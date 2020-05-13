@@ -1,11 +1,9 @@
 import React from 'react';
-import CollapsedNavigator from "../Navigation/CollapsedNavigator.jsx";
 import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
 
 const PublicKey = () => {
     return (
         <div>
-            <CollapsedNavigator />
             <SidebarNavigator name="$ gpg --import"/>
             <main className="" id="main-collapse">
                 <pre style={{width: "min-content", whiteSpace: "normal", wordBreak: "normal"}}>

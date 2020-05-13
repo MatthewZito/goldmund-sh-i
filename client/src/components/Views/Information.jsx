@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CollapsedNavigator from "../Navigation/CollapsedNavigator.jsx";
 import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
 
 const Information = () => {
     return (
         <div>
-            <CollapsedNavigator />
             <SidebarNavigator name="$ whatis"/>
             <main className="" id="main-collapse">
                 <div className="row">
