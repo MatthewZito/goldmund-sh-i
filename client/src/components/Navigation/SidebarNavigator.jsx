@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import SidebarFooter from "../Fragments/SidebarFooter.jsx"
-
+// wrap new entry route in admin
 const SidebarNavigator = (props) => {
     const [toggled, setToggled] = useState(false);
     return (
@@ -28,9 +28,10 @@ const SidebarNavigator = (props) => {
                         )}
                     </div>
                     <ul className="nav">
-                        <li><NavLink activeClassName="active" exact to="/"> Vestibule</NavLink></li>
+                        <li><NavLink activeClassName="active" exact to="/">Vestibule</NavLink></li>
                         <li><NavLink activeClassName="active" to="/info">Info</NavLink></li>
                         <li><NavLink activeClassName="active" to="/contact">Comms</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/admin/process">New Entry</NavLink></li>
                     </ul>
                     <SidebarFooter />
                 </div> 
