@@ -12,42 +12,22 @@ class ProcessEntry extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
-        console.log(data)
-        if (this.state.editMode) {
-            fetch(`http://localhost:5000/entry/${data._id}`, {
-            method: 'POST',
-            body: data,
-            }).then(res => res)
-            .then(data => {
-                if (data.status === 201) {
-                    this.props.history.push(`/entry/${data.slug}`);
-                }
-            }).catch(err => {
-                console.log(err)
-            })
-        } else {
-            fetch(`http://localhost:5000/entry/new`, {
-                method: 'POST',
-                body: data,
-                }).then(res => res)
-                .then(data => {
-                    if (data.status === 201) {
-                        this.props.history.push("/");
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-                
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.editMode ? data._id : "new"}`, { method: 'POST', body: data })
+            if (response.status === 201) {
+                let redirectPath = this.state.editMode ? `/entry/${response.slug}` : "/entry/new"
+                this.props.history.push(`${process.env.REACT_APP_SERVER_BASE_URL}/${redirectPath}`);
+            }
+        } catch(err) {
+            console.log(err);
         }
     }
-    
     render() {
         let { editMode } = this.state
         let { data } = this.state.data || ""
-        console.log(this.props)
         return (
             <div>
                 <SidebarNavigator name="$ su -"/>

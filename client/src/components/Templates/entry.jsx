@@ -15,23 +15,20 @@ class Entry extends React.Component {
         }
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:5000/entry/${this.state.slug}`)
-        .then(res => res.json())
-        .then(data => {
+    async componentDidMount() {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.slug}`);
+        const body = await response.json();
+        if (response.status !== 200) {
+            this.setState({ error: true })
+        }
+        else {
             this.setState({
                 isLoaded: true,
-                data
+                data: body
             });
-        },
-        (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-                });
-            }
-        )
+        }
     }
+
     render() {
         const { error, isLoaded, data } = this.state;
         const isAdmin = true

@@ -11,35 +11,25 @@ class Vestibule extends React.Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:5000/')
-        .then(res => res.json())
-        .then(data => {
+    async componentDidMount() {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/`);
+        const body = await response.json();
+        if (response.status !== 200) {
+            this.setState({ error: true })
+        }
+        else {
             this.setState({
                 isLoaded: true,
-                data
+                data: body
             });
-        },
-        (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-                });
-            }
-        )
+        }
     }
-      
-    // callApi = async () => {
-    //     const response = await ;
-    //     const body = await response.json();
-    //     if (response.status !== 200) throw Error(body.message);
-    //     return body;
-    // };
 
     render() {
         const { error, isLoaded, data } = this.state;
         if (error) {
-            return <div>Error: {error}</div>;
+            console.log(error)
+            return <div>Error</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {

@@ -32,30 +32,27 @@ function saveEntryAndRedirect(path) {
     }
   }
 
-// app.get("/api/:id", (req, res) => {
-//     res.send(req.params.id)
-// })
-
-app.get('/', (req, res) => {
-    Entry.find().sort({ createdAt: 'desc' }).then(entries =>{
+// pull all entries/index thereof
+app.get('/', async (req, res) => {
+    try {
+        let entries = await Entry.find().sort({ createdAt: 'desc' })
         res.send(entries);
-    }).catch(err => {
+    } catch(err) {
         res.status(500).send(err);
-    })
-    
-  })
+    }
+});
 
 // view entry
-app.get('/entry/:slug', (req, res) => {
-    Entry.findOne({ slug: req.params.slug }).then(entry => {
-        if (entry == null) {
-            return res.redirect("/"); // do this clientside
-        }
-        res.send({ data: entry });
-    }).catch(err => {
+app.get('/entry/:slug', async (req, res) => {
+    try {
+        let entry = await Entry.findOne({ slug: req.params.slug })
+            if (entry == null) {
+                return res.status(500); 
+            }
+            res.send({ data: entry });
+    } catch(err) {
         res.status(500).send(err);
-    })
-    
+    }
 });
 
 // edit entry
@@ -64,24 +61,27 @@ app.put('/entry/:id', async (req, res, next) => {
     next()
 }, saveEntryAndRedirect('edit'))
 
+app.patch('/entry/:id', async (req, res) => {
+    try {
+        let entry = await Entry.findByIdAndUpdate(req.params.id, req.body, { });
 
-// app.post("/entry/:id", (req, res) => {
-//     Entry.findByIdAndUpdate(req.params.id, { help: req.body }).then(entry => {
+    } catch(err) {
 
-//     })
-// })
+    }
+})
+
+
 
 // new entry
-app.post('/entry/new', upload.none(), (req, res) => {
-    console.log(req.body)
+app.post('/entry/new', upload.none(), async (req, res) => {
     let entry = new Entry(req.body);
-    entry.save().then(() => {
+    try {
+        await entry.save();
         res.status(201).send(entry.slug);
-    }).catch(err => {
+    } catch(err) {
         res.status(400).send(err);
-    })
-
-  })
+    }
+});
 
 app.listen(port, () => console.log(`[+} Listening on port ${port}...`));
 
