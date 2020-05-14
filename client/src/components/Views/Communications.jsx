@@ -28,7 +28,7 @@ const Communications = () => {
                             <div className="form-group">
                                 <textarea name="message" className="form-control" rows="3" placeholder="Enter your message"></textarea>
                             </div>
-                            <button type="submit" className="btn btn-primary btn-lg">Send</button>
+                            <button type="submit" className="btn btn-primary">Send</button>
                             </div>
                             <div className="col-md-6">
                             <ul className="list-unstyled address-container">

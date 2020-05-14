@@ -2,6 +2,9 @@ require('dotenv').config()
 const express = require("express");
 const mongoose = require('mongoose')
 const cors = require('cors');
+const multer  = require("multer");
+const upload = multer();
+
 require("./db/mongoose.js");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -35,7 +38,7 @@ function saveEntryAndRedirect(path) {
 
 app.get('/', (req, res) => {
     Entry.find().sort({ createdAt: 'desc' }).then(entries =>{
-        res.send({ data: entries });
+        res.send(entries);
     }).catch(err => {
         res.status(500).send(err);
     })
@@ -61,16 +64,23 @@ app.put('/entry/:id', async (req, res, next) => {
     next()
 }, saveEntryAndRedirect('edit'))
 
+
+// app.post("/entry/:id", (req, res) => {
+//     Entry.findByIdAndUpdate(req.params.id, { help: req.body }).then(entry => {
+
+//     })
+// })
+
 // new entry
-app.post('/entry/new', (req, res) => {
+app.post('/entry/new', upload.none(), (req, res) => {
+    console.log(req.body)
     let entry = new Entry(req.body);
     entry.save().then(() => {
-        res.status(201).send(entry);
+        res.status(201).send(entry.slug);
     }).catch(err => {
         res.status(400).send(err);
     })
 
-    
   })
 
 app.listen(port, () => console.log(`[+} Listening on port ${port}...`));

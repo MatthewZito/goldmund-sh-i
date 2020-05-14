@@ -5,7 +5,7 @@ const EntryThumbnail = (props) => {
     return (
         <div className="grid-item">
             <img className="img-responsive" alt="" src={props.imgsrc} />
-            <NavLink to={`/entry/${props.id}`} className="project-description">
+            <NavLink to={`/entry/${props.slug}`} className="project-description">
                 <div className="project-text-holder">
                 <div className="project-text-inner">
                     <h3>{props.title}</h3>

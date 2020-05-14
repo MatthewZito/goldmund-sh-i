@@ -40,7 +40,7 @@ const entrySchema = new mongoose.Schema({
 );
 
 entrySchema.pre("validate", function(next) {
-    console.log("this")
+    console.log("validate")
     if (this.title) {
         this.slug = slugify(this.title, { lower: true, strict: true })
         console.log(this.slug)

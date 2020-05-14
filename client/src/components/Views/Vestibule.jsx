@@ -6,49 +6,61 @@ class Vestibule extends React.Component {
     constructor() {
         super();
         this.state = {
-            entries: [{
-                  title: "First Article",
-                  subtitle: "subtitle here",
-                  imgsrc: 'https://i.ibb.co/cvpntL1/hats.png',
-                  id: 1,
-                  content: "A bunch of content here",
-                },
-                {
-                  title: "Second Article",
-                  subtitle: "subtitle here",
-                  imgsrc: 'https://i.ibb.co/px2tCc3/jackets.png',
-                  id: 2,
-                  content: "A bunch of content here",
-                },
-                {
-                  title: "Third Article",
-                  subtitle: "subtitle here",
-                  imgsrc: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-                  id: 3,
-                  content: "A bunch of content here",
-                }]       
+            isLoaded: false,
+            data: null
         }
     }
-   
+
+    componentDidMount() {
+        fetch('http://localhost:5000/')
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                isLoaded: true,
+                data
+            });
+        },
+        (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+                });
+            }
+        )
+    }
+      
+    // callApi = async () => {
+    //     const response = await ;
+    //     const body = await response.json();
+    //     if (response.status !== 200) throw Error(body.message);
+    //     return body;
+    // };
+
     render() {
-        return (
-            <div>
-                <SidebarNavigator name="$pwd" home={true} />
-                <main id="main-collapse">
-                <div className="hero-full-wrapper">
-                    <div className="grid" >
-                    <div className="gutter-sizer"></div>
-                    {/* <div className="grid-sizer"></div> */}
-                    {
-                    this.state.entries.map(({ id, ...otherEntriesProps }) => (
-                        <EntryThumbnail key={id} id={id} {...otherEntriesProps} />
-                    ))
-                    }
+        const { error, isLoaded, data } = this.state;
+        if (error) {
+            return <div>Error: {error}</div>;
+        } else if (!isLoaded) {
+            return <div>Loading...</div>;
+        } else {
+            return (
+                <div>
+                    <SidebarNavigator name="$pwd" home={true} />
+                    <main id="main-collapse">
+                    <div className="hero-full-wrapper">
+                        <div className="grid" >
+                        <div className="gutter-sizer"></div>
+                        <div className="grid-sizer"></div>
+                        {data.map(({_id, ...data}) => (
+                            <EntryThumbnail key={_id} {...data} />
+                        ))
+                        }
+                        </div>
                     </div>
+                    </main>
                 </div>
-                </main>
-            </div>
-        );
+            );
+        }
     }
 }
 export default Vestibule;
