@@ -28,7 +28,6 @@ class Vestibule extends React.Component {
     render() {
         const { error, isLoaded, data } = this.state;
         if (error) {
-            console.log(error)
             return <div>Error</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;

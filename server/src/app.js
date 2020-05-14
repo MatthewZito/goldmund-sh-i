@@ -30,7 +30,7 @@ app.get('/entry/:slug', async (req, res) => {
     try {
         let entry = await Entry.findOne({ slug: req.params.slug, deleted: false })
         if (entry === null) {
-            return res.status(500).send(null); 
+            return res.status(500).end(); 
         }
         res.send({ data: entry });
     } catch(err) {
@@ -44,12 +44,15 @@ app.patch('/entry/:id', upload.none(), async (req, res) => {
         req.entry = await Entry.findById(req.params.id);
         let entry = req.entry
         if (!entry) {
-            return res.status(404);
+            return res.status(404).end();
         }
         Object.keys(req.body).forEach(key => {
             entry[key] = req.body[key]
         });
         entry = await entry.save()
+        if (entry.deleted) {
+            return res.status(204).end()
+        }
         res.status(201).send(entry.slug);
         } catch(err) {
             res.status(500).send(err);

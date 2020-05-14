@@ -44,29 +44,13 @@ const entrySchema = new mongoose.Schema({
 );
 
 entrySchema.pre("validate", function(next) {
-    console.log("validate")
     if (this.title) {
         this.slug = slugify(this.title, { lower: true, strict: true })
-        console.log(this.slug)
     }
     if (this.content) {
         this.sanitizedHTML = dompurify.sanitize(marked(this.content));
     }
     next();
 })
-
-// entrySchema.pre("findOneAndUpdate", function(next) {
-//     console.log("validate")
-//     console.log(this)
-//     if (this.title) {
-//         console.log("SLUGZ")
-//         this.slug = slugify(this.title, { lower: true, strict: true })
-//         console.log(this.slug)
-//     }
-//     if (this.content) {
-//         this.sanitizedHTML = dompurify.sanitize(marked(this.content));
-//     }
-//     next();
-// })
 
 module.exports = mongoose.model("Entry", entrySchema);
