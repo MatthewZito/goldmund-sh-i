@@ -40,7 +40,7 @@ class Vestibule extends React.Component {
                     <div className="hero-full-wrapper">
                         <div className="grid" >
                         <div className="gutter-sizer"></div>
-                        <div className="grid-sizer"></div>
+                        {/* <div className="grid-sizer"></div> */}
                         {data.map(({_id, ...data}) => (
                             <EntryThumbnail key={_id} {...data} />
                         ))

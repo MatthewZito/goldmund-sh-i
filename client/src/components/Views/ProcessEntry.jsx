@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
 
 class ProcessEntry extends React.Component {
@@ -7,7 +7,9 @@ class ProcessEntry extends React.Component {
         super(props);
         this.state = {
             data: this.props.location.state,
-            editMode: props.location.state ? true : false
+            editMode: props.location.state ? true : false,
+            redirectPath: "",
+            redirect: false
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -15,11 +17,14 @@ class ProcessEntry extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
+        
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.editMode ? data._id : "new"}`, { method: 'POST', body: data })
+            let response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.editMode ? this.state.data.data._id : "new"}`, { method: this.state.editMode ? "PATCH" : "POST", body: data })
+            const slugResponse = await response.text();
+
             if (response.status === 201) {
-                let redirectPath = this.state.editMode ? `/entry/${response.slug}` : "/entry/new"
-                this.props.history.push(`${process.env.REACT_APP_SERVER_BASE_URL}/${redirectPath}`);
+                this.setState({ redirect: true, redirectPath: this.state.editMode ? `/entry/${slugResponse}` : "/" });
+                this.props.history.replace(`${this.state.redirectPath}`);
             }
         } catch(err) {
             console.log(err);

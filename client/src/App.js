@@ -9,22 +9,18 @@ import Entry from "./components/Templates/Entry.jsx";
 import ProcessEntry from "./components/Views/ProcessEntry.jsx";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-      
     render() {
         return (
-        <div className="App">
-            <Switch>
-                <Route exact path="/" component={Vestibule} />
-                <Route path="/contact" component={Communications} />
-                <Route path="/info" component={Information} />
-                <Route path="/pubkey" component={PublicKey} />
-                <Route path="/entry/:slug" render={({match}) =>  <Entry match={match} /> }/>
-                <Route path="/admin/process" component={ProcessEntry} />
-            </Switch>
-        </div>
+            <div className="App">
+                <Switch>
+                    <Route exact path="/" component={Vestibule} />
+                    <Route path="/contact" component={Communications} />
+                    <Route path="/info" component={Information} />
+                    <Route path="/pubkey" component={PublicKey} />
+                    <Route path="/entry/:slug" render={({match}) =>  <Entry match={match} /> }/>
+                    <Route path="/admin/process" component={ProcessEntry} />
+                </Switch>
+            </div>
         );
     }
 }

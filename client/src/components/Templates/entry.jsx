@@ -17,11 +17,11 @@ class Entry extends React.Component {
 
     async componentDidMount() {
         const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.slug}`);
-        const body = await response.json();
         if (response.status !== 200) {
             this.setState({ error: true })
         }
         else {
+            const body = await response.json();
             this.setState({
                 isLoaded: true,
                 data: body

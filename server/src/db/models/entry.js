@@ -22,6 +22,10 @@ const entrySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    entryIssued: {
+        type: Date,
+        default: Date.now
+    },
     slug: {
         type: String,
         required: true,
@@ -29,7 +33,7 @@ const entrySchema = new mongoose.Schema({
     },
     sanitizedHTML: {
         type: String,
-        required: true
+        required: true,
     },
     deleted: {
         type: Boolean,
@@ -50,5 +54,19 @@ entrySchema.pre("validate", function(next) {
     }
     next();
 })
+
+// entrySchema.pre("findOneAndUpdate", function(next) {
+//     console.log("validate")
+//     console.log(this)
+//     if (this.title) {
+//         console.log("SLUGZ")
+//         this.slug = slugify(this.title, { lower: true, strict: true })
+//         console.log(this.slug)
+//     }
+//     if (this.content) {
+//         this.sanitizedHTML = dompurify.sanitize(marked(this.content));
+//     }
+//     next();
+// })
 
 module.exports = mongoose.model("Entry", entrySchema);
