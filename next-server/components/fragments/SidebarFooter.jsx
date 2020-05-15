@@ -1,6 +1,4 @@
-import React from 'react';
-
-const SidebarFooter = (props) => {
+const SidebarFooter = () => {
     return (
         <nav className="nav-footer">
             <p className="nav-footer-social-buttons">
@@ -18,6 +16,5 @@ const SidebarFooter = (props) => {
         </nav>  
     );
 }
-    
 export default SidebarFooter;
     

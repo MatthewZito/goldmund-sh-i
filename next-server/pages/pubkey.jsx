@@ -1,11 +1,10 @@
-import React from 'react';
-import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
+import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 
 const PublicKey = () => {
     return (
         <div>
             <SidebarNavigator name="$ gpg --import"/>
-            <main className="" id="main-collapse">
+            <main id="main-collapse">
                 <pre style={{width: "min-content", whiteSpace: "normal", wordBreak: "normal"}}>
                 -----BEGIN PGP PUBLIC KEY BLOCK-----
 

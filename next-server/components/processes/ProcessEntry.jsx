@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import Router from 'next/router'
+import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
 
 class ProcessEntry extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.location.state !== null ? this.props.location.state.data : this.props.location.state,
-            editMode: props.location.state ? true : false,
+            data: this.props.data !== null ? this.props.data : { title: "", subtitle: "", imgsrc: "", content: "", deleted: false },
+            editMode: this.props.data !== null ? true : false,
             redirectPath: "",
             redirect: false
         }
@@ -19,14 +21,14 @@ class ProcessEntry extends React.Component {
         event.preventDefault();
         const data = new FormData(event.target);
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/entry/${this.state.editMode ? this.state.data._id : "new"}`, { method: this.state.editMode ? "PATCH" : "POST", body: data })
+            let response = await fetch(`http://localhost:5000/entry/${this.state.editMode ? this.state.data._id : "new"}`, { method: this.state.editMode ? "PATCH" : "POST", body: data })
             const slugResponse = await response.text();
             if (response.status === 201) {
-                this.setState({ redirect: true, redirectPath: this.state.editMode ? `/entry/${slugResponse}` : "/" });
+                this.setState({ redirect: true, redirectPath: `/entry/${slugResponse}`});
             } else {
                 this.setState({ redirect: true, redirectPath: "/"});
             }
-            this.props.history.replace(`${this.state.redirectPath}`);
+            Router.push(`${this.state.redirectPath}`);
         } catch(err) {
             console.log(err);
         }
@@ -50,9 +52,8 @@ class ProcessEntry extends React.Component {
       }
 
     render() {
-        let { editMode } = this.state
-        let { data } = this.state || ""
-        let { deleted } = this.state.data ? this.state.data : false
+        let { data } = this.state
+        let { deleted } = data
         return (
             <div>
                 <SidebarNavigator name="$ su -"/>
@@ -62,26 +63,28 @@ class ProcessEntry extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="title">Title</label>
-                                <input required defaultValue={editMode ? data.title : ""} type="text" name="title" id="title" className="form-control" />
+                                <input required defaultValue={data.title} type="text" name="title" id="title" className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="subtitle">Subtitle</label>
-                                <textarea required name="subtitle" id="subtitle" defaultValue={editMode ? data.subtitle : ""} className="form-control" />
+                                <textarea required name="subtitle" id="subtitle" defaultValue={data.subtitle} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="imgsrc">Image URL</label>
-                                <textarea required name="imgsrc" id="imgsrc" defaultValue={editMode ? data.imgsrc : ""} className="form-control" />
+                                <textarea required name="imgsrc" id="imgsrc" defaultValue={data.imgsrc} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="content">Content</label>
-                                <textarea required name="content" id="content" defaultValue={editMode ? data.content : ""} className="form-control" />
+                                <textarea required name="content" id="content" defaultValue={data.content} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="deleted">Set deleted?</label>
                                 <input name="deleted" type="radio" value="true" checked={deleted === true} onChange={this.radioToggle} />Yes
                                 <input name="deleted" type="radio" value="false" checked={deleted === false} onChange={this.radioToggle} />No
                             </div>
-                            <Link to="/" className="btn btn-secondary">Cancel</Link>
+                            <Link href="/">
+                                <button className="btn btn-secondary">Cancel</button>
+                            </Link>
                             <button type="submit" className="btn btn-primary">Save</button>
                         </form>
                     </div>
@@ -90,4 +93,4 @@ class ProcessEntry extends React.Component {
         );
     }
 }
-export default withRouter(ProcessEntry);
+export default ProcessEntry;

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
+import Link from "next/link";
+import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 
 const Communications = () => {
     return (
@@ -36,7 +35,7 @@ const Communications = () => {
                                 <span className="fa-icon">
                                     <i className="fa fa-key" aria-hidden="true"></i>
                                 </span>
-                                <Link to="/pubkey">public key</Link>
+                                <Link href="/pubkey"><a>public key</a></Link>
                                 </li>
                                 <li>
                                 <span className="fa-icon">

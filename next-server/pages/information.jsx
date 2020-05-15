@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
+import Link from "next/link";
+import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 
 const Information = () => {
     return (
@@ -14,10 +13,11 @@ const Information = () => {
                     <div className="col-xs-12 col-md-6">
                         <h1>Lexicon v2.0</h1>
                         <p>content here</p>
-                <Link to="/contact" className="btn btn-primary" title=""> Communicate</Link>
-            </div>
-            </div>
-                
+                        <Link href="/communications">
+                            <button className="btn btn-primary">Communicate</button>
+                        </Link>
+                    </div>
+                </div>
             </main>
         </div>
     );
