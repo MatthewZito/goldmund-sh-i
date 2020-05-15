@@ -1,51 +1,39 @@
-Please see my other repositories for proper examples of my documentation and capacity to use markdown - this README is not going to be 
-formatted for quite a while.
+## goldmund.io
+This repository hosts an application that is currently in development. As such, this document may not be formatted/completed until said
+app has been deployed to production.
 
-TODO:
-
-Add error view
-Add 404 view
-Add 500 view
-Error handling 
-Admin routing
-Add spinner
-
-async/await, transliterate
-
-edit endpoint
-
-pagination, at vestibule component
-
-
-BUGFIXES:
-- fix router history obj on "go back", e.g. from created/updated blog post redirect
+### TODOs
+ - Error handling 
+ - Admin routing
+ - Add dedicated loading state
+ - Add pagination, at vestibule component
+ - ~~error routing~~ handled by nextjs
+ - add cookies service
+ - tracking pixel campaign(s)
+ - analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
+ - Email-handling (with data sanatization)
+ - implement cookies via Redis store, utilize in-memory caching for client
+ - add logger to server, wire logger to crontab on primary host
+ - SEO optimize
+ - wrap services in dockerfile
 
 
-ABOUT:
-- database uses [(quasi)Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
+### BUGFIXES
+  - ~~fix router history obj on "go back", e.g. from created/updated blog post redirect~~ handled by nextjs
 
-Features:
-- CRUD db operations via admin panel
-  * update post
-  * create new post
-  * set 'deleted' flag (update, qua lamdba architectural ethos)
-- Dynamic template engine/render
-- Markdown-render blog format; sanitized HTML, dynamically slugified URIs
-- server-side rendering with NextJs, client with Reactjs
+### Features
+  - database uses [(quasi)Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
+  - CRUD db operations via admin panel
+    * update post
+    * create new post
+    * set 'deleted' flag (update, qua lamdba architectural ethos)
+  - Dynamic template engine/render
+  - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
+  - server-side rendering with NextJs, client with Reactjs
 
 
-
-TODO
-- tracking pixel campaign(s)
-- analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
-- Email-handling (with data sanatization)
-- implement cookies via Redis store, utilize in-memory caching for client
-- add logger to server, wire logger to crontab on primary host
-- containerize all services in docker 
-- convert to whollyrely upon server-side-rendering
-- SEO optimize
  
-ABOUT
+### ABOUT
 
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
 to your needs, please consider this application to be exemplary of my technical skillset.
