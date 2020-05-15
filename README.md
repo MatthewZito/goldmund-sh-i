@@ -1,3 +1,6 @@
+Please see my other repositories for proper examples of my documentation and capacity to use markdown - this README is not going to be 
+formatted for quite a while.
+
 TODO:
 
 Add error view
@@ -28,6 +31,7 @@ Features:
   * set 'deleted' flag (update, qua lamdba architectural ethos)
 - Dynamic template engine/render
 - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
+- server-side rendering with NextJs, client with Reactjs
 
 
 
@@ -40,7 +44,7 @@ TODO
 - containerize all services in docker 
 - convert to whollyrely upon server-side-rendering
 - SEO optimize
-
+ 
 ABOUT
 
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
