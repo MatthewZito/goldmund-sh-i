@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import SidebarFooter from "../fragments/SidebarFooter.jsx";
-import svglogo from "../../public/static/assets/main-logo.svg";
+import svglogo from "../../static/assets/main-logo.svg";
 
 // wrap new entry route in admin
 const SidebarNavigator = (props) => {

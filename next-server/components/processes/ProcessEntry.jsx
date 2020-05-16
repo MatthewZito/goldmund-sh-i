@@ -30,7 +30,7 @@ class ProcessEntry extends React.Component {
             }
             Router.push(`${this.state.redirectPath}`);
         } catch(err) {
-            console.log(err);
+            Router.back();
         }
     }
 
