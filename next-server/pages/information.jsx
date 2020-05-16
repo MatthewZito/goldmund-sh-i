@@ -5,7 +5,7 @@ const Information = () => {
     return (
         <div>
             <SidebarNavigator name="$ whatis"/>
-            <main className="" id="main-collapse">
+            <main id="main-collapse">
                 <div className="row">
                     <div className="col-xs-12 col-md-6">
                         <img className="img-responsive" alt="" src="" />

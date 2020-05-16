@@ -5,7 +5,7 @@ const createDomPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
 const dompurify = createDomPurify(new JSDOM().window)
 
-const entrySchema = new mongoose.Schema({
+const EntrySchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -21,10 +21,6 @@ const entrySchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
-    },
-    entryIssued: {
-        type: Date,
-        default: Date.now
     },
     slug: {
         type: String,
@@ -43,7 +39,7 @@ const entrySchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-entrySchema.pre("validate", function(next) {
+EntrySchema.pre("validate", function(next) {
     if (this.title) {
         this.slug = slugify(this.title, { lower: true, strict: true })
     }
@@ -53,4 +49,4 @@ entrySchema.pre("validate", function(next) {
     next();
 })
 
-module.exports = mongoose.model("Entry", entrySchema);
+module.exports = mongoose.model("Entry", EntrySchema);

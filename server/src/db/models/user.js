@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
 );
 
 // fetches user by email, then by matching plaintext to hashed pw
-userSchema.statics.findByCredentials = async (email, password) => {
+UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient
     console.log("here")
     const user = await User.findOne({ email })
@@ -52,7 +52,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 }
 
 // hash plaintext pw prior to persisting
-userSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function (next) {
     const user = this
     if (user.isModified("password")) {
         user.password = await bcrypt.hash(user.password, 9);
@@ -61,6 +61,6 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User

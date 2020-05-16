@@ -8,6 +8,7 @@ const Entry = require("../db/models/entry.js");
 router.use(cors());
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
+    res.set({ 'Content-Security-Policy': "script-src 'self'" })
     try {
         let entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" })
         res.send(entries);
@@ -24,7 +25,7 @@ router.get("/entry/:slug", async (req, res) => {
         if (entry === null) {
             return res.status(500).end(); 
         }
-        res.send({ data: entry });
+        res.send(entry);
     } catch(err) {
         res.status(500).send(err);
     }

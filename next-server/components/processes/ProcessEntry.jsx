@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'next/router'
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
-import SidebarNavigator from "../Navigation/SidebarNavigator.jsx";
+import SidebarNavigator from "../navigation/SidebarNavigator.jsx";
 
 class ProcessEntry extends React.Component {
     constructor(props) {

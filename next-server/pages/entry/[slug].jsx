@@ -4,9 +4,6 @@ import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
 import ProcessEntry from "../../components/processes/ProcessEntry.jsx";
 
 const Entry = (props) => {
-    /* If you are looking at this...
-    the markdown was sanitized on api server.
-    */
     const [editMode, setEditMode] = useState(false);
     let { error, isLoaded, data } = props;
     const isAdmin = true
@@ -16,17 +13,23 @@ const Entry = (props) => {
         return <div>Loading...</div>;
     } else if (isAdmin && editMode) {
         return (
-            <ProcessEntry data={data.data} />
+            <ProcessEntry data={data} />
         )
     } else {
+        let dateFooter = `${new Date(data.createdAt).toDateString()} ${data.createdAt !== data.updatedAt ? ` (updated on ${new Date(data.updatedAt).toDateString()})` : ""}`
         return (
             <div>
-                <SidebarNavigator name="$ ping"/>
+                <SidebarNavigator name="$ cat "/>
                 <main className="" id="main-collapse">
                     <div className="row">
-                        <div className="col-xs-12 col-md-8">
+                        <div className="col-xs-12 col-md-12">
                             <div className="section-container-spacer">
-                            <div dangerouslySetInnerHTML={{__html: data.data.sanitizedHTML}}></div>
+                            <h2>{data.title}</h2>
+                            <p><strong>{data.subtitle}</strong></p>
+                            <hr />
+                            <div dangerouslySetInnerHTML={{__html: data.sanitizedHTML}}></div>
+                            <hr />
+                            <p><em>{dateFooter}</em></p>
                             {isAdmin &&
                                 <button className="btn btn-primary" onClick={() => setEditMode(true)}>Edit</button>
                             }
@@ -42,7 +45,7 @@ const Entry = (props) => {
 Entry.getInitialProps = async ({ query }) => {
     const { slug } = query
     const response = await fetch(`http://localhost:5000/entry/${slug}`);
-    const body = await response.json();
+    const entryObject = await response.json();
     if (response.status !== 200) {
         return {
             error: true
@@ -51,7 +54,7 @@ Entry.getInitialProps = async ({ query }) => {
     else {
         return {
             isLoaded: true,
-            data: body
+            data: entryObject
         }
     }
 }

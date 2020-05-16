@@ -3,7 +3,7 @@ This repository hosts an application that is currently in development. As such, 
 app has been deployed to production.
 
 ### TODOs
- - Error handling 
+ - ~~Error handling~~ prettify error boundary 
  - Admin routing
  - Add dedicated loading state
  - Add pagination, at vestibule component
@@ -16,6 +16,7 @@ app has been deployed to production.
  - add logger to server, wire logger to crontab on primary host
  - SEO optimize
  - wrap services in dockerfile
+ - cloudflare for ddos protection + auto https
 
 
 ### BUGFIXES
@@ -29,7 +30,7 @@ app has been deployed to production.
     * set 'deleted' flag (update, qua lamdba architectural ethos)
   - Dynamic template engine/render
   - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
-  - server-side rendering with NextJs, client with Reactjs
+  - hybrid progressive / server-side rendering with NextJs + Reactjs
 
 
  

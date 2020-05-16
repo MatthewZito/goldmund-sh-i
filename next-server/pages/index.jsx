@@ -13,7 +13,7 @@ class Vestibule extends React.Component {
     static async getInitialProps() {
         try {
             const response = await fetch("http://localhost:5000/");
-            const body = await response.json();
+            const entriesObject = await response.json();
             if (response.status !== 200) {
                 return {
                     error: true
@@ -22,7 +22,7 @@ class Vestibule extends React.Component {
             else {
                 return {
                     isLoaded: true,
-                    data: body
+                    data: entriesObject
                 }
             }
         } catch (err) {
@@ -47,15 +47,20 @@ class Vestibule extends React.Component {
                 <>
                     <Meta />
                     <div>
-                        <SidebarNavigator name="$pwd" />
+                        <SidebarNavigator name="$ pwd" />
                         <main id="main-collapse">
                         <div className="hero-full-wrapper">
-                            <div className="grid" >
-                            <div className="gutter-sizer"></div>
-                            {data.map(({_id, ...data}) => (
-                                <EntryThumbnail key={_id} {...data} />
-                            ))
-                            }
+                            <div className="grid" style={{ 
+                                display: "grid",
+                                gridTemplateColumns: "repeat( auto-fill, minmax(250px, 1fr) )",
+                                gridAutoRows: "250px",
+                                gridGap: "2em",
+                                
+                            }}> 
+                                {data.map(({_id, ...data}) => (
+                                    <EntryThumbnail key={_id} {...data} />
+                                ))
+                                }
                             </div>
                         </div>
                         </main>

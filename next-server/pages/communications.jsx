@@ -2,6 +2,23 @@ import Link from "next/link";
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 
 const Communications = () => {
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        try {
+            let response = await fetch("http://localhost:5000/email/", { method: "POST", body: data })
+            const slugResponse = await response.text();
+            if (response.status === 201) {
+                this.setState({ redirect: true, redirectPath: `/entry/${slugResponse}`});
+            } else {
+                this.setState({ redirect: true, redirectPath: "/"});
+            }
+            Router.push(`${this.state.redirectPath}`);
+        } catch(err) {
+            Router.back();
+        }
+    }
+
     return (
         <div>
             <SidebarNavigator name="$ ping"/>
