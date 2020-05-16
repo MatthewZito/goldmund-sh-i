@@ -58,7 +58,7 @@ class ProcessEntry extends React.Component {
             <div>
                 <SidebarNavigator name="$ su -"/>
                 <main className="" id="main-collapse">
-                    <div className="container">
+                    <div style={{maxWidth: "900px"}}>
                         <h1>Process Entry</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
@@ -78,14 +78,16 @@ class ProcessEntry extends React.Component {
                                 <textarea required name="content" id="content" defaultValue={data.content} className="form-control" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="deleted">Set deleted?</label>
-                                <input name="deleted" type="radio" value="true" checked={deleted === true} onChange={this.radioToggle} />Yes
+                                <label htmlFor="deleted" style={{color: "red"}}>Set deleted?</label>
+                                <input name="deleted" type="radio" value="true" checked={deleted === true} onChange={this.radioToggle} style={{margin: "4px 15px"}} />Yes
                                 <input name="deleted" type="radio" value="false" checked={deleted === false} onChange={this.radioToggle} />No
                             </div>
-                            <Link href="/">
-                                <button className="btn btn-secondary">Cancel</button>
-                            </Link>
-                            <button type="submit" className="btn btn-primary">Save</button>
+                            <div>
+                                <Link href="/">
+                                    <button className="btn btn-secondary" style={{float: "left", marginBottom: "5px"}}>Cancel</button>
+                                </Link>
+                                <button type="submit" style={{float: "left", marginLeft: "10px"}} className="btn btn-primary">Save</button>
+                            </div>
                         </form>
                     </div>
                 </main>

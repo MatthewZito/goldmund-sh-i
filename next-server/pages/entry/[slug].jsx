@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import fetch from "isomorphic-unfetch";
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
-import ProcessEntry from "../../components/processes/ProcessEntry.jsx";
+const ProcessEntry = React.lazy(() => import("../../components/processes/ProcessEntry.jsx"));
 
 const Entry = (props) => {
     const [editMode, setEditMode] = useState(false);
@@ -13,7 +13,9 @@ const Entry = (props) => {
         return <div>Loading...</div>;
     } else if (isAdmin && editMode) {
         return (
-            <ProcessEntry data={data} />
+            <Suspense fallback={<div>Loading...</div>}>
+                <ProcessEntry data={data} />
+            </Suspense>
         )
     } else {
         let dateFooter = `${new Date(data.createdAt).toDateString()} ${data.createdAt !== data.updatedAt ? ` (updated on ${new Date(data.updatedAt).toDateString()})` : ""}`

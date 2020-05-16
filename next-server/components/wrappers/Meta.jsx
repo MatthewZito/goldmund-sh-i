@@ -12,7 +12,6 @@ export default function Meta() {
         <link href="/static/assets/apple-icon-180x180.png" rel="apple-touch-icon" />
         <link href="/static/assets/favicon.ico" rel="icon" type="image/x-icon" />
         <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossOrigin="anonymous" />
         <title>goldmund.io :: </title>
     </Head>
   )
