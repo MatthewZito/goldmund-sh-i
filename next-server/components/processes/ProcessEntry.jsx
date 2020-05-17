@@ -80,7 +80,7 @@ class ProcessEntry extends React.Component {
                             <div className="form-group">
                                 <label htmlFor="deleted" style={{color: "red"}}>Set deleted?</label>
                                 <input name="deleted" type="radio" value="true" checked={deleted === true} onChange={this.radioToggle} style={{margin: "4px 15px"}} />Yes
-                                <input name="deleted" type="radio" value="false" checked={deleted === false} onChange={this.radioToggle} />No
+                                <input name="deleted" type="radio" value="false" checked={deleted === false} onChange={this.radioToggle} style={{margin: "4px 15px"}} />No
                             </div>
                             <div>
                                 <Link href="/">

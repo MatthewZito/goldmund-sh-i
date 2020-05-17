@@ -8,9 +8,9 @@ const Entry = (props) => {
     let { error, isLoaded, data } = props;
     const isAdmin = true
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>Error: {error}</div>
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div> // fallback in case data does not populate
     } else if (isAdmin && editMode) {
         return (
             <Suspense fallback={<div>Loading...</div>}>
