@@ -2,10 +2,8 @@ const express = require("express");
 const multer  = require("multer");
 const upload = multer();
 const router = new express.Router();
-const cors = require("cors");
 const Entry = require("../db/models/entry.js");
 
-router.use(cors());
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
     res.set({ 'Content-Security-Policy': "script-src 'self'" })

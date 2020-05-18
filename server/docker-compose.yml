@@ -9,12 +9,24 @@ services:
         working_dir: /usr/src/server
         ports:
             - "5000:5000"
-        links: 
-            - mongo
-    mongo:
-        container_name: api-db
-        image: mongo
-        volumes:
-            - ./data:/data/db
-        ports:
-            - "27017:27017"
+        volumes: 
+            - ./:/usr/src/server
+
+
+
+
+
+
+
+
+
+            
+    #     links: 
+    #         - mongo
+    # mongo:
+    #     container_name: mongod
+    #     image: mongo
+    #     volumes:
+    #         - ~/opt/mongodb-data:/data/db
+    #     ports:
+    #         - "27017:27017"

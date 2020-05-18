@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -30,17 +31,37 @@ const UserSchema = new mongoose.Schema({
                 throw new Error("Password cannot contain 'password'");
             }
         }
-    }
     },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        required: true,
+        default: 'user'
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
+},
     { timestamps: true }
 );
+
+// gen JWT
+UserSchema.methods.generateAuthToken = async function() {
+    const user = this
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+    // persist user's tokens to db so as to keep track of them...
+    user.tokens = user.tokens.concat({ token });
+    return token
+}
+
 
 // fetches user by email, then by matching plaintext to hashed pw
 UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient
-    console.log("here")
     const user = await User.findOne({ email })
-    console.log(user)
     if (!user) {
         throw new Error("Unable to login.");
     }

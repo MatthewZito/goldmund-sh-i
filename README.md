@@ -3,7 +3,10 @@ This repository hosts an application that is currently in development. As such, 
 app has been deployed to production.
 
 ### TODOs
- - add cookies service
+ - ~~add cookies service~~ we are not coupling the API and server, after all. Thus:
+    * add JWT
+    * add cookies, disable webstore so as to prevent things like downstream injections (e.g. the Flatmap-stream incident, circa 2018)
+    * implement CSRF forgery protection
  - tracking pixel campaign(s)
  - analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
  - implement cookies via Redis store, utilize in-memory caching for client
@@ -11,7 +14,8 @@ app has been deployed to production.
  - add rate limiter
  - add CORS policy/whitelist
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
-
+ - handle the GET users endpoint
+ 
 ### BUGFIXES
   - ~~fix router history obj on "go back", e.g. from created/updated blog post redirect~~ handled by nextjs
 
@@ -48,5 +52,20 @@ docker exec -it <HASH> bash .. bring ps to fg
 
 # bind to port
 docker run -it -p 5000:5000 testcontainer
+
+
+#### Why I Elected to Use an External API
+As you may know, Nextjs version 9 saw the introduction of several new features which deprecated custom servers and introduced myriad utilities for integrating API routes into a Nextjs project.
+
+Nextjs v9's Routes API is incredible, however it is very nascent. I have elected to maintain my API as a standard RESTful CRUD endpoint. I have done this for a few reasons:
+ - Nextjs Routes API does not support the level of granularity I need in my middlewares
+   * I cannot perform logging as I would like
+   * I cannot set sessions without inelegant logic (I'll nigh make mention of auth issues)
+ - Building my API into the Next server will effectively marry this project to Nextjs; development would be contingent on Zeit's priorities
+ - My services still maintain same-origin given they will be containerized (no need for explicit service coupling)
+ - Authentication and authorization are both difficult to properly implement when dealing with Nextjs; auth will be handled by the API - the rendered browser can simply store the token after authenticating with the API itself (as opposed to auth with next routed api, which can detriment security efforts)
+ 
+ Finally, as someone who admires a great deal the ethos of the giants upon whose shoulders we stand (ie our UNIX forefathers), I'd prefer each service *do one thing, and do it well*. I have not enumarated this in my afore-cited reasons for using a decoupled API as it is ultimately a matter of personal preference and not of performance. Next's internal API feature is blazing fast, but it simply is not extensible enough for my needs right now.
+
 ```
 

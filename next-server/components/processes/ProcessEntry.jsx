@@ -58,7 +58,7 @@ class ProcessEntry extends React.Component {
             <div>
                 <SidebarNavigator name="$ su -"/>
                 <main className="" id="main-collapse">
-                    <div style={{maxWidth: "900px"}}>
+                    <div style={{maxWidth: "700px"}}>
                         <h1>Process Entry</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
@@ -67,11 +67,11 @@ class ProcessEntry extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="subtitle">Subtitle</label>
-                                <textarea required name="subtitle" id="subtitle" defaultValue={data.subtitle} className="form-control" />
+                                <input required name="subtitle" id="subtitle" defaultValue={data.subtitle} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="imgsrc">Image URL</label>
-                                <textarea required name="imgsrc" id="imgsrc" defaultValue={data.imgsrc} className="form-control" />
+                                <input required name="imgsrc" id="imgsrc" defaultValue={data.imgsrc} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="content">Content</label>
