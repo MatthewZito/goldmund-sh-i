@@ -10,7 +10,7 @@ app has been deployed to production.
  - cloudflare for ddos protection + auto https
  - add rate limiter
  - add CORS policy/whitelist
-
+ - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
 
 ### BUGFIXES
   - ~~fix router history obj on "go back", e.g. from created/updated blog post redirect~~ handled by nextjs
