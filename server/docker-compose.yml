@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    goldmund-api:
+        container_name: goldmund-api
+        restart: always
+        build: ./
+        command: npm start
+        working_dir: /usr/src/server
+        ports:
+            - "5000:5000"
+        links: 
+            - mongo
+    mongo:
+        container_name: api-db
+        image: mongo
+        volumes:
+            - ./data:/data/db
+        ports:
+            - "27017:27017"
