@@ -48,12 +48,24 @@ const UserSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
+// modify JWT
+UserSchema.methods.toJSON = function() {
+    const user = this
+    const userObject = user.toObject();
+
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+}
+
 // gen JWT
 UserSchema.methods.generateAuthToken = async function() {
     const user = this
     const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
     // persist user's tokens to db so as to keep track of them...
     user.tokens = user.tokens.concat({ token });
+
     return token
 }
 

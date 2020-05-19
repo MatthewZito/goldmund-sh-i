@@ -34,7 +34,15 @@ const EntrySchema = new mongoose.Schema({
     deleted: {
         type: Boolean,
         default: false
-    } 
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
+    },
+    tags: {
+        type: Array
+    }
     },
     { timestamps: true }
 );

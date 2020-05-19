@@ -22,11 +22,10 @@ class Login extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         this.setState({ [name]: value });
-      }
+    }
     
     async handleSubmit(event) {
         event.preventDefault();
-        const data = new FormData(event.target);
         try {
             let response = await axios({
                 method: "post",

@@ -1,9 +1,46 @@
 const express = require("express");
 const User = require("../db/models/user.js");
-const auth = require("../../middleware/auth.js");
+const authenticate = require("../../middleware/authenticate.js");
 const router = new express.Router();
 
-// create new user
+// login
+router.post("/user/login", async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password);
+        const token = await user.generateAuthToken();
+        await user.save();
+        res.status(201).send({ user, token });
+    } catch(err) {
+        res.status(400).end();
+    }
+});
+
+// logout
+router.post("/user/logout", authenticate, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter(token => {
+            return token.token !== req.token
+        })
+        await req.user.save();
+        res.send()
+    } catch(err) {
+        res.status(500).send();
+    }
+});
+
+// logout all sessions
+router.post("/user/logoutall", authenticate, async (req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save();
+        res.send()
+    } catch(err) {
+        res.status(500).send();
+    }
+});
+
+
+// // create new user
 // router.post("/user", async (req, res) => {
 //     const user = new User(req.body);
 //     try {
@@ -14,43 +51,22 @@ const router = new express.Router();
 //     } catch (err) {
 //         res.status(400).send(err);
 //     }
-// })
+// });
 
-// login
-router.post("/user/login", async (req, res) => {
-    console.log(req.body)
-    try {
-        const user = await User.findByCredentials(req.body.email, req.body.password);
-        const token = await user.generateAuthToken();
-        await user.save();
-        res.status(201).send({ user, token });
-    } catch(err) {
-        res.status(400).end();
-    }
-})
 
-// fetch users
-router.get("/user", auth, async (req, res) => {
-    try {
-        const users = await User.find({})
-        res.send(users)
-    } catch (err) {
-        res.status(500).send(err);
-    }
-})
-
-// // fetch user by id
-// router.get("/user/:id", async (req, res) => {
-//     const _id = req.params.id
+// // fetch users
+// router.get("/user", authenticate, async (req, res) => {
 //     try {
-//         const user = await User.findById(_id);
-//         if (!user) {
-//             return res.status(404).send();
-//         }
-//         res.send(user);
+//         const users = await User.find({})
+//         res.send(users)
 //     } catch (err) {
 //         res.status(500).send(err);
 //     }
+// });
+
+// // fetch user by id
+// router.get("/user/self", authenticate, async (req, res) => {
+//     res.send(req.user)
 // })
 
 // // update user by id
@@ -74,7 +90,7 @@ router.get("/user", auth, async (req, res) => {
 //     } catch (err) {
 //         res.status(400).send(err);
 //     }
-// })
+// });
 
 // // delete user by id
 // router.delete("/user/:id", async (req, res) => {
@@ -89,6 +105,6 @@ router.get("/user", auth, async (req, res) => {
 //     } catch (err) {
 //         res.status(500).send(err);
 //     }
-// })
+// });
 
 module.exports = router

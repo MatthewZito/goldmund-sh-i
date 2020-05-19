@@ -4,7 +4,7 @@ app has been deployed to production.
 
 ### TODOs
  - ~~add cookies service~~ we are not coupling the API and server, after all. Thus:
-    * add JWT
+    * ~~add JWT~~
     * add cookies, disable webstore so as to prevent things like downstream injections (e.g. the Flatmap-stream incident, circa 2018)
     * implement CSRF forgery protection
  - tracking pixel campaign(s)
@@ -14,7 +14,8 @@ app has been deployed to production.
  - add rate limiter
  - add CORS policy/whitelist
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
- - handle the GET users endpoint
+ - ~~handle the GET users endpoint~~
+ - slowly convert CSS stylesheet to styled components with Emotionjs
  
 ### BUGFIXES
   - ~~fix router history obj on "go back", e.g. from created/updated blog post redirect~~ handled by nextjs
@@ -31,6 +32,8 @@ app has been deployed to production.
   - route-based code-splitting
 
 ### ABOUT
+
+This project is not a course project, nor does it use any bootstrapped content e.g. Boostrap, Material UI CDN, templates, et al. All pages and components have been written from scratch. This is a full-stack application designed for production.
 
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
 to your needs, please consider this application to be exemplary of my technical skillset.
