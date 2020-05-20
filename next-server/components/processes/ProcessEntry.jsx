@@ -41,8 +41,8 @@ class ProcessEntry extends React.Component {
         event.preventDefault();
         try {
             let response = await axios({
-                method: this.state.editMode ? "patch" : "post", body: data,
-                url: `http://localhost:5000/entry/${this.state.editMode ? this.state.data._id : "new"}`,
+                method: this.state.editMode ? "patch" : "post", body: this.state.data,
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/entry/${this.state.editMode ? this.state.data._id : "new"}`,
                 data: {
                     title: this.state.title,
                     subtitle: this.state.subtitle,
@@ -166,11 +166,6 @@ class ProcessEntry extends React.Component {
                                 <label htmlFor="imgsrc">Image URL</label>
                                 <input required type="text" name="imgsrc" id="imgsrc" className="form-control" defaultValue={data.imgsrc} onChange={this.handleChange} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="content">Content</label>
-                                <textarea required name="content" id="content" className="form-control" defaultValue={data.content} onChange={this.handleChange} />
-                            </div>
-
                             <div className="form-group">
                                 <label htmlFor="content">Content</label>
                                 <textarea required name="content" id="content" className="form-control" defaultValue={data.content} onChange={this.handleChange} />

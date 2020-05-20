@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
-import fetch from "isomorphic-unfetch";
 import axios from "axios";
+import { withCookies } from 'react-cookie';
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
 import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
@@ -10,7 +10,7 @@ import Meta from "../components/wrappers/Meta.jsx";
 class Vestibule extends React.Component {
     constructor(props, { search }) {
         super(props, { search });
-        this.state = {search:undefined};
+        this.state = {search: ""};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -32,17 +32,21 @@ class Vestibule extends React.Component {
     }
 
     static async getInitialProps({ query }) {
-        console.log(query.search)
-        console.log(query ? query.search : "")
         try {
-            const response = await fetch(`http://localhost:5000/${ query ? `?search=${query.search}` : ""}`);
+            let response = await axios({
+                method: "get",
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/`,
+                params: {
+                    search: query ? query.search : undefined,
+                }
+            });
             if (response.status !== 200) {
                 return {
                     error: true
                 }
             }
             else {
-                const entriesObject = await response.json();
+                const entriesObject = response.data
                 return {
                     isLoaded: true,
                     data: entriesObject
@@ -56,7 +60,6 @@ class Vestibule extends React.Component {
     }
     render() {
         const { error, isLoaded, data } = this.props
-        
         if (error) {
             return (
                 <>
@@ -75,7 +78,7 @@ class Vestibule extends React.Component {
                         <main id="main-collapse">
                             <div className="search-outer" >
                                 <form onSubmit={this.handleSubmit} className="search-form">
-                                    <input required type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange}  />
+                                    <input type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange}  />
                                     <i className="fa fa-search" aria-hidden="true" />
                                 </form>
                             </div>
@@ -101,4 +104,4 @@ class Vestibule extends React.Component {
     }
 }
 
-export default Vestibule;
+export default withCookies(Vestibule);

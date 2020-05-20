@@ -7,15 +7,15 @@ const Entry = require("../db/models/entry.js");
 
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
+    const { search } = req.query
     try {
-        // no query param provided, return full index
-        if (req.query.search === "undefined") {
-            const entries = await Entry.find({ deleted: false }).skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit)).sort({ createdAt: "desc" });
+        if (search=== undefined || search === "") {
+            const entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" }); // .skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit))
             res.send(entries);
         } 
         // query param provided, return cooresponding filtered index
-        else if (typeof(req.query.search) !== undefined){
-            const entries = await Entry.find({ deleted: false,  tags: { $in: [req.query.search] }}).sort({ createdAt: "desc" });
+        else if (typeof(search) !== undefined){
+            const entries = await Entry.find({ deleted: false,  tags: { $in: [search] }}).sort({ createdAt: "desc" });
             res.send(entries);
         }
     } catch(err) {

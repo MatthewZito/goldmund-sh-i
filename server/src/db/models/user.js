@@ -62,7 +62,7 @@ UserSchema.methods.toJSON = function() {
 // gen JWT
 UserSchema.methods.generateAuthToken = async function() {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: 60 });
     // persist user's tokens to db so as to keep track of them...
     user.tokens = user.tokens.concat({ token });
 

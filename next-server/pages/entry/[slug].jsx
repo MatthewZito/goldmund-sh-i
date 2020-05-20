@@ -1,5 +1,6 @@
 import React, { useState, Suspense } from "react";
-import fetch from "isomorphic-unfetch";
+import axios from "axios";
+import { withCookies } from 'react-cookie';
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
 const ProcessEntry = React.lazy(() => import("../../components/processes/ProcessEntry.jsx"));
 
@@ -46,8 +47,11 @@ const Entry = (props) => {
 
 Entry.getInitialProps = async ({ query }) => {
     const { slug } = query
-    const response = await fetch(`http://localhost:5000/entry/${slug}`);
-    const entryObject = await response.json();
+    const response = await axios({
+        method: "get",
+        url: `${process.env.NEXT_PUBLIC_API_BASE}/entry/${slug}`
+        });
+    const entryObject = response.data
     if (response.status !== 200) {
         return {
             error: true
@@ -62,4 +66,4 @@ Entry.getInitialProps = async ({ query }) => {
 }
 
 
-export default Entry;
+export default withCookies(Entry);

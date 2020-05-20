@@ -3,7 +3,9 @@ import Router from 'next/router'
 import Link from "next/link";
 import axios from "axios";
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
+import { Cookies, withCookies } from 'react-cookie';
 
+const cookies = new Cookies();
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -12,11 +14,6 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // getUsers = async () => {
-    //     let res = await axios.get("https://reqres.in/api/users?page=1");
-    //     let { data } = res.data;
-    //     this.setState({ users: data });
-    // };
     handleChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -29,12 +26,14 @@ class Login extends React.Component {
         try {
             let response = await axios({
                 method: "post",
-                url: "http://localhost:5000/user/login",
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/user/login`,
                 data: {
                   email: this.state.email,
                   password: this.state.password
                 }
               });
+              const token = response.data.token;
+              cookies.set('token', token);
         } catch(err) {
             console.log(err);
         }
@@ -70,4 +69,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withCookies(Login);
