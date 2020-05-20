@@ -14,10 +14,17 @@ router.get("/", async (req, res) => {
     const { search } = req.query
 
     try {
-        if (search=== undefined || search === "") {
-            const entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" }); // .skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit))
+
+
+        if (search === undefined || search === "") {
+            const entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" }); // .skip((resPerPage * page) - resPerPage).limit(resPerPage);
             res.send(entries);
         } 
+        
+
+
+
+
         // query param provided, return cooresponding filtered index
         else if (typeof(search) !== undefined){
             searchPattern = new RegExp(escapeRegex(search), 'gi');
@@ -81,3 +88,4 @@ router.patch("/entry/:id", authenticate, upload.none(), async (req, res) => {
     });
 
 module.exports = router
+

@@ -47,6 +47,36 @@ const EntrySchema = new mongoose.Schema({
     { timestamps: true }
 );
 
+UserSchema.statics.findByCredentials = async (email, password) => {
+    // attempt to match email first; isnt hashed, ergo more expedient
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new Error("Unable to login.");
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        throw new Error("Unable to login.");
+    }
+    return user
+}
+
+EntrySchema.statics.batchProcessor = async (lastProcessedID=null) => {
+    const numReturnedDocs = 10
+    // first page
+    if (!lastProcessedID) {
+        const entries = await Entry.find({deleted: false}).limit(numReturnedDocs);
+        lastProcessedID = entries[-1]._id
+        return entries, lastProcessedID
+    }
+    else {
+        const entries = await Entry.find( {'_id': { '$gt': lastProcessedID }, deleted: false }).limit(numReturnedDocs);
+        lastProcessedID = entries[-1]._id
+        return entries, lastProcessedID
+    }
+
+    
+}
+
 EntrySchema.pre("validate", function(next) {
     if (this.title) {
         this.slug = slugify(this.title, { lower: true, strict: true })
