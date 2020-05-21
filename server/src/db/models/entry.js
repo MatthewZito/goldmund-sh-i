@@ -3,7 +3,9 @@ const slugify = require("slugify");
 const marked = require("marked");
 const createDomPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
-const dompurify = createDomPurify(new JSDOM().window)
+const dompurify = createDomPurify(new JSDOM().window);
+const escapeRegex = require("../../../utils/regex-escape.js");
+
 
 const EntrySchema = new mongoose.Schema({
     title: {
@@ -47,35 +49,36 @@ const EntrySchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-UserSchema.statics.findByCredentials = async (email, password) => {
-    // attempt to match email first; isnt hashed, ergo more expedient
-    const user = await User.findOne({ email })
-    if (!user) {
-        throw new Error("Unable to login.");
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        throw new Error("Unable to login.");
-    }
-    return user
-}
 
-EntrySchema.statics.batchProcessor = async (lastProcessedID=null) => {
+EntrySchema.statics.findByTag = async (tag) => {
+    let data = {}
+    let searchPattern = new RegExp(escapeRegex(tag), 'gi');
+    this.find({ tags: { $in: [searchPattern] } }).then(() => {
+        return Entry.processBatch();
+    }).then((res) => {
+       console.log(res)
+    });
+    return data
+}
+// mongoose 4.5 introduced custom query methods...my life just got so much easier. save and fix on linux machine.
+// yes, I am using github to transport my repo - I'm too lazy to use scp lol
+// to get ID of last doc, entrieslist[-1]
+EntrySchema.statics.processBatch = async (lastProcessedID=undefined) => {
     const numReturnedDocs = 10
     // first page
     if (!lastProcessedID) {
-        const entries = await Entry.find({deleted: false}).limit(numReturnedDocs);
-        lastProcessedID = entries[-1]._id
-        return entries, lastProcessedID
+        data.entries = await Entry.find({ deleted: false }).limit(numReturnedDocs).sort({ createdAt: "desc" });
+        if (!data.entries) {
+            throw new Error("[-] Unable to query database for entries.")
+        }
     }
     else {
-        const entries = await Entry.find( {'_id': { '$gt': lastProcessedID }, deleted: false }).limit(numReturnedDocs);
-        lastProcessedID = entries[-1]._id
-        return entries, lastProcessedID
+        data.entries = await Entry.find( { "_id": { $gt: lastProcessedID }, deleted: false }).limit(numReturnedDocs).sort({ createdAt: "desc" });
+       
     }
-
-    
+    return data
 }
+//  data.lastProcessedID = entries[-1]._id
 
 EntrySchema.pre("validate", function(next) {
     if (this.title) {
@@ -87,4 +90,6 @@ EntrySchema.pre("validate", function(next) {
     next();
 })
 
-module.exports = mongoose.model("Entry", EntrySchema);
+const Entry = mongoose.model('Entry', EntrySchema);
+
+module.exports = Entry

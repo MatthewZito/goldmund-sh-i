@@ -4,34 +4,24 @@ const upload = multer();
 const authenticate = require("../../middleware/authenticate.js");
 const router = new express.Router();
 const Entry = require("../db/models/entry.js");
-const escapeRegex = require("../../utils/regex-escape.js");
 
 
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
-    const resPerPage = 9; // results per page
-    const { page } = req.params || 1; // Page 
     const { search } = req.query
-
     try {
-
-
-        if (search === undefined || search === "") {
-            const entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" }); // .skip((resPerPage * page) - resPerPage).limit(resPerPage);
-            res.send(entries);
-        } 
-        
-
-
-
-
         // query param provided, return cooresponding filtered index
-        else if (typeof(search) !== undefined){
-            searchPattern = new RegExp(escapeRegex(search), 'gi');
-            const entries = await Entry.find({ deleted: false,  tags: { $in: [searchPattern] }}).sort({ createdAt: "desc" });
-            res.send(entries);
+        if (search !== undefined && search !== ""){
+            const { entries, lastProcessedID } = await Entry.findByTag(search);
+            res.send({ entries, lastProcessedID});
         }
+        else {
+            const { entries, lastProcessedID } = await Entry.processBatch();
+            res.send({ entries, lastProcessedID});
+        }
+       
     } catch(err) {
+        console.log(err)
         res.status(500).send(err);
     }
 });
