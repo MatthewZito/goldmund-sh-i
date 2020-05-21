@@ -49,37 +49,42 @@ const EntrySchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-
-EntrySchema.statics.findByTag = async (tag) => {
-    let data = {}
+/**
+ * Find all entries whose tags contain a regex object created contingent on user input tag
+ * @param {tag} string Given tag for regex against which to query.
+ * @param {lastProcessedID} any createdAt Date ID object signifying cursor qua last processed batch.
+ * Returns all matched entries (even if no res). Chains to `processBatch`.
+ */
+EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
     let searchPattern = new RegExp(escapeRegex(tag), 'gi');
-    this.find({ tags: { $in: [searchPattern] } }).then(() => {
-        return Entry.processBatch();
-    }).then((res) => {
-       console.log(res)
-    });
-    return data
+    return await this.find({ tags: { $in: [searchPattern] } }).processBatch(lastProcessedID);
 }
-// mongoose 4.5 introduced custom query methods...my life just got so much easier. save and fix on linux machine.
-// yes, I am using github to transport my repo - I'm too lazy to use scp lol
-// to get ID of last doc, entrieslist[-1]
-EntrySchema.statics.processBatch = async (lastProcessedID=undefined) => {
-    const numReturnedDocs = 10
+
+/**
+ * Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
+ * @param {lastProcessedID} any createdAt Date ID object signifying cursor qua last processed batch.
+ * Returns all matched entries (even if no res).
+ */
+EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
+    const numReturnedDocs = 5
     // first page
     if (!lastProcessedID) {
-        data.entries = await Entry.find({ deleted: false }).limit(numReturnedDocs).sort({ createdAt: "desc" });
-        if (!data.entries) {
+        let entries = await this.find().sort({ createdAt: "desc"}).limit(numReturnedDocs);
+        if (!entries) {
+            // first batch; if nothing found, likely erroneous
             throw new Error("[-] Unable to query database for entries.")
         }
+        return entries
     }
     else {
-        data.entries = await Entry.find( { "_id": { $gt: lastProcessedID }, deleted: false }).limit(numReturnedDocs).sort({ createdAt: "desc" });
-       
+        return await this.find( { "createdAt": { $lt: lastProcessedID }}).sort({ createdAt: "desc"}).limit(numReturnedDocs);
     }
-    return data
 }
-//  data.lastProcessedID = entries[-1]._id
 
+/**
+ * Slugify title and sanitize markdown content, transmogrify into raw HTML
+ * @param {next} func callback
+ */
 EntrySchema.pre("validate", function(next) {
     if (this.title) {
         this.slug = slugify(this.title, { lower: true, strict: true })

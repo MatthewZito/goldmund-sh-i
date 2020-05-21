@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import axios from "axios";
 import { withCookies } from 'react-cookie';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
 import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
@@ -10,9 +11,10 @@ import Meta from "../components/wrappers/Meta.jsx";
 class Vestibule extends React.Component {
     constructor(props, { search }) {
         super(props, { search });
-        this.state = {search: ""};
+        this.state = { search: "", entries: this.props.entries, lastProcessedID: this.props.lastProcessedID, error: this.props.error };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.fetchNextBatch = this.fetchNextBatch.bind(this);
     }
 
     handleChange(event) {
@@ -25,10 +27,33 @@ class Vestibule extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         let { search } = this.state
-        Router.push({
-            pathname: "/",
-            query: { search },
-          });
+        // weird workaround, probably because router.push only works on client and not server
+        // unless it's a hot-reloading issue only present in dev
+        // we shall see. nevertheless, file this as a TODO: ensure works in prod
+        Router.push("/error", `/?search=${search}`);
+    }
+
+    async fetchNextBatch(query=this.state.search) {
+        try {
+            let response = await axios({
+                method: "get",
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/`,
+                params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
+            });
+            if (response.status !== 200) {
+                this.setState({ error: true })
+
+            }
+            else {
+                const { entries, lastProcessedID } = response.data
+                this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
+            }
+        } catch (err) {
+            console.log(err)
+            return {
+                error: true
+            }
+        }
     }
 
     static async getInitialProps({ query }) {
@@ -46,20 +71,22 @@ class Vestibule extends React.Component {
                 }
             }
             else {
-                const entriesObject = response.data
+                const { entries, lastProcessedID } = response.data
                 return {
-                    isLoaded: true,
-                    data: entriesObject
+                    entries: entries,
+                    lastProcessedID: lastProcessedID
                 } 
             }
         } catch (err) {
+            console.log(err)
             return {
                 error: true
             }
         }
     }
+
     render() {
-        const { error, isLoaded, data } = this.props
+        const { error, entries, lastProcessedID } = this.state
         if (error) {
             return (
                 <>
@@ -67,8 +94,6 @@ class Vestibule extends React.Component {
                     <ErrorBoundary reason={"Currently unable to fetch data..."} />
                 </>
             )
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
         } else {
             return (
                 <>
@@ -83,19 +108,26 @@ class Vestibule extends React.Component {
                                 </form>
                             </div>
                         <div className="hero-full-wrapper">
-                            <div className="grid" style={{ 
-                                display: "grid",
-                                gridTemplateColumns: "repeat( auto-fill, minmax(250px, 1fr) )",
-                                gridAutoRows: "250px",
-                                gridGap: "2em",
-                                
-                            }}> 
-                                {data.map(({_id, ...data}) => (
-                                    <EntryThumbnail key={_id} {...data} />
-                                ))
-                                }
+                                <InfiniteScroll
+                                    dataLength={entries.length}
+                                    next={this.fetchNextBatch}
+                                    loader={<h4>Loading...</h4>}
+                                    hasMore={lastProcessedID}
+                                    >
+                                    <div className="grid" style={{ 
+                                        display: "grid",
+                                        gridTemplateColumns: "repeat( auto-fill, minmax(250px, 1fr) )",
+                                        gridAutoRows: "250px",
+                                        gridGap: "2em",
+                                        
+                                    }}> 
+                                        {entries && entries.map(({_id, ...data}) => (
+                                            <EntryThumbnail key={_id} {...data} />
+                                        ))
+                                        }
+                                    </div>
+                                </InfiniteScroll>
                             </div>
-                        </div>
                         </main>
                     </div>
                 </>

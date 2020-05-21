@@ -4,22 +4,24 @@ const upload = multer();
 const authenticate = require("../../middleware/authenticate.js");
 const router = new express.Router();
 const Entry = require("../db/models/entry.js");
-
+const calculateLastProcessedID = require("../../utils/last-id.js");
 
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
-    const { search } = req.query
+    const { search, lastProcessedID } = req.query
     try {
-        // query param provided, return cooresponding filtered index
+        // query param provided, return corresponding filtered index
         if (search !== undefined && search !== ""){
-            const { entries, lastProcessedID } = await Entry.findByTag(search);
-            res.send({ entries, lastProcessedID});
+            let entries = await Entry.find({ deleted: false }).findByTag(search, lastProcessedID);
+            let newLastProcessedID = calculateLastProcessedID(entries);
+            res.send({ entries, newLastProcessedID });
         }
+        // no query param provided, continue with batch processing
         else {
-            const { entries, lastProcessedID } = await Entry.processBatch();
-            res.send({ entries, lastProcessedID});
+            let entries = await Entry.find({ deleted: false }).processBatch(lastProcessedID);
+            let newLastProcessedID = calculateLastProcessedID(entries);
+            res.send({ entries, lastProcessedID: newLastProcessedID});
         }
-       
     } catch(err) {
         console.log(err)
         res.status(500).send(err);
