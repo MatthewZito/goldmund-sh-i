@@ -9,8 +9,8 @@ import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
 import Meta from "../components/wrappers/Meta.jsx";
 
 class Vestibule extends React.Component {
-    constructor(props, { search }) {
-        super(props, { search });
+    constructor(props) {
+        super(props);
         this.state = { search: "", entries: this.props.entries, lastProcessedID: this.props.lastProcessedID, error: this.props.error };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
