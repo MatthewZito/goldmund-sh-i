@@ -4,27 +4,26 @@ const upload = multer();
 const authenticate = require("../../middleware/authenticate.js");
 const router = new express.Router();
 const Entry = require("../db/models/entry.js");
-const escapeRegex = require("../../utils/regex-escape.js");
-
+const calculateLastProcessedID = require("../../utils/last-id.js");
 
 // pull all entries/index thereof
 router.get("/", async (req, res) => {
-    const resPerPage = 9; // results per page
-    const { page } = req.params || 1; // Page 
-    const { search } = req.query
-
+    const { search, lastProcessedID } = req.query
     try {
-        if (search=== undefined || search === "") {
-            const entries = await Entry.find({ deleted: false }).sort({ createdAt: "desc" }); // .skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit))
-            res.send(entries);
-        } 
-        // query param provided, return cooresponding filtered index
-        else if (typeof(search) !== undefined){
-            searchPattern = new RegExp(escapeRegex(search), 'gi');
-            const entries = await Entry.find({ deleted: false,  tags: { $in: [searchPattern] }}).sort({ createdAt: "desc" });
-            res.send(entries);
+        // query param provided, return corresponding filtered index
+        if (search !== undefined && search !== ""){
+            let entries = await Entry.find({ deleted: false }).findByTag(search, lastProcessedID);
+            let newLastProcessedID = calculateLastProcessedID(entries);
+            res.send({ entries, newLastProcessedID });
+        }
+        // no query param provided, continue with batch processing
+        else {
+            let entries = await Entry.find({ deleted: false }).processBatch(lastProcessedID);
+            let newLastProcessedID = calculateLastProcessedID(entries);
+            res.send({ entries, lastProcessedID: newLastProcessedID});
         }
     } catch(err) {
+        console.log(err)
         res.status(500).send(err);
     }
 });
@@ -81,3 +80,4 @@ router.patch("/entry/:id", authenticate, upload.none(), async (req, res) => {
     });
 
 module.exports = router
+

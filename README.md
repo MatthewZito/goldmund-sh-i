@@ -30,6 +30,8 @@ app has been deployed to production.
   - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
   - hybrid progressive / server-side rendering with NextJs + Reactjs
   - route-based code-splitting
+  - infinite scrolling coordinated via batch processing on the backend (maintains consistent processing power requirements regardless of dataset size)
+  - JWT + Cookies 
 
 ### ABOUT
 
@@ -41,6 +43,7 @@ to your needs, please consider this application to be exemplary of my technical 
 I solely designed and architected this app. No tutorials were used, this wasn't a Udemy project. I pre-planned this app, I worked with wireframes, I ran simulations, I gathered intelligence. I have - very carefully and deliberately - implemented each feature here per my own devices. A lot of Stack Overflow and Google querying, yes, but this app was made by me.
 
 So, yes, an exemplar thereof. This is a sample of what I can design and build on my own. My hope here is that this delimits my actual capabilities from those apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). For instance, maybe I worked at a company that used Docker. How do you know if *I* understand Docker? You don't. Hopefully, this app dispels that veil.
+
 
 ### Devevelopment Notes
 Running Docker:
@@ -55,7 +58,7 @@ docker exec -it <HASH> bash .. bring ps to fg
 
 # bind to port
 docker run -it -p 5000:5000 testcontainer
-
+```
 
 #### Why I Elected to Use an External API
 As you may know, Nextjs version 9 saw the introduction of several new features which deprecated custom servers and introduced myriad utilities for integrating API routes into a Nextjs project.

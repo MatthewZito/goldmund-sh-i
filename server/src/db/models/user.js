@@ -69,7 +69,6 @@ UserSchema.methods.generateAuthToken = async function() {
     return token
 }
 
-
 // fetches user by email, then by matching plaintext to hashed pw
 UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient
