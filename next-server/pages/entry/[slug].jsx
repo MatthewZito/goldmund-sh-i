@@ -2,6 +2,7 @@ import React, { useState, Suspense } from "react";
 import axios from "axios";
 import { withCookies } from 'react-cookie';
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
+import Meta from "../../components/wrappers/Meta.jsx";
 const ProcessEntry = React.lazy(() => import("../../components/processes/ProcessEntry.jsx"));
 
 const Entry = (props) => {
@@ -21,26 +22,29 @@ const Entry = (props) => {
     } else {
         let dateFooter = `${new Date(data.createdAt).toDateString()} ${data.createdAt !== data.updatedAt ? ` (updated on ${new Date(data.updatedAt).toDateString()})` : ""}`
         return (
-            <div>
-                <SidebarNavigator name="$ cat "/>
-                <main className="" id="main-collapse">
-                    <div className="row">
-                        <div className="col-xs-12 col-md-12">
-                            <div className="section-container-spacer">
-                            <h2>{data.title}</h2>
-                            <p><strong>{data.subtitle}</strong></p>
-                            <hr />
-                            <div dangerouslySetInnerHTML={{__html: data.sanitizedHTML}}></div>
-                            <hr />
-                            <p><em>{dateFooter}</em></p>
-                            {isAdmin &&
-                                <button className="btn btn-primary" onClick={() => setEditMode(true)}>Edit</button>
-                            }
+            <>
+            <Meta />
+                <div>
+                    <SidebarNavigator name="$ cat "/>
+                    <main className="" id="main-collapse">
+                        <div className="row">
+                            <div className="col-xs-12 col-md-12">
+                                <div className="section-container-spacer">
+                                <h2>{data.title}</h2>
+                                <p><strong>{data.subtitle}</strong></p>
+                                <hr />
+                                <div dangerouslySetInnerHTML={{__html: data.sanitizedHTML}}></div>
+                                <hr />
+                                <p><em>{dateFooter}</em></p>
+                                {isAdmin &&
+                                    <button className="btn btn-primary" onClick={() => setEditMode(true)}>Edit</button>
+                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>
+            </>
         );
     }
 }
