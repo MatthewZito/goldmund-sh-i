@@ -22,10 +22,7 @@ app has been deployed to production.
 
 ### Features
   - database uses [(quasi)Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
-  - CRUD db operations via admin panel
-    * update post
-    * create new post
-    * set 'deleted' flag (update, qua lamdba architectural ethos)
+  - custom REST microservice for data processing
   - Dynamic template engine/render
   - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
   - hybrid progressive / server-side rendering with NextJs + Reactjs
@@ -38,11 +35,7 @@ app has been deployed to production.
 This project is not a course project, nor does it use any bootstrapped content e.g. Boostrap, Material UI CDN, templates, et al. All pages and components have been written from scratch. This is a full-stack application designed for production.
 
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
-to your needs, please consider this application to be exemplary of my technical skillset.
-
-I solely designed and architected this app. No tutorials were used, this wasn't a Udemy project. I pre-planned this app, I worked with wireframes, I ran simulations, I gathered intelligence. I have - very carefully and deliberately - implemented each feature here per my own devices. A lot of Stack Overflow and Google querying, yes, but this app was made by me.
-
-So, yes, an exemplar thereof. This is a sample of what I can design and build on my own. My hope here is that this delimits my actual capabilities from those apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). For instance, maybe I worked at a company that used Docker. How do you know if *I* understand Docker? You don't. Hopefully, this app dispels that veil.
+to your needs, please consider this application to be an examplar of what I can design and build on my own. My hope here is that this delimits my actual capabilities from those apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). For instance, maybe I worked at a company that used Docker. How do you know if *I* understand Docker? You don't. Hopefully, this app dispels that veil.
 
 
 ### Devevelopment Notes
