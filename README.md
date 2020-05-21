@@ -14,11 +14,9 @@ app has been deployed to production.
  - add rate limiter
  - add CORS policy/whitelist
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
- - ~~handle the GET users endpoint~~
  - slowly convert CSS stylesheet to styled components with Emotionjs
  
 ### BUGFIXES
-  - ~~fix router history obj on "go back", e.g. from created/updated blog post redirect~~ handled by nextjs
 
 ### Features
   - database uses [(quasi)Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)

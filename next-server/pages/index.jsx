@@ -111,7 +111,7 @@ class Vestibule extends React.Component {
                                 <InfiniteScroll
                                     dataLength={entries.length}
                                     next={this.fetchNextBatch}
-                                    loader={<h4>Loading...</h4>}
+                                    loader={<p>Loading...</p>}
                                     hasMore={lastProcessedID}
                                     >
                                     <div className="grid" style={{ 

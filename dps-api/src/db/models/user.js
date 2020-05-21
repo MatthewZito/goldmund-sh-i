@@ -27,8 +27,8 @@ const UserSchema = new mongoose.Schema({
         minlength: 7,
         trim: true,
         validate(value) {
-            if (value.toLowerCase().includes("password")) {
-                throw new Error("Password cannot contain 'password'");
+            if (value.toLowerCase().includes("password" || "$")) {
+                throw new Error("Password cannot contain 'password' or '$'");
             }
         }
     },
@@ -50,8 +50,7 @@ const UserSchema = new mongoose.Schema({
 
 // modify JWT
 UserSchema.methods.toJSON = function() {
-    const user = this
-    const userObject = user.toObject();
+    const userObject = this.toObject();
 
     delete userObject.password
     delete userObject.tokens
@@ -61,10 +60,9 @@ UserSchema.methods.toJSON = function() {
 
 // gen JWT
 UserSchema.methods.generateAuthToken = async function() {
-    const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: 60 });
+    const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET, { expiresIn: 60 });
     // persist user's tokens to db so as to keep track of them...
-    user.tokens = user.tokens.concat({ token });
+    this.tokens = this.tokens.concat({ token });
 
     return token
 }
@@ -85,9 +83,8 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 
 // hash plaintext pw prior to persisting
 UserSchema.pre("save", async function (next) {
-    const user = this
-    if (user.isModified("password")) {
-        user.password = await bcrypt.hash(user.password, 9);
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 9);
     }
  
     next();

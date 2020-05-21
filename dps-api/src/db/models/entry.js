@@ -66,7 +66,7 @@ EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
  * Returns all matched entries (even if no res).
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
-    const numReturnedDocs = 5
+    const numReturnedDocs = 10
     // first page
     if (!lastProcessedID) {
         let entries = await this.find().sort({ createdAt: "desc"}).limit(numReturnedDocs);
