@@ -6,6 +6,7 @@ require("dotenv").config();
 require("./db/mongoose.js");
 const entryRouter = require("./routes/entry.js");
 const userRouter = require("./routes/user.js");
+const emailRouter = require("./routes/email.js");
 const app = express();
 const port = process.env.PORT || 5000
 
@@ -16,7 +17,7 @@ app.use(express.json());
 // routes
 app.use(entryRouter);
 app.use(userRouter);
-
+app.use(emailRouter);
 
 app.listen(port, () => console.log(`[+] Listening on port ${port}...`));
 

@@ -1,16 +1,19 @@
 const express = require("express");
 const User = require("../db/models/user.js");
 const authenticate = require("../../middleware/authenticate.js");
+const sanitizeQuery = require("../../middleware/sanitize.js");
 const router = new express.Router();
 
+
 // login
-router.post("/user/login", async (req, res) => {
+router.post("/user/login", sanitizeQuery, async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
         await user.save();
         res.status(201).send({ user, token });
     } catch(err) {
+        console.log(err)
         res.status(400).end();
     }
 });
@@ -39,6 +42,7 @@ router.post("/user/logoutall", authenticate, async (req, res) => {
     }
 });
 
+module.exports = router
 
 // // create new user
 // router.post("/user", async (req, res) => {
@@ -107,4 +111,11 @@ router.post("/user/logoutall", authenticate, async (req, res) => {
 //     }
 // });
 
-module.exports = router
+// router.post("/user/test", sanitizeQuery, async (req, res) => {
+//     try{
+//         const user = await User.findOne({ email: req.body.email });
+//         res.send(user)
+//     } catch(err) {
+//         res.status(400).end();
+//     }
+// })
