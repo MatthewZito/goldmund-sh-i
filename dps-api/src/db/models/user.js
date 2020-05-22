@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const redisClient = require("../redis.js");
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -48,23 +49,22 @@ const UserSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-// modify JWT
-UserSchema.methods.toJSON = function() {
-    const userObject = this.toObject();
 
-    delete userObject.password
-    delete userObject.tokens
-
-    return userObject
+const persistToken = async (token, id) => {
+    console.log("ok")
 }
 
 // gen JWT
 UserSchema.methods.generateAuthToken = async function() {
-    const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET, { expiresIn: 60 });
-    // persist user's tokens to db so as to keep track of them...
-    this.tokens = this.tokens.concat({ token });
+    const { _id, email } = this
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1 hour' });
+    // persist token to Redis
+    const persistence = await persistToken(token, _id);
+    if (!persistence) {
+        throw new Error("[-] Unable to persist to cache database.");
+    }
+    return { success: "true", userId: _id, token }
 
-    return token
 }
 
 // fetches user by email, then by matching plaintext to hashed pw
@@ -72,11 +72,11 @@ UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient
     const user = await User.findOne({ email })
     if (!user) {
-        throw new Error("Unable to login.");
+        throw new Error("[-] Unable to login.");
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        throw new Error("Unable to login.");
+        throw new Error("[-] Unable to login.");
     }
     return user
 }

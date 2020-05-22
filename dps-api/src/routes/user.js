@@ -8,10 +8,18 @@ const router = new express.Router();
 // login
 router.post("/user/login", sanitizeQuery, async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.email, req.body.password);
-        const token = await user.generateAuthToken();
-        await user.save();
-        res.status(201).send({ user, token });
+        const { authorization } = req.headers
+        if (authorization) {
+            const token = await user.generateAuthToken();
+        }
+        else {
+            const user = await User.findByCredentials(req.body.email, req.body.password);
+            const token = await user.generateAuthToken();
+            // await user.save();
+            res.status(201).send({ token });
+
+        }
+        
     } catch(err) {
         console.log(err)
         res.status(400).end();
