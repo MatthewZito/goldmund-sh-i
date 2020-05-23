@@ -4,9 +4,9 @@ const cors = require('cors');
 const morgan = require("morgan");
 require("dotenv").config();
 require("./db/mongoose.js");
-const entryRouter = require("./routes/entry.js");
-const userRouter = require("./routes/user.js");
-const emailRouter = require("./routes/email.js");
+const entryRouter = require("./routes/entry-route.js");
+const userRouter = require("./routes/user-route.js");
+const emailRouter = require("./routes/email-route.js");
 const app = express();
 const port = process.env.PORT || 5000
 

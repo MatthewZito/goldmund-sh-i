@@ -1,4 +1,3 @@
-import { withCookies } from 'react-cookie';
 import ProcessEntry from "../components/processes/ProcessEntry.jsx";
 
 const newentry = () => {
@@ -7,4 +6,4 @@ const newentry = () => {
     )
 }
 
-export default withCookies(newentry);
+export default newentry;

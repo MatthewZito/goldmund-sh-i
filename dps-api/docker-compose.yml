@@ -1,32 +1,23 @@
 version: '3.8'
 
 services:
+    # dps
     goldmund-api:
         container_name: goldmund-api
         restart: always
         build: ./
         command: npm start
         working_dir: /usr/src/dps-api
+        env_file: 
+            - config/dev.env
+        links:
+            - redis
         ports:
             - "5000:5000"
         volumes: 
             - ./:/usr/src/dps-api
-
-
-
-
-
-
-
-
-
-            
-    #     links: 
-    #         - mongo
-    # mongo:
-    #     container_name: mongod
-    #     image: mongo
-    #     volumes:
-    #         - ~/opt/mongodb-data:/data/db
-    #     ports:
-    #         - "27017:27017"
+    # Redis 
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"

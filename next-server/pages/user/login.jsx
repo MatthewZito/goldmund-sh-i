@@ -3,15 +3,37 @@ import Router from 'next/router'
 import Link from "next/link";
 import axios from "axios";
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
-import { Cookies, withCookies } from 'react-cookie';
 
-const cookies = new Cookies();
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {email: "",password:""};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.persistAuthToken = this.persistAuthToken.bind(this);
+    }
+
+    async componentDidMount() {
+        const token = window.sessionStorage.getItem("token");
+        if (token) {
+            try {
+                let response = await axios({
+                    method: "post",
+                    url: `${process.env.NEXT_PUBLIC_API_BASE}/user/login`,
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    }
+                  });
+                  console.log(response)
+                  if (response.data.token.userId && response.data.token.success === "true") {
+                      this.persistAuthToken(response.data.token.token);
+                  }
+            } catch(err) {
+                console.log(err);
+            }
+
+        }
+
     }
 
     handleChange(event) {
@@ -20,7 +42,12 @@ class Login extends React.Component {
         const name = target.name;
         this.setState({ [name]: value });
     }
-    
+
+    persistAuthToken = (token) => {
+        console.log("ya")
+        window.sessionStorage.setItem("token", token);
+    }
+
     async handleSubmit(event) {
         event.preventDefault();
         try {
@@ -32,8 +59,10 @@ class Login extends React.Component {
                   password: this.state.password
                 }
               });
-              const token = response.data.token;
-              cookies.set('token', token);
+              console.log(response)
+              if (response.data.token.userId && response.data.token.success === "true") {
+                  this.persistAuthToken(response.data.token.token);
+              }
         } catch(err) {
             console.log(err);
         }
@@ -69,4 +98,4 @@ class Login extends React.Component {
     }
 }
 
-export default withCookies(Login);
+export default Login;

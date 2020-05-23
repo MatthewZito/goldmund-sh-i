@@ -31,7 +31,7 @@ const EmailSchema = new mongoose.Schema({
  * @param {next} func callback
  */
 EmailSchema.pre("save", function(next) {
-    next();
+    return next();
 })
 
 const Email = mongoose.model('Email', EmailSchema);

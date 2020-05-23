@@ -1,6 +1,5 @@
 import React, { useState, Suspense } from "react";
 import axios from "axios";
-import { withCookies } from 'react-cookie';
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
 import Meta from "../../components/wrappers/Meta.jsx";
 const ProcessEntry = React.lazy(() => import("../../components/processes/ProcessEntry.jsx"));
@@ -70,4 +69,4 @@ Entry.getInitialProps = async ({ query }) => {
 }
 
 
-export default withCookies(Entry);
+export default Entry;
