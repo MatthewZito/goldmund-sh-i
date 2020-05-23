@@ -1,6 +1,12 @@
 const { Types } = require("mongoose");
 const redisClient = require("../db/redis.js");
 
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @param {func} callback 
+ * @description Authorization middleware; enforces JWT verification via cache db and sets author field.
+ */
 const authorize = async (req, res, next) => {
     const { authorization } = req.headers
     try {

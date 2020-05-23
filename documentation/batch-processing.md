@@ -42,7 +42,7 @@ Here is the final implementation of the batch processing unit:
 ```
 /**
  * Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
- * @param {lastProcessedID} any createdAt Date ID object signifying cursor qua last processed batch.
+ * @param {Object|string} lastProcessedID any createdAt Date ID object signifying cursor qua last processed * batch.
  * Returns all matched entries (even if no res).
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {

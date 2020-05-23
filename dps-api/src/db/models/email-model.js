@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const validator = require('validator');
 
+/**
+ * @class EmailSchema
+ */
 const EmailSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -27,8 +30,8 @@ const EmailSchema = new mongoose.Schema({
 );
 
 /**
- * Ensures validators are called via middleware arg.
- * @param {next} func callback
+ * @param {func} callback
+ * @description Ensures sanitization validators are called via corresponding middleware.
  */
 EmailSchema.pre("save", function(next) {
     return next();

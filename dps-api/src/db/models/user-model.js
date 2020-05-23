@@ -4,8 +4,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const redisClient = require("../redis.js");
 
-/* SCHEMA */
-
+/**
+ * @class UserSchema
+ * @mixes {UserSchema.methods}
+ */
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -54,7 +56,10 @@ const UserSchema = new mongoose.Schema({
 
 /* METHODS */
 
-// generate JWT
+/**
+ * @description Generates JWT token for given user. Persists said token via Redis client.
+ * @returns JWT object.
+ */
 UserSchema.methods.generateAuthToken = async function() {
     const { _id, email } = this
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1 hour' });
@@ -67,7 +72,13 @@ UserSchema.methods.generateAuthToken = async function() {
 
 }
 
-// fetches user by email, then by matching plaintext to hashed pw
+
+/**
+ * @param {string} email The given user's email, as input by a user.
+ * @param {string} password The given user's password, as input by a user.
+ * @description Fetches user by email, proceeds to validate plaintext password against hash.
+ * @returns User object.
+ */
 UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient
     const user = await User.findOne({ email })
@@ -81,12 +92,13 @@ UserSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-// hash plaintext pw prior to persisting
+/**
+ * @description Hash plaintext password prior to persisting.
+ */
 UserSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 9);
     }
- 
     return next();
 })
 

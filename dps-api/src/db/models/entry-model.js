@@ -6,7 +6,10 @@ const { JSDOM } = require("jsdom");
 const dompurify = createDomPurify(new JSDOM().window);
 const escapeRegex = require("../../utils/regex-escape.js");
 
-
+/**
+ * @class EntrySchema
+ * @mixes {EntrySchema.methods}
+ */
 const EntrySchema = new mongoose.Schema({
     title: {
         type: String,
@@ -50,10 +53,10 @@ const EntrySchema = new mongoose.Schema({
 );
 
 /**
- * Find all entries whose tags contain a regex object created contingent on user input tag
- * @param {tag} string Given tag for regex against which to query.
- * @param {lastProcessedID} any createdAt Date ID object signifying cursor qua last processed batch.
- * Returns all matched entries (even if no res). Chains to `processBatch`.
+ * @param {string} tag Given tag for regex against which to query.
+ * @param {Object|undefined} lastProcessedID createdAt Date ID object signifying cursor qua last processed batch.
+ * @returns all matched entries (even if no res). Chains to `processBatch`.
+ * @description Find all entries whose tags contain a regex object created contingent on user input tag
  */
 EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
     let searchPattern = new RegExp(escapeRegex(tag), 'gi');
@@ -61,9 +64,9 @@ EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
 }
 
 /**
- * Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
- * @param {lastProcessedID} any createdAt Date ID object signifying cursor qua last processed batch.
- * Returns all matched entries (even if no res).
+ * @param {Object|undefined} lastProcessedID  createdAt Date ID object signifying cursor qua last processed batch.
+ * @returns all matched entries (even if no res).
+ * @description Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
     const numReturnedDocs = 10
@@ -82,8 +85,8 @@ EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
 }
 
 /**
- * Slugify title and sanitize markdown content, transmogrify into raw HTML
- * @param {next} func callback
+ * @param {func} callback
+ * @description Slugify title and sanitize markdown content, transmogrify into raw HTML
  */
 EntrySchema.pre("validate", function(next) {
     if (this.title) {
