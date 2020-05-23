@@ -9,7 +9,7 @@ const sanitizeQuery = async (req, res, next) => {
                     throw new Error("nested key found");
                 }
             }
-            next()
+            return next()
         } 
     } catch(err) {
         res.status(401).send({ error: "[-] Malformed input. This transaction has been logged."})

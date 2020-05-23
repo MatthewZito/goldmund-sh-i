@@ -4,7 +4,7 @@ const marked = require("marked");
 const createDomPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
 const dompurify = createDomPurify(new JSDOM().window);
-const escapeRegex = require("../../../utils/regex-escape.js");
+const escapeRegex = require("../../utils/regex-escape.js");
 
 
 const EntrySchema = new mongoose.Schema({
@@ -92,7 +92,7 @@ EntrySchema.pre("validate", function(next) {
     if (this.content) {
         this.sanitizedHTML = dompurify.sanitize(marked(this.content));
     }
-    next();
+    return next();
 })
 
 const Entry = mongoose.model('Entry', EntrySchema);

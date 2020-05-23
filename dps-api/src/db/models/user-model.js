@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const redisClient = require("../redis.js");
 
+/* SCHEMA */
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -50,16 +52,14 @@ const UserSchema = new mongoose.Schema({
 );
 
 
-const persistToken = async (token, id) => {
-    console.log("ok")
-}
+/* METHODS */
 
-// gen JWT
+// generate JWT
 UserSchema.methods.generateAuthToken = async function() {
     const { _id, email } = this
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1 hour' });
     // persist token to Redis
-    const persistence = await persistToken(token, _id);
+    const persistence = await redisClient.setAsync(token, _id.toString());
     if (!persistence) {
         throw new Error("[-] Unable to persist to cache database.");
     }
@@ -87,7 +87,7 @@ UserSchema.pre("save", async function (next) {
         this.password = await bcrypt.hash(this.password, 9);
     }
  
-    next();
+    return next();
 })
 
 const User = mongoose.model('User', UserSchema);

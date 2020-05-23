@@ -1,7 +1,6 @@
 import React from "react";
 import Router from "next/router";
 import axios from "axios";
-import { withCookies } from 'react-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
@@ -136,4 +135,4 @@ class Vestibule extends React.Component {
     }
 }
 
-export default withCookies(Vestibule);
+export default Vestibule;
