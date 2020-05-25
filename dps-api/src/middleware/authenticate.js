@@ -3,7 +3,6 @@ const redisClient = require("../db/redis.js");
 // fetch JWT
 const authenticate = async (req, res, next) => {
     const { authorization } = req.headers
-    console.log("auth")
     try {
         if (authorization) {
             const token = authorization.replace("Bearer ", "");

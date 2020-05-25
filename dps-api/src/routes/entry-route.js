@@ -5,7 +5,6 @@ const authorize = require("../middleware/authorize.js");
 const EntryController = require("../controllers/entry-controller.js");
 const router = new express.Router();
 
-
 // pull all entries/index thereof
 router.get("/", 
     EntryController.fetchIndex
