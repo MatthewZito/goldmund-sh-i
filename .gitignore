@@ -3,6 +3,7 @@
 *DS_Store
 *.next
 dps-api/data
+dps-api/redis.conf
 crypto.js
 logs
 cli/tmp

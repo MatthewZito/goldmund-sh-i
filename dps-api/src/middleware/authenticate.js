@@ -1,23 +1,28 @@
 const redisClient = require("../db/redis.js");
 
-// fetch JWT
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @param {func} callback 
+ * @description Authentication middleware. Parses for auth headers.
+ * If auth header provided: query cache db for user-provided token to ascertain if session is live.
+ * Else, return generated token and persist at Redis caching layer.
+ */
 const authenticate = async (req, res, next) => {
     const { authorization } = req.headers
     try {
         if (authorization) {
             const token = authorization.replace("Bearer ", "");
             const reply = await redisClient.getAsync(token);
-            console.log(reply)
             if (!reply) {
-                throw new Error("Nope.");
+                throw new Error("[-] A failure occurred at the caching layer.");
             }
             return res.send({ _id: reply });
         }
         else {
-            next();
+            return next();
         }
     } catch(err) {
-        console.log(err)
         res.status(401).send({ error: "[-] Authentication required. This transaction has been logged."});
     }
 }
