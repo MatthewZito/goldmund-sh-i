@@ -6,7 +6,7 @@ app has been deployed to production.
  - ~~add cookies service~~ we are not coupling the API and server, after all. Thus:
     * ~~add JWT~~
     * add cookies, disable webstore so as to prevent things like downstream injections (e.g. the Flatmap-stream incident, circa 2018)
-    * implement CSRF forgery protection
+    * implement CSRF protection
  - tracking pixel campaign(s)
  - analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
  - implement cookies via Redis store, utilize in-memory caching for client
@@ -27,6 +27,7 @@ app has been deployed to production.
   - route-based code-splitting
   - infinite scrolling coordinated via batch processing on the backend (maintains consistent processing power requirements regardless of dataset size)
   - JWT + Cookies 
+  - sessions caching with Redis
 
 ### ABOUT
 

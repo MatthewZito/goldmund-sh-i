@@ -47,11 +47,6 @@ const SidebarNavigator = (props) => {
                                 <a className={router.pathname == "/communications" ? "active" : ""}>Comms</a>
                             </Link>
                         </li>
-                        <li> 
-                            <Link href="/newentry">
-                                <a className={router.pathname == "/newentry" ? "active" : ""}>New Entry</a>
-                            </Link>
-                        </li>
                     </ul>
                     <SidebarFooter />
                 </div> 

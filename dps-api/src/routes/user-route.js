@@ -4,7 +4,6 @@ const sanitizeQuery = require("../middleware/sanitize.js");
 const UserController = require("../controllers/user-controller.js");
 const router = new express.Router();
 
-
 // login
 router.post("/user/login", 
     sanitizeQuery, 

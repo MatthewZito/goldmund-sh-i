@@ -48,7 +48,6 @@ class Vestibule extends React.Component {
                 this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
             }
         } catch (err) {
-            console.log(err)
             return {
                 error: true
             }
@@ -77,7 +76,6 @@ class Vestibule extends React.Component {
                 } 
             }
         } catch (err) {
-            console.log(err)
             return {
                 error: true
             }

@@ -36,10 +36,11 @@ class Communications extends React.Component {
                 throw new Error("no");
               }
               else {
+                alert("[+] Success.");
                 Router.push("/"); // TODO change to form success
               }
         } catch(err) {
-            console.log(err);
+            alert("[-] Form submission failed.");
             Router.push("/"); // TODO change to err
         }
     }
