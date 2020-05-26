@@ -1,0 +1,23 @@
+{
+  "name": "Goldmund.io Admin CLI",
+  "version": "0.1.0",
+  "description": "A console-oriented service for localized web administration",
+  "bin": {
+    "goldmund": "./app.js"
+  },
+  "preferGlobal": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Matthew T Zito (goldmund)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "validator": "^13.0.0",
+    "yargs": "^15.3.1"
+  }
+}
