@@ -49,13 +49,11 @@ exports.createEntry = async (req, res) => {
 
 exports.updateEntry = async (req, res) => {
     try { 
-        console.log("[DEBUG]", req.author)
         let entry = await Entry.findOne({ _id: req.params.id, author: req.author });
-        console.log(entry)
         if (!entry) {
             return res.status(401).send({ error: "Authentication required. This transaction has been logged."});
         }
-
+        // map all user-provided fields into data object
         Object.keys(req.body).forEach(key => {
             entry[key] = req.body[key]
         });
