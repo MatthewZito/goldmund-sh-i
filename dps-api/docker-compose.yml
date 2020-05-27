@@ -17,7 +17,7 @@ services:
         command: npm run dev # npm start prod
         working_dir: /usr/src/dps-api
         env_file: 
-            - config/dev.env
+            - config/prod.env
         volumes: 
             - ./:/usr/src/dps-api
         ports:
