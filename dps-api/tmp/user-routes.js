@@ -66,7 +66,7 @@
 //     }
 // });
 
-// router.post("/user/test", sanitizeQuery, async (req, res) => {
+// router.post("/user/test", sanitizeBody, async (req, res) => {
 //     try{
 //         const user = await User.findOne({ email: req.body.email });
 //         res.send(user)
