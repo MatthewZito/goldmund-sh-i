@@ -69,9 +69,7 @@ UserSchema.methods.generateAuthToken = async function() {
         throw new Error("[-] Unable to persist to cache database.");
     }
     return { success: "true", userId: _id, token }
-
 }
-
 
 /**
  * @param {string} email The given user's email, as input by a user.

@@ -14,6 +14,7 @@ const authenticate = async (req, res, next) => {
         if (authorization) {
             const token = authorization.replace("Bearer ", "");
             const reply = await redisClient.getAsync(token);
+            // verify jwt here
             if (!reply) {
                 throw new Error("[-] A failure occurred at the caching layer.");
             }
