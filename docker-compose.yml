@@ -13,13 +13,13 @@ services:
     goldmund-api:
         container_name: goldmund-api
         restart: always
-        build: ./
+        build: .dps-api/
         command: npm run dev # npm start prod
         working_dir: /usr/src/dps-api
         env_file: 
             - config/prod.env
         volumes: 
-            - ./:/usr/src/dps-api
+            - .dps-api/:/usr/src/dps-api
         ports:
             - "5000:5000"
         networks:
