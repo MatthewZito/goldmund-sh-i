@@ -11,29 +11,10 @@ router.post("/user/login",
     UserController.login
     );
 
-
-// // logout
-// router.post("/user/logout", authenticate, async (req, res) => {
-//     try {
-//         req.user.tokens = req.user.tokens.filter(token => {
-//             return token.token !== req.token
-//         })
-//         await req.user.save();
-//         res.send()
-//     } catch(err) {
-//         res.status(500).send();
-//     }
-// });
-
-// // logout all sessions
-// router.post("/user/logoutall", authenticate, async (req, res) => {
-//     try {
-//         req.user.tokens = []
-//         await req.user.save();
-//         res.send()
-//     } catch(err) {
-//         res.status(500).send();
-//     }
-// });
+// logout
+router.post("/user/logout", 
+    sanitizeQuery, 
+    UserController.logout
+    );
 
 module.exports = router

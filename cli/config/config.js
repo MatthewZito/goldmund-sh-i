@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require("dotenv").config();
 module.exports = {
     localStore: "tmp/ephemera.json",

@@ -51,7 +51,15 @@ docker exec -it <HASH> bash .. bring ps to fg
 # bind to port
 docker run -it -p 5000:5000 testcontainer
 ```
-
+### Accessing Redis-CLI
+```
+# fetch internal IP
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name_or_id>
+# connect
+docker exec -it <container_name_or_id> bash
+# launch cli from internal docker namespace
+redis-cli -h <internal IP>
+```
 #### Why I Elected to Use an External API
 As you may know, Nextjs version 9 saw the introduction of several new features which deprecated custom servers and introduced myriad utilities for integrating API routes into a Nextjs project.
 

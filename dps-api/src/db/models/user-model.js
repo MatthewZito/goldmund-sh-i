@@ -57,21 +57,19 @@ const UserSchema = new mongoose.Schema({
 /* METHODS */
 
 /**
- * @description Generates JWT token for given user. Persists said token via Redis client.
+ * @description Generates JWT token for given user. Persists said token to cache layer via Redis client.
  * @returns JWT object.
  */
 UserSchema.methods.generateAuthToken = async function() {
     const { _id, email } = this
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1 hour' });
+    const token = jwt.sign({ email }, process.env.JWT_SECRET);
     // persist token to Redis
-    const persistence = await redisClient.setAsync(token, _id.toString());
+    const persistence = await redisClient.setAsync(token, _id.toString(),'EX', 60 * 60 * 1);
     if (!persistence) {
         throw new Error("[-] Unable to persist to cache database.");
     }
     return { success: "true", userId: _id, token }
-
 }
-
 
 /**
  * @param {string} email The given user's email, as input by a user.

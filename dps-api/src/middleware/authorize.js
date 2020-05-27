@@ -11,17 +11,16 @@ const authorize = async (req, res, next) => {
     const { authorization } = req.headers
     try {
         if (!authorization) {
-            throw new Error("Nope.")
+            throw new Error("[-] No authorization data provided.")
         }
         const token = authorization.replace("Bearer ", "");
         const reply = await redisClient.getAsync(token);
         if (!reply) {
-            throw new Error("Nope.");
+            throw new Error("[-] A failure occurred at the caching layer.");
         }
         req.author = Types.ObjectId.createFromHexString(reply)
         return next();
     } catch(err) {
-        console.log(err)
         res.status(401).send({ error: "[-] Authorization required. This transaction has been logged."});
     }
 }
