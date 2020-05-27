@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const chalk = require("chalk");
 const { authorize } = require("../utils/fs.js");
 const { login } = require("../utils/requests.js");
@@ -9,11 +10,11 @@ const establishAuth = async () => {
             return
         }
         if (token && !token.success === "true") {
-            throw new Error("\n[-] An error occurred during token generation.");
+            throw new Error("[-] An error occurred during token generation.\n");
         }
         else {
             authorize({ token: token.token });
-            console.log(chalk.green("\n[+] Successfully authenticated; new session established."));
+            console.log(chalk.green("[+] Successfully authenticated; new session established.\n"));
         }
     } catch(err) {
         console.log(chalk.red(err));

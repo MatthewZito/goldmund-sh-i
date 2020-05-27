@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require("fs");
 const chalk = require("chalk");
 const { localStore, sessionStore } = require("../config/config.js");
@@ -19,7 +20,7 @@ const readToken = () => {
         return JSON.parse(data);        
     }
     catch (err) {
-        console.log(chalk.red(`\n[-] A critical error occurred during mounting. See: ${err}`));
+        console.log(chalk.red(`[-] A critical error occurred during mounting. See: ${err}\n`));
     }
 }
 
@@ -30,7 +31,7 @@ const mountEphemeralDoc = () => {
         return JSON.parse(data);        
     }
     catch (err) {
-        console.log(chalk.red(`\n[-] A critical error occurred during mounting. See: ${err}`));
+        console.log(chalk.red(`[-] A critical error occurred during mounting. See: ${err}\n`));
     }
 }
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const chalk = require("chalk");
 const { persist } = require("../utils/fs.js");
 const { fetchEntry } = require("../utils/requests.js");
@@ -7,7 +8,7 @@ const populateEntry = async (slug) => {
         let ephemeralEntry = {}
         const entry = await fetchEntry(slug);
         if (!entry) {
-            return
+            throw new Error("[-] Entry object not found; population terminated.\n")
         }
         else {
             const fields = [ "deleted", "tags", "_id", "title", "subtitle", "imgsrc", "content"]
@@ -18,7 +19,7 @@ const populateEntry = async (slug) => {
                 );
             // populate local tempfile
             persist(ephemeralEntry);
-            console.log(chalk.green("[+] Ephemeral document populated..."));
+            console.log(chalk.green("[+] Ephemeral document populated...\n"));
         }
     } catch(err) {
         console.log(chalk.red(err));

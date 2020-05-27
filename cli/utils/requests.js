@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const axios = require("axios");
 const chalk = require("chalk");
 const { basePath, email, password } = require("../config/config.js");
@@ -19,7 +20,7 @@ const login = async () => {
                 return await response.data.token
           }
     } catch(err) {
-        console.log(chalk.red(`\n[-] Failed to authenticate. See: ${err}`));
+        console.log(chalk.red(`[-] Failed to authenticate. See: ${err}\n`));
     }
 }
 
@@ -37,7 +38,7 @@ const logout = async (token) => {
                 return true
           }
     } catch(err) {
-        console.log(chalk.red(`\n[-] Failed to authenticate. See: ${err}`));
+        console.log(chalk.red(`[-] Failed to deauthenticate. See: ${err}\n`));
     }
 }
 
@@ -54,7 +55,7 @@ const fetchEntry = async (slug) => {
                 return await response.data
           }
     } catch(err) {
-        console.log(chalk.red(`\n[-] Failed to fetch entry ${slug} See: ${err}`));
+        console.log(chalk.red(`[-] Failed to fetch entry ${slug} See: ${err}\n`));
     }
 }
 
@@ -67,7 +68,7 @@ const pushEntry = async (id, data, token) => {
             headers: {"Authorization" : `Bearer ${token}` }
         });
             if (response.status !== 201 && 204) {
-                throw new Error("\n[-] Failed to process " + id ? `entry ${id}` : "new entry" );
+                throw new Error("[-] Failed to process " + id ? `entry ${id}\n` : "new entry\n" );
             }
             else {
                 return await response
