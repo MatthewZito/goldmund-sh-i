@@ -20,7 +20,6 @@ const establishAuth = async () => {
     }
 }
 
-
 exports.command = "auth"
 exports.desc = "Authorize a session"
 exports.handler = () => {
