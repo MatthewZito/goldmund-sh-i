@@ -40,7 +40,7 @@ Entry.getInitialProps = async ({ query }) => {
     const { slug } = query
     const response = await axios({
         method: "get",
-        url: `${process.env.NEXT_PUBLIC_API_BASE}/entry/${slug}`
+        url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/${slug}`
         });
     const entryObject = response.data
     if (response.status !== 200) {

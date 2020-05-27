@@ -5,7 +5,7 @@ exports.fetchIndex = async (req, res) => {
     const { search, lastProcessedID } = req.query
     try {
         // query param provided, return corresponding filtered index
-        if (search !== undefined && search !== ""){
+        if (search) {
             let entries = await Entry.find({ deleted: false }).findByTag(search, lastProcessedID);
             let newLastProcessedID = calculateLastProcessedID(entries);
             return res.send({ entries, newLastProcessedID });
@@ -17,20 +17,20 @@ exports.fetchIndex = async (req, res) => {
             return res.send({ entries, lastProcessedID: newLastProcessedID});
         }
     } catch(err) {
-        console.log(err)
-        return res.status(500).send(err);
+        return res.status(500).send({ error: "[-] A critical error has occurred. This transaction has been logged."});
     }
 }
 
 exports.fetchEntry = async (req, res) => {
+    console.log(req.params)
     try {
         const entry = await Entry.findOne({ slug: req.params.slug, deleted: false })
         if (entry === null) {
-            return res.status(500).end(); 
+            return res.status(500).send({ error: "[-] Entry not found."});
         }
         return res.send(entry);
     } catch(err) {
-        return res.status(500).send(err);
+        return res.status(500).send({ error: "[-] A critical error has occurred. This transaction has been logged."});
     }
 }
 
@@ -43,7 +43,7 @@ exports.createEntry = async (req, res) => {
         await entry.save();
         return res.status(201).send(entry.slug);
     } catch(err) {
-        return res.status(400).send(err);
+        return res.status(400).send({ error: "[-] A critical error has occurred. This transaction has been logged."});
     }
 }
 
@@ -51,7 +51,7 @@ exports.updateEntry = async (req, res) => {
     try { 
         let entry = await Entry.findOne({ _id: req.params.id, author: req.author });
         if (!entry) {
-            return res.status(401).send({ error: "Authentication required. This transaction has been logged."});
+            return res.status(401).send({ error: "[-] Authentication required. This transaction has been logged."});
         }
         // map all user-provided fields into data object
         Object.keys(req.body).forEach(key => {
@@ -65,7 +65,6 @@ exports.updateEntry = async (req, res) => {
         }
         return res.status(201).send(entry.slug);
     } catch(err) {
-        return res.status(500).send(err);
+        return res.status(500).send({ error: "[-] A critical error has occurred. This transaction has been logged."});
     }
 }
-// TODO end exception responses with custom error msg

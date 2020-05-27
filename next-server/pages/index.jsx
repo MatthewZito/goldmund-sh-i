@@ -36,7 +36,7 @@ class Vestibule extends React.Component {
         try {
             let response = await axios({
                 method: "get",
-                url: `${process.env.NEXT_PUBLIC_API_BASE}/`,
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/`,
                 params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
             });
             if (response.status !== 200) {
@@ -58,7 +58,7 @@ class Vestibule extends React.Component {
         try {
             let response = await axios({
                 method: "get",
-                url: `${process.env.NEXT_PUBLIC_API_BASE}/`,
+                url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/`,
                 params: {
                     search: query ? query.search : undefined,
                 }

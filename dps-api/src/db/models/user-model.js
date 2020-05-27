@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const redisClient = require("../redis.js");
+const { sign } = require("../../utils/rsa.js");
 
 /**
  * @class UserSchema
@@ -62,7 +62,7 @@ const UserSchema = new mongoose.Schema({
  */
 UserSchema.methods.generateAuthToken = async function() {
     const { _id, email } = this
-    const token = jwt.sign({ email }, process.env.JWT_SECRET);
+    const token = sign({ email, data: process.env.JWT_SECRET });
     // persist token to Redis
     const persistence = await redisClient.setAsync(token, _id.toString(),'EX', 60 * 60 * 1);
     if (!persistence) {

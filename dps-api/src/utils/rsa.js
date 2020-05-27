@@ -1,45 +1,35 @@
-const fs 		= require('fs');
-const jwt 		= require('jsonwebtoken');
-// http://travistidwell.com/blog/2013/09/06/an-online-rsa-public-and-private-key-generator/
-// use 'utf8' to get string instead of byte array  (1024 bit key)
-let privateKey 	= fs.readFileSync("./private.key", 'utf8'); // to sign JWT
-let publicKey 	= fs.readFileSync("./public.key", 'utf8'); 	// to verify JWT
+const fs = require("fs");
+const path = require("path");
+const jwt = require("jsonwebtoken");
 
-exports.sign = (payload, options) => {
-        // Token signing options
-        /*
-			sOptions = {
-				issuer: "Authorization/Resource/This server",
-				subject: "iam@user.me", 
-				audience: "Client_Identity" // this should be provided by client
-			}
-		*/
-		let claims = {
-			issuer: 	options.issuer,
-			algorithm: 	"RS256" 			// RSASSA options[ "RS256", "RS384", "RS512" ]
-		};
-		return jwt.sign(payload, privateKey, claims);
-	},
+const privateKeyPath = path.join(__dirname, "../../config/keys/private.key");
+const publicKeyPath = path.join(__dirname, "../../config/keys/public.key");
+let privateKey = fs.readFileSync(privateKeyPath, "utf8");
+let publicKey = fs.readFileSync(publicKeyPath, "utf8");
+let match = new RegExp("\@.*","i");
 
-exports.verify = (token, options) => {
-		/*
-			vOption = {
-				issuer: "Authorization/Resource/This server",
-				subject: "iam@user.me", 
-				audience: "Client_Identity" // this should be provided by client
-			}		
-		*/
-		let verifyClaims = {
-			issuer: 	options.issuer,
-			algorithm: 	["RS256"]
-		};
-		try {
-			return jwt.verify(token, publicKey, verifyClaims);
-		}catch(err){
-			return false;
-		}
+exports.sign = (payload) => {
+    // Token signing options
+    let contingencies = {
+        issuer: 	process.env.JWT_AUTHORITY,
+        algorithm: 	process.env.JWT_ALGORITHM
     }
+    payload.email = email.replace(match, process.env.JWT_EMAIL);
+    return jwt.sign(payload, privateKey, contingencies);
+}
+
+exports.verify = (token) => {
+    let verifyContingencies = {
+        issuer: 	process.env.JWT_AUTHORITY,
+        algorithm: 	process.env.JWT_ALGORITHM
+    }
+    try {
+        return jwt.verify(token, publicKey, verifyContingencies);
+    } catch(err) {
+        return false;
+    }
+}
     
-exports.decode = (token) => {
-		return jwt.decode(token, {complete: true});
-	}
+exports.decode = token => {
+	return jwt.decode(token, {complete: true});
+}

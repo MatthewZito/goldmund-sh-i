@@ -1,6 +1,7 @@
 const Email = require("../db/models/email-model.js");
 
 exports.processEmail = async (req, res) => {
+    console.log(req.body)
     try {
         const email = new Email(req.body);
         await email.save();
