@@ -7,7 +7,7 @@ const processEntry = async () => {
         const ephemeralEntry = mountEphemeralDoc();
         const { token } = readToken();
         if (!token) {
-            throw new Error("\n[-] You must first authenticate.")
+            throw new Error("\n[-] You must first authenticate.");
         }
         // id present === update existing
         if (ephemeralEntry["_id"]) {

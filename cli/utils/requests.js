@@ -23,6 +23,24 @@ const login = async () => {
     }
 }
 
+const logout = async (token) => {
+    try {
+        let response = await axios({
+            method: "post", 
+            url: `${basePath}/user/logout`,
+            headers: {"Authorization" : `Bearer ${token}` }
+        });
+            if (response.status !== 204) {
+                throw new Error();
+            }
+            else {
+                return true
+          }
+    } catch(err) {
+        console.log(chalk.red(`\n[-] Failed to authenticate. See: ${err}`));
+    }
+}
+
 const fetchEntry = async (slug) => {
     try {
         let response = await axios({
@@ -62,6 +80,7 @@ const pushEntry = async (id, data, token) => {
 
 module.exports = {
     login,
+    logout,
     fetchEntry,
     pushEntry
 }
