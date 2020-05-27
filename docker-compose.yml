@@ -13,11 +13,13 @@ services:
     goldmund-api:
         container_name: goldmund-api
         restart: always
-        build: .dps-api/
+        build: 
+            context: packages/dps-api
+            dockerfile: Dockerfile
         command: npm run dev # npm start prod
         working_dir: /usr/src/dps-api
         env_file: 
-            - config/prod.env
+            - .env
         volumes: 
             - .dps-api/:/usr/src/dps-api
         ports:
@@ -26,6 +28,21 @@ services:
             - goldmundio
         depends_on:
             - redis
+    # SSR 'client' app
+    nextjs:
+        build:
+            context: packages/next-server
+            dockerfile: Dockerfile
+        env_file:
+            - .env
+        volumes:
+            - ./packages/next-server:/usr/src/app
+            - /usr/src/app/node_modules
+            - /usr/src/app/.next
+        ports:
+            - "3000:3000"
+        networks:
+            - goldmundio
 
 networks:
     goldmundio:
