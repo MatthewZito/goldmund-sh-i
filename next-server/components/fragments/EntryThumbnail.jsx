@@ -4,7 +4,7 @@ const EntryThumbnail = (props) => {
     return (
         <div key={props._id} className="grid-item" style={{display:"flex"}}>
             <img className="img-responsive" alt="blog entry image" src={props.imgsrc} />
-            <Link href="/entry/[slug]" as={`/entry/${props.slug}`}>
+            <Link href="/entries/[slug]" as={`/entries/${props.slug}`}>
                 <a className="project-description">
                 <div className="project-text-holder">
                     <div className="project-text-inner">

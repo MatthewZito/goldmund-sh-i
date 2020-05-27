@@ -30,5 +30,3 @@ exports.sanitizeQuery = async (req, res, next) => {
         return next();
     } 
 }
-
-

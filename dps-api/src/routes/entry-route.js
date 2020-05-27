@@ -13,19 +13,19 @@ router.get("/",
     );
 
 // view entry
-router.get("/entry/:slug", 
+router.get("/:slug",
     EntryController.fetchEntry
     );
 
 // new entry
-router.post("/entry/new", 
+router.post("/new", 
     authorize, 
     upload.none(), 
     EntryController.createEntry
     );
 
 // update entry
-router.patch("/entry/:id", 
+router.patch("/:id", 
     authorize, 
     upload.none(), 
     EntryController.updateEntry

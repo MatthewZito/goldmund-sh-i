@@ -5,14 +5,14 @@ const UserController = require("../controllers/user-controller.js");
 const router = new express.Router();
 
 // login
-router.post("/user/login", 
+router.post("/login", 
     sanitizeBody, 
     authenticate, 
     UserController.login
     );
 
 // logout
-router.post("/user/logout", 
+router.post("/logout", 
     sanitizeBody, 
     UserController.logout
     );

@@ -22,6 +22,7 @@ exports.fetchIndex = async (req, res) => {
 }
 
 exports.fetchEntry = async (req, res) => {
+    console.log(req.params)
     try {
         const entry = await Entry.findOne({ slug: req.params.slug, deleted: false })
         if (entry === null) {

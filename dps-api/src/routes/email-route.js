@@ -4,7 +4,7 @@ const EmailController = require("../controllers/email-controller.js");
 const router = new express.Router();
 
 // process emails
-router.post("/email", 
+router.post("/", 
     sanitizeBody, 
     EmailController.processEmail
     );

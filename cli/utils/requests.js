@@ -46,7 +46,7 @@ const fetchEntry = async (slug) => {
     try {
         let response = await axios({
             method: "get", 
-            url: `${basePath}/entry/${slug}`,
+            url: `${basePath}/entries/${slug}`,
         });
             if (response.status !== 200) {
                 throw new Error();
@@ -63,7 +63,7 @@ const pushEntry = async (id, data, token) => {
     try {
         let response = await axios({
             method: id ? "patch" : "post", 
-            url: `${basePath}/entry/${id ? id : "new"}`,
+            url: `${basePath}/entries/${id ? id : "new"}`,
             data: data,
             headers: {"Authorization" : `Bearer ${token}` }
         });
