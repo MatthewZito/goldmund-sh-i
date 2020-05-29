@@ -6,7 +6,7 @@ require("dotenv").config();
 require("./db/mongoose.js");
 
 const entryRouter = require("./routes/entry-route.js");
-// const userRouter = require("./routes/user-route.js");
+const userRouter = require("./routes/user-route.js");
 const emailRouter = require("./routes/email-route.js");
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(express.json());
 
 /* Routes */
 app.use("/entries", entryRouter);
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 app.use("/email", emailRouter);
 
 app.listen(port, () => console.log(`[+] Listening on port ${port}...`));
