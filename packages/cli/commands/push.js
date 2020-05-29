@@ -33,8 +33,7 @@ const processEntry = async () => {
 }
 
 exports.command = "push"
-exports.desc = "push local tempfile to database"
-
+exports.desc = "Push local tempfile to database"
 exports.handler = () => {
     processEntry();
 }

@@ -31,10 +31,10 @@ const populateEntry = async (slug) => {
 }
 
 exports.command = "pull"
-exports.desc = "populate local tempfile"
+exports.desc = "Populate local tempfile"
 exports.builder = {
     slug: {
-        describe: "entry identification number",
+        describe: "Specify entry URI",
         demandOption: true,
         type: "string"
     }
