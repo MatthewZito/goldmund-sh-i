@@ -6,13 +6,5 @@ module.exports = withCSS(withImages({
   },
   env: {
     NEXT_PUBLIC_API_BASE: "http://localhost:5000"
-  },
-  webpackDevMiddleware: config => {
-    config.watchOptions = {
-      poll: 1000,
-      aggregateTimeout: 300,
-    }
-
-    return config
   }
 }));

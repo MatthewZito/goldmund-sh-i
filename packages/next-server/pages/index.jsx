@@ -83,8 +83,6 @@ class Vestibule extends React.Component {
 
     render() {
         const { error, entries, lastProcessedID } = this.state
-        console.log("state", this.state)
-        console.log("props", this.props)
         if (error) {
             return (
                 <>
