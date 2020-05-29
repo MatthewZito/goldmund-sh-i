@@ -9,8 +9,6 @@ License: MIT
     * [Features](#features)
     * [About](#about)
     * [Demos](#demo)
- - [Installation](#install) 
- - [Usage](#usage) 
  - [Development Notes](#notes)
     * [Todos](#todo)
     * [Bugs](#bugs)

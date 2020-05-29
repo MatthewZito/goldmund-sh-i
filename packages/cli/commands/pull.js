@@ -37,7 +37,7 @@ exports.builder = {
         describe: "Specify entry URI",
         demandOption: true,
         type: "string"
-    }
+    },
 }
 exports.handler = argv => {
     populateEntry(argv.slug);
