@@ -36,8 +36,8 @@ const Entry = (props) => {
     }
 }
 
-Entry.getInitialProps = async ({ query }) => {
-    const { slug } = query
+Entry.getInitialProps = async ({ params }) => {
+    const { slug } = params
     const response = await axios({
         method: "get",
         url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/${slug}`

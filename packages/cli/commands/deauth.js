@@ -3,6 +3,9 @@ const chalk = require("chalk");
 const { authorize, readToken } = require("../utils/fs.js");
 const { logout } = require("../utils/requests.js");
 
+/**
+ * @description Command handler. Nullifies session on issuing authority and destroys local artifact thereof.
+ */
 const destroyAuth = async () => {
     try {
         const { token } = readToken();

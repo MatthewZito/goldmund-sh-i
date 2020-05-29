@@ -3,6 +3,9 @@ const chalk = require("chalk");
 const { authorize } = require("../utils/fs.js");
 const { login } = require("../utils/requests.js");
 
+/**
+ * @description Command handler. Automate login process and persist resulting session token locally.
+ */
 const establishAuth = async () => {
     try {
         let token = await login();

@@ -21,7 +21,7 @@ services:
         env_file: 
             - .env
         volumes: 
-            - .dps-api/:/usr/src/dps-api
+            - ./packages/dps-api:/usr/src/dps-api
         ports:
             - "5000:5000"
         networks:
@@ -30,9 +30,11 @@ services:
             - redis
     # SSR 'client' app
     nextjs:
+        container_name: goldmund-client
         build:
             context: packages/next-server
             dockerfile: Dockerfile
+        command: npm start
         env_file:
             - .env
         volumes:
@@ -43,7 +45,6 @@ services:
             - "3000:3000"
         networks:
             - goldmundio
-
 networks:
     goldmundio:
         driver: bridge

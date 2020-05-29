@@ -3,6 +3,10 @@ const chalk = require("chalk");
 const { persist } = require("../utils/fs.js");
 const { fetchEntry } = require("../utils/requests.js");
 
+/**
+ * @param {String} slug The slug (URI identifier) of the given entry.
+ * @description Command handler. Populates local entry template by pulling given entry and persisting matched fields.
+ */
 const populateEntry = async (slug) => {
     try {
         let ephemeralEntry = {}

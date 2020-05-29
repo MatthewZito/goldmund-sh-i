@@ -32,11 +32,11 @@ class Communications extends React.Component {
                   content: this.state.content
                 }
               });
-              if (response.status !== 200) {
+              if (response.status !== 201) {
                 throw new Error("no");
               }
               else {
-                alert("[+] Success.");
+                alert("[+] Successfully submitted.");
                 Router.push("/"); // TODO change to form success
               }
         } catch(err) {

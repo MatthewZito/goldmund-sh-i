@@ -3,6 +3,10 @@ const axios = require("axios");
 const chalk = require("chalk");
 const { basePath, email, password } = require("../config/config.js");
 
+/**
+ * @description  Automate login process and return resulting session token.
+ * @returns {String} RSA encrypted token object.
+ */
 const login = async () => {
     try {
         let response = await axios({
@@ -24,6 +28,11 @@ const login = async () => {
     }
 }
 
+/**
+ * @param {String} token RSA encrypted token object.
+ * @description Nullifies session on issuing authority.
+ * @returns {Boolean} Returns true if logout successful, else throw error.
+ */
 const logout = async (token) => {
     try {
         let response = await axios({
@@ -42,6 +51,11 @@ const logout = async (token) => {
     }
 }
 
+/**
+ * @param {String} slug The slug (URI identifier) of the given entry.
+ * @description Pulls given entry from API via resource URI.
+ * @returns {Object} Entry data which corresponds to given slug input.
+ */
 const fetchEntry = async (slug) => {
     try {
         let response = await axios({
@@ -59,6 +73,14 @@ const fetchEntry = async (slug) => {
     }
 }
 
+/**
+ * @param {String} id The id (URI identifier) of the given entry.
+ * @param {Object} data Entry data currently holding residence in local entry template.
+ * @param {String} token RSA encrypted token object.
+ * @description Pushes the current entry template to server. If entry ID exists, the entry is of 
+ * type update and is therefore sent to the PATCH endpoint. Else, the entry is new and is sent to the new entry endpoint.
+ * @returns {String} The API response - either null or the newly created resource's slug URI. 
+ */
 const pushEntry = async (id, data, token) => {
     try {
         let response = await axios({
