@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
 import Meta from "../../components/wrappers/Meta.jsx";
+import ErrorBoundary from "../../components/fragments/ErrorBoundary.jsx";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -11,7 +12,12 @@ const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 export default function Entry(props) {
     let { error, data } = props;
     if (error) {
-        return <div>Error: {error}</div>
+        return (
+            <>
+                <Meta />
+                <ErrorBoundary reason={"Currently unable to fetch entry..."} />
+            </>
+        )
     }
     else {
         let dateFooter = `${new Date(data.createdAt).toDateString()} ${data.createdAt !== data.updatedAt ? ` (updated on ${new Date(data.updatedAt).toDateString()})` : ""}`

@@ -1,9 +1,14 @@
 import React from 'react';
 import Router from "next/router";
 import Link from "next/link";
+import getConfig from 'next/config';
 import axios from "axios";
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import Meta from "../components/wrappers/Meta.jsx"
+
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 
 class Communications extends React.Component {
     constructor(props) {
@@ -25,7 +30,7 @@ class Communications extends React.Component {
         try {
             let response = await axios({
                 method: "post",
-                url: `${process.env.API_BASE_CLIENT}/email`,
+                url: `${DPS_URI}/email`,
                 data: {
                   email: this.state.email,
                   subject: this.state.subject,
@@ -33,14 +38,14 @@ class Communications extends React.Component {
                 }
               });
               if (response.status !== 201) {
-                throw new Error("no");
+                throw new Error();
               }
               else {
-                alert("[+] Successfully submitted.");
+                alert("[+] Success; Your message has been forwarded to the administrator.");
                 Router.push("/"); // TODO change to form success
               }
         } catch(err) {
-            alert("[-] Form submission failed.");
+            alert("[-] Form submission failed. Please report this issue to the administrator at exbotanical at gmail dot com.");
             Router.push("/"); // TODO change to err
         }
     }
