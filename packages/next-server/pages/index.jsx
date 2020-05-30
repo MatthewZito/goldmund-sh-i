@@ -1,11 +1,17 @@
 import React from "react";
 import Router from "next/router";
+import getConfig from 'next/config';
 import axios from "axios";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
 import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
 import Meta from "../components/wrappers/Meta.jsx";
+
+
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 
 class Vestibule extends React.Component {
     constructor(props) {
@@ -36,7 +42,7 @@ class Vestibule extends React.Component {
         try {
             let response = await axios({
                 method: "get",
-                url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/`,
+                url: `${DPS_URI}/entries/`,
                 params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
             });
             if (response.status !== 200) {
@@ -57,7 +63,7 @@ class Vestibule extends React.Component {
         try {
             let response = await axios({
                 method: "get",
-                url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/`,
+                url: `${DPS_URI}/entries/`,
                 params: {
                     search: query ? query.search : undefined,
                 }

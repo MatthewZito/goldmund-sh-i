@@ -50,6 +50,7 @@ to your needs, please consider this application to be an examplar of what I can 
  - add CORS policy/whitelist
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
+ - Front-end proxy for DNS resolution of internal Docker hostnames
  
 ### <a name="bugs"></a> Bugfixes Needed
 
@@ -92,4 +93,10 @@ Nextjs v9's Routes API is incredible, however it is very nascent. I have elected
  
  Finally, as someone who admires a great deal the ethos of the giants upon whose shoulders we stand (ie our UNIX forefathers), I'd prefer each service *do one thing, and do it well*. I have not enumarated this in my afore-cited reasons for using a decoupled API as it is ultimately a matter of personal preference and not of performance. Next's internal API feature is blazing fast, but it simply is not extensible enough for my needs right now.
 
+#### Why There is a 'wait-for-it' Shell Script Running in My Docker Config
 
+I'll get around to this one...
+
+#### How I Handled Isomorphic Hostname Resolution in a Serverless Environment
+
+I literally just implemented this and am therefore exhausted; I'll get around to this one...

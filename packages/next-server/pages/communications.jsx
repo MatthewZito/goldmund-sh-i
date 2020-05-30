@@ -25,7 +25,7 @@ class Communications extends React.Component {
         try {
             let response = await axios({
                 method: "post",
-                url: `${process.env.NEXT_PUBLIC_API_BASE}/email`,
+                url: `${process.env.API_BASE_CLIENT}/email`,
                 data: {
                   email: this.state.email,
                   subject: this.state.subject,

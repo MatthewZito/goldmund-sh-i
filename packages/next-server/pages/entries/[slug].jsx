@@ -1,7 +1,12 @@
+import getConfig from 'next/config';
 import React from "react";
 import axios from "axios";
 import SidebarNavigator from "../../components/navigation/SidebarNavigator.jsx";
 import Meta from "../../components/wrappers/Meta.jsx";
+
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 
 export default function Entry(props) {
     console.log(props)
@@ -41,7 +46,7 @@ Entry.getInitialProps = async (ctx) => {
     console.log(slug)
     const response = await axios({
         method: "get",
-        url: `${process.env.NEXT_PUBLIC_API_BASE}/entries/${ctx.query.slug}`
+        url: `${DPS_URI}/entries/${ctx.query.slug}`
         });
     const entryObject = response.data
     if (response.status !== 200) {

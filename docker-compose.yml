@@ -36,7 +36,8 @@ services:
             dockerfile: Dockerfile
         command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 -- npm run build && npm run start"
         environment: 
-            - NEXT_PUBLIC_API_BASE=http://goldmund-api:5000
+            - API_BASE_DOCKER=http://goldmund-api:5000
+            - API_BASE_CLIENT=http://localhost:5000
         volumes:
             - ./packages/next-server:/usr/src/app
         ports:
