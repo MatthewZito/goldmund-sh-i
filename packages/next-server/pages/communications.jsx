@@ -52,7 +52,7 @@ class Communications extends React.Component {
                 <div>
                     <SidebarNavigator name="$ ping"/>
                     <main id="main-collapse">
-                        <div className="row" style={{maxWidth: "900px"}}>
+                        <div style={{maxWidth: "750px"}}>
                             <div className="section-container-spacer">
                                 <h1>Communications</h1>
                                 <p>Should you wish to communicate, this is the best means to do so. PGP correspondence is welcome and even encouraged.
@@ -84,7 +84,7 @@ class Communications extends React.Component {
                                     <button type="submit" className="btn btn-primary">Send</button>
                                 </form>
                                 <div className="row" style={{marginTop: "20px"}}>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6" style={{marginLeft: "-15px"}}>
                                         <ul className="list-unstyled address-container">
                                             <li>
                                                 <span className="fa-icon">

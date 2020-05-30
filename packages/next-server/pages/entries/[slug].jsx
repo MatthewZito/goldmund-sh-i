@@ -18,7 +18,7 @@ export default function Entry(props) {
         let dateFooter = `${new Date(data.createdAt).toDateString()} ${data.createdAt !== data.updatedAt ? ` (updated on ${new Date(data.updatedAt).toDateString()})` : ""}`
         return (
             <>
-                <Meta />
+                <Meta tags={data.tags} />
                 <div>
                     <SidebarNavigator name="$ cat "/>
                     <main className="" id="main-collapse">
