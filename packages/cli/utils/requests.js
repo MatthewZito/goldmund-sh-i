@@ -8,7 +8,6 @@ const { basePath, email, password } = require("../config/config.js");
  * @returns {String} RSA encrypted token object.
  */
 const login = async () => {
-    console.log(email)
     try {
         let response = await axios({
             method: "post", 

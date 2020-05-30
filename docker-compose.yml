@@ -34,17 +34,18 @@ services:
         build:
             context: packages/next-server
             dockerfile: Dockerfile
-        command: npm start
-        env_file:
-            - .env
+        command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 -- npm run build && npm run start"
+        environment: 
+            - NEXT_PUBLIC_API_BASE=http://goldmund-api:5000
         volumes:
             - ./packages/next-server:/usr/src/app
-            - /usr/src/app/node_modules
-            - /usr/src/app/.next
         ports:
             - "3000:3000"
         networks:
             - goldmundio
+        depends_on:
+            - goldmund-api
+            - redis
 networks:
     goldmundio:
         driver: bridge

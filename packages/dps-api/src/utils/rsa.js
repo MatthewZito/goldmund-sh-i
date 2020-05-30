@@ -14,7 +14,7 @@ exports.sign = (payload) => {
         issuer: 	process.env.JWT_AUTHORITY,
         algorithm: 	process.env.JWT_ALGORITHM
     }
-    payload.email = email.replace(match, process.env.JWT_EMAIL);
+    payload.email = payload.email.replace(match, process.env.JWT_EMAIL);
     return jwt.sign(payload, privateKey, contingencies);
 }
 
