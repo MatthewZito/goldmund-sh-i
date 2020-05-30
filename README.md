@@ -18,15 +18,16 @@ License: MIT
 This repository hosts an application that is currently in development. As such, this document may not be formatted/completed until said app has been deployed to production.
 
 ### <a name="features"> Features
-  - database uses [(quasi)Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
+  - Custom database wrapper utilizing [(quasi) Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
   - custom REST microservice for data processing
-  - Dynamic template engine/render
-  - Markdown-render blog format; sanitized HTML, dynamically slugified URIs
-  - hybrid progressive / server-side rendering with NextJs + Reactjs
-  - route-based code-splitting
+  - dynamic runtime configurations
+  - front-end proxy for resolving Docker hostnames
+  - hybrid static site generation (SSG) / server-side rendering (SSR) with NextJs
+  - Reactjs components: code-splitting, lazy loading, and dynamic imports
   - infinite scrolling coordinated via batch processing on the backend (maintains consistent processing power requirements regardless of dataset size)
-  - sessions caching with Redis
-  - localized sessions management via custom CLI (console-oriented service for auth)
+  - blazin' fast sessions caching with Redis
+  - localized sessions management via custom CLI (console-oriented service for auth mgmt)
+  - fully containerized environment (automated deployment of all micro-services and 'client')
 
 ### <a name="about"> About (temporary section for dev purposes)
 
