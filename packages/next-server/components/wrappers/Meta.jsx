@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
-const Meta = (props, { router }) => {
+const Meta = (props) => {
+    const router = useRouter();
     let { tags } = props
     let path = `${router.pathname === "/" ? "vestibule" : router.asPath.split("/").slice(-1)} ${ router.query.search ? `:: ${router.query.search}` : ""}`
-    let content = tags ? `A blog post about ${tags.map(tag => `${tag}, `)} among other things. You've found | goldmund.io` : "A rabbit hole, somewhere on the web. Endeavors into computer-science, arts, and philosophy. Perhaps a few experiments upon the way. | goldmund.io"
+    let content = tags ? `A blog post about ${tags.join(", ")}, among other things. You've found | goldmund.io` : "A rabbit hole, somewhere on the web. Endeavors into computer-science, arts, and philosophy. Perhaps a few experiments upon the way. | goldmund.io"
   return (
     <Head>
         <meta charSet="utf-8" />
@@ -16,5 +17,5 @@ const Meta = (props, { router }) => {
     </Head>
   )
 }
-
-export default withRouter(Meta);
+a blog post about this, this, 
+export default Meta;

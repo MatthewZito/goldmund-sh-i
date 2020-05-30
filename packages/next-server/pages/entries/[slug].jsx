@@ -9,7 +9,6 @@ const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 
 export default function Entry(props) {
-    console.log(props)
     let { error, data } = props;
     if (error) {
         return <div>Error: {error}</div>
