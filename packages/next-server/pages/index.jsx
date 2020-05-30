@@ -8,7 +8,6 @@ import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
 import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
 import Meta from "../components/wrappers/Meta.jsx";
 
-
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
 const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
@@ -119,7 +118,7 @@ class Vestibule extends React.Component {
                                     <div className="grid" style={{ 
                                         display: "grid",
                                         gridTemplateColumns: "repeat( auto-fill, minmax(250px, 1fr) )",
-                                        gridAutoRows: "250px",
+                                        gridAutoRows: "1fr",
                                         gridGap: "2em",
                                         
                                     }}> 

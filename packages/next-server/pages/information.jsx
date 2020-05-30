@@ -11,7 +11,7 @@ const Information = () => {
                 <main id="main-collapse">
                     <div className="row">
                         <div className="col-xs-12 col-md-6">
-                            <img className="img-responsive" alt="" src="" />
+                            <img className="img-responsive" alt="John Tromp's Cuckoo Cycle logo" src="https://hackernoon.com/hn-images/1*y9-rz5yuvrYeQMhyFChocg.png" />
                         </div>
                         <div className="col-xs-12 col-md-6">
                             <h1>Lexicon v2.0</h1>
