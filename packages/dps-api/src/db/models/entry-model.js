@@ -56,6 +56,7 @@ const EntrySchema = new mongoose.Schema({
  * @param {string} tag Given tag for regex against which to query.
  * @param {Object|undefined} lastProcessedID createdAt Date ID object signifying cursor qua last processed batch.
  * @returns all matched entries (even if no res). Chains to `processBatch`.
+ * @summary Find Entry by tag.
  * @description Find all entries whose tags contain a regex object created contingent on user input tag
  */
 EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
@@ -65,7 +66,8 @@ EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
 
 /**
  * @param {Object|undefined} lastProcessedID  createdAt Date ID object signifying cursor qua last processed batch.
- * @returns all matched entries (even if no res).
+ * @returns All matched entries (even if no res).
+ * @summary Light-weight batch processor.
  * @description Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {

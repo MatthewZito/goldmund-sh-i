@@ -6,25 +6,33 @@ const { sanitizeQuery } = require("../middleware/sanitize.js");
 const EntryController = require("../controllers/entry-controller.js");
 const router = new express.Router();
 
-// pull all entries/index thereof
+/**
+ * @summary Endpoint, handles fetching Entry index.
+ */
 router.get("/", 
     sanitizeQuery,
     EntryController.fetchIndex
     );
 
-// view entry
+/**
+ * @summary Endpoint, handles fetching Entry by slug.
+ */
 router.get("/:slug",
     EntryController.fetchEntry
     );
 
-// new entry
+/**
+ * @summary Endpoint, handles creation of new Entry.
+ */
 router.post("/new", 
     authorize, 
     upload.none(), 
     EntryController.createEntry
     );
 
-// update entry
+/**
+ * @summary Endpoint, handles updating of existing Entry by id.
+ */
 router.patch("/:id", 
     authorize, 
     upload.none(), 

@@ -57,8 +57,8 @@ const UserSchema = new mongoose.Schema({
 /* METHODS */
 
 /**
- * @description Generates JWT token for given user. Persists said token to cache layer via Redis client.
  * @returns JWT object.
+ * @description Generates JWT token for given user. Persists said token to cache layer via Redis client.
  */
 UserSchema.methods.generateAuthToken = async function() {
     const { _id, email } = this
@@ -74,8 +74,9 @@ UserSchema.methods.generateAuthToken = async function() {
 /**
  * @param {string} email The given user's email, as input by a user.
  * @param {string} password The given user's password, as input by a user.
- * @description Fetches user by email, proceeds to validate plaintext password against hash.
  * @returns User object.
+ * @summary Find User by email, password.
+ * @description Fetches user by email, proceeds to validate plaintext password against hash.
  */
 UserSchema.statics.findByCredentials = async (email, password) => {
     // attempt to match email first; isnt hashed, ergo more expedient

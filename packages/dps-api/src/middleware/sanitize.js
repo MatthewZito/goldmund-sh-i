@@ -1,4 +1,11 @@
-
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @param {func} callback 
+ * @summary Body sanitization middleware.
+ * @description Sanitizes request body by filtering incoming body object against `allowedFields`.
+ *     Throws error if any request field contains nested data.
+ */
 exports.sanitizeBody = async (req, res, next) => {
     try {
         if (req.body) {
@@ -7,7 +14,7 @@ exports.sanitizeBody = async (req, res, next) => {
             const isValidOperation = fields.every((field) => allowedFields.includes(field));
             for(let key in req.body) {
                 if (!isValidOperation || req.body[key] instanceof Object) {
-                    throw new Error("nested key found");
+                    throw new Error("[-] Nested key found. This transaction has been logged.");
                 }
             }
             return next();
@@ -17,6 +24,14 @@ exports.sanitizeBody = async (req, res, next) => {
     }
 }
 
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @param {func} callback 
+ * @summary Query parameter sanitization middleware.
+ * @description Sanitizes query params by filtering incoming body object's query fields against `allowedFields`.
+ *     Deletes all non-compliant and empty keys, for security and to prevent needless database queries, respectively.
+ */
 exports.sanitizeQuery = async (req, res, next) => {
     if (req.query) {
         const fields = Object.keys(req.query);

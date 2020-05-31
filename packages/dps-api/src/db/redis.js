@@ -1,6 +1,13 @@
 const redis = require("redis");
 const { promisify } = require('util');
 
+/**
+ * @summary Instantiate new Redis Client.
+ * @description Instantiates Redis Client on internal host/port with admin credentials.
+ *     Promisifies all heretofore utilized Redis Client methods and exports their newly-bound
+ *     asynchronous counterparts.
+ */
+
 // instantiate client
 const redisClient = redis.createClient({
     host: process.env.REDIS_HOST, 

@@ -1,7 +1,9 @@
-/*
-This is an experimental script. If you stumbled across this, do NOT use. This script
-overrides a given node core module
-*/
+/**
+ * @summary This is an experimental script. If you stumbled across this, do NOT use.
+ * @description Hi-jacks node environment and overrides core module `readFileSync`.
+ *     Enables interception of method so as to restrict system access. If violated,
+ *     the method is frozen.
+ */
 const fs = require("fs");
 const path = require("path");
 const wrap = (module, name, wrapper) => {
