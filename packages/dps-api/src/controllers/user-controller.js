@@ -1,6 +1,14 @@
 const User = require("../db/models/user-model.js");
 const redisClient = require("../db/redis.js");
 
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @returns A server response status commensurate with login status. If user session exists, return token object.
+ * @summary Instantiate new User session.
+ * @description Pulls sanitized credentials, as provided by user. 
+ *     Queries database for user, generates user-contingent token.
+ */
 exports.login = async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
@@ -12,6 +20,13 @@ exports.login = async (req, res) => {
     }
 }
 
+/**
+ * @param {Object} req The current request object.
+ * @param {Object} res The current response object.
+ * @returns A server response status and message commensurate with logout status. Message types: error, success.
+ * @summary Destroys existing User session.
+ * @description Pulls session token from Authorization headers. Clears token in Redis cache.
+ */
 exports.logout = async (req, res) => {
     const { authorization } = req.headers
     try {

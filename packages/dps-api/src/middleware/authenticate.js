@@ -1,12 +1,14 @@
 const redisClient = require("../db/redis.js");
 const { verify } = require("../utils/rsa.js");
+
 /**
  * @param {Object} req The current request object.
  * @param {Object} res The current response object.
  * @param {func} callback 
- * @description Authentication middleware. Parses for auth headers.
- * If auth header provided: query cache db for user-provided token to ascertain if session is live.
- * Else, return generated token and persist at Redis caching layer.
+ * @summary Authentication middleware.
+ * @description Parses for auth headers.
+ *     If auth header provided: query cache db for user-provided token to ascertain if session is live.
+ *     Else, return generated token and persist at Redis caching layer.
  */
 const authenticate = async (req, res, next) => {
     const { authorization } = req.headers

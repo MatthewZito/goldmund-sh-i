@@ -11,6 +11,7 @@ License: MIT
     * [Demos](#demo)
  - [Development Notes](#notes)
     * [Todos](#todo)
+    * [Roadmap](#bugs)
     * [Bugs](#bugs)
     * [Operational Notes](#ops)
 
@@ -51,8 +52,9 @@ to your needs, please consider this application to be an examplar of what I can 
  - add CORS policy/whitelist
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
- - Front-end proxy for DNS resolution of internal Docker hostnames
- 
+ - ~~Front-end proxy for DNS resolution of internal Docker hostnames~~
+ - Add test coverage - integrated, automated, and unit. 
+
 ### <a name="bugs"></a> Bugfixes Needed
 
 ### <a name="ops"></a> Operational Notes
