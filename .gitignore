@@ -2,10 +2,9 @@
 *.env
 *DS_Store
 *.next
-dps-api/data
-dps-api/config/
-dps-api/redis.conf
-crypto.js
-logs
-cli/tmp
-cli/tmp
+*dps-api/data
+*dps-api/config/
+*dps-api/redis.conf
+*logs
+*cli/tmp
+packages/dps-api/config/
