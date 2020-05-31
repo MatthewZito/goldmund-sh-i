@@ -53,7 +53,7 @@ to your needs, please consider this application to be an examplar of what I can 
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
  - ~~Front-end proxy for DNS resolution of internal Docker hostnames~~
- - Add test coverage - integrated, automated, and unit. 
+ - Add test coverage - integrated, automated, and unit (integrate into pipeline)
 
 ### <a name="bugs"></a> Bugfixes Needed
 
