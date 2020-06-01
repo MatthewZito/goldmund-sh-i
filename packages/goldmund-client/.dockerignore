@@ -1,2 +1,4 @@
 node_modules
 .next
+setupTests.js
+__tests__

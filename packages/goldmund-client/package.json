@@ -1,12 +1,16 @@
 {
   "name": "goldmund-client",
+  "jest": {
+    "setupFilesAfterEnv": ["<rootDir>/setupTests.js"]
+  },
   "version": "0.1.0",
   "description": "Frontend for goldmundio webapp",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Matthew T Zito (goldmund)",
@@ -19,5 +23,13 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.4"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.2",
+    "babel-jest": "^26.0.1",
+    "babel-polyfill": "^6.26.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^26.0.1"
   }
 }

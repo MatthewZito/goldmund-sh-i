@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the EntryThumbnail component 1`] = `
+"<div className=\\"grid-item\\" style={{...}}>
+  <img className=\\"img-responsive\\" alt=\\"blog entry thumbnail\\" src={[undefined]} />
+  <Link href=\\"/entries/[slug]\\" as=\\"/entries/undefined\\">
+    <a className=\\"project-description\\">
+      <div className=\\"project-text-holder\\">
+        <div className=\\"project-text-inner\\">
+          <h3 />
+          <p />
+        </div>
+      </div>
+    </a>
+  </Link>
+</div>"
+`;
