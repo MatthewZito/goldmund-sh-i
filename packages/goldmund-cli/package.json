@@ -1,5 +1,5 @@
 {
-  "name": "Goldmund.io Admin CLI",
+  "name": "goldmund-cli",
   "version": "0.1.0",
   "description": "A console-oriented service for localized web administration",
   "bin": {
@@ -8,7 +8,7 @@
   "preferGlobal": true,
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
   "author": "Matthew T Zito (goldmund)",
