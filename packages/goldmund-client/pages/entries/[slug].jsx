@@ -48,7 +48,6 @@ export default function Entry(props) {
 
 Entry.getInitialProps = async (ctx) => {
     const { slug } = ctx.query
-    console.log(slug)
     const response = await axios({
         method: "get",
         url: `${DPS_URI}/entries/${ctx.query.slug}`

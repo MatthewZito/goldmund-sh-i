@@ -2,10 +2,11 @@
 *.env
 *DS_Store
 *.next
-*dps-api/data
-*dps-api/config/
-*dps-api/redis.conf
+*packages/goldmund-api/data
+*packages/goldmund-api/config/
+*packages/goldmund-api/redis.conf
 *logs
-*cli/tmp
-packages/dps-api/config/
-packages/cli/tmp
+*packages/goldmund-cli/tmp
+*packages/goldmund-api/config/
+*packages/goldmund-cli/tmp
+lerna-debug.log

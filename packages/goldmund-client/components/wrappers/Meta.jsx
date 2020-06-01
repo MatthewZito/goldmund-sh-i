@@ -17,5 +17,5 @@ const Meta = (props) => {
     </Head>
   )
 }
-a blog post about this, this, 
+
 export default Meta;

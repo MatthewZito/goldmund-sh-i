@@ -1,0 +1,5 @@
+node_modules
+.next
+setupTests.js
+__tests__
+.babelrc

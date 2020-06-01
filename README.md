@@ -10,6 +10,7 @@ License: MIT
     * [About](#about)
     * [Demos](#demo)
  - [Development Notes](#notes)
+    * [Testing](#test)
     * [Todos](#todo)
     * [Roadmap](#bugs)
     * [Bugs](#bugs)
@@ -29,6 +30,7 @@ This repository hosts an application that is currently in development. As such, 
   - blazin' fast sessions caching with Redis
   - localized sessions management via custom CLI (console-oriented service for auth mgmt)
   - fully containerized environment (automated deployment of all micro-services and 'client')
+  - monorepo architecture handles package testing at root level w/Lerna
 
 ### <a name="about"> About (temporary section for dev purposes)
 
@@ -53,11 +55,23 @@ to your needs, please consider this application to be an examplar of what I can 
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
  - ~~Front-end proxy for DNS resolution of internal Docker hostnames~~
- - Add test coverage - integrated, automated, and unit (integrate into pipeline)
+ - ~~Add test coverage - integrated, automated, and unit (integrate into pipeline)~~
 
 ### <a name="bugs"></a> Bugfixes Needed
 
 ### <a name="ops"></a> Operational Notes
+
+Testing monorepo:
+
+*Run all packages' respective tests (quiet)*
+```
+lerna run test 
+```
+
+*Run all packages' respective tests (quiet)*
+```
+lerna run test --stream
+```
 
 Running Docker:
 ```
