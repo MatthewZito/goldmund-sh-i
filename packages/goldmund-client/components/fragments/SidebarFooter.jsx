@@ -1,3 +1,5 @@
+import React from "react";
+
 const SidebarFooter = () => {
     return (
         <nav className="nav-footer">

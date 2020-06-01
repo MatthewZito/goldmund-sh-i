@@ -1,6 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+      "test": "lerna run test --stream"
+  },
   "devDependencies": {
     "@babel/preset-react": "^7.10.1",
     "lerna": "^3.22.0"
