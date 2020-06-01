@@ -1,7 +1,7 @@
 {
   "name": "goldmund-client",
   "version": "0.1.0",
-  "description": "",
+  "description": "Frontend for goldmundio webapp",
   "main": "index.js",
   "scripts": {
     "dev": "next",
