@@ -68,7 +68,7 @@ Testing monorepo:
 lerna run test 
 ```
 
-*Run all packages' respective tests (quiet)*
+*Run all packages' respective tests (verbose)*
 ```
 lerna run test --stream
 ```
