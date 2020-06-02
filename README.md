@@ -61,7 +61,7 @@ to your needs, please consider this application to be an examplar of what I can 
 
 ### <a name="ops"></a> Operational Notes
 
-Testing monorepo:
+Testing monorepo (local):
 
 *Run all packages' respective tests (quiet)*
 ```
@@ -73,7 +73,12 @@ lerna run test
 lerna run test --stream
 ```
 
-Running Docker:
+Test at package level:
+```
+npm run test
+```
+
+Running Docker (general):
 ```
 docker build -t >=;
 
@@ -95,6 +100,25 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <co
 docker exec -it <container_name_or_id> bash
 # launch cli from internal docker namespace
 redis-cli -h <internal IP>
+```
+
+Using 'Dive' to Audit Cached Container Layers (*This is a mandatory security audit which will be included in the CI/CD pipeline*):
+
+*on osx*:
+```
+# in given package root dir
+docker run --rm -it \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v  "$(pwd)":"$(pwd)" \
+      -w "$(pwd)" \
+      -v "$HOME/.dive.yaml":"$HOME/.dive.yaml" \
+      wagoodman/dive:latest build -t <some-tag> .
+```
+
+*on pixel-linux*
+```
+# in given package root dir
+dive build -t <some-tag> .
 ```
 
 #### Why I Elected to Use an External API

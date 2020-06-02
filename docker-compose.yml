@@ -17,11 +17,11 @@ services:
             context: packages/goldmund-api
             dockerfile: Dockerfile
         command: npm run dev # npm start prod
-        working_dir: /usr/src/goldmund-api
         env_file: 
             - .env
-        volumes: 
-            - ./packages/goldmund-api:/usr/src/goldmund-api
+        volumes:
+            - ./packages/goldmund-api:/home/node/app
+            - api_node_modules:/home/node/app/node_modules
         ports:
             - "5000:5000"
         networks:
@@ -34,11 +34,13 @@ services:
         build:
             context: packages/goldmund-client
             dockerfile: Dockerfile
-        command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
-        working_dir: /usr/src/goldmund-client
         environment: 
             - API_BASE_DOCKER=http://goldmund-api:5000
             - API_BASE_CLIENT=http://localhost:5000
+        volumes:
+            - ./packages/goldmund-client:/home/node/app
+            - client_node_modules:/home/node/app/node_modules
+            - client_dist:/home/node/app/.next
         ports:
             - "3000:3000"
         networks:
@@ -49,3 +51,8 @@ services:
 networks:
     goldmundio:
         driver: bridge
+
+volumes:
+    api_node_modules: 
+    client_node_modules:
+    client_dist:
