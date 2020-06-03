@@ -22,6 +22,7 @@ services:
         volumes:
             - ./packages/goldmund-api:/home/node/app
             - api_node_modules:/home/node/app/node_modules
+            - logs:/home/node/app/logs
         ports:
             - "5000:5000"
         networks:
@@ -55,5 +56,7 @@ networks:
 
 volumes:
     api_node_modules: 
+    logs:
     client_node_modules:
     client_dist:
+    

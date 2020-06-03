@@ -1,17 +1,11 @@
 const path = require("path");
-const fs = require("fs");
-const appRoot = require("app-root-path");
 const winston = require("winston");
 const clfDate = require("clf-date");
 require("winston-daily-rotate-file");
 
-// ensure log directory exists
-const logDirectory = path.resolve(`${appRoot}`, "logs");
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-
 const infofile = new winston.transports.DailyRotateFile({
   level: "info",
-  filename: path.resolve(logDirectory, "application-%DATE%-info.log"),
+  filename: path.resolve(process.env.EPHEMERAL_LOGS_PATH, "-%DATE%-info.log"),
   datePattern: "YYYY-MM-DD-HH",
   zippedArchive: true,
   maxSize: "20m",
