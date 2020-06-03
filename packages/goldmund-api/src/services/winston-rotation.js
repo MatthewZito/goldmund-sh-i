@@ -5,7 +5,7 @@ require("winston-daily-rotate-file");
 
 const infofile = new winston.transports.DailyRotateFile({
   level: "info",
-  filename: path.resolve(process.env.EPHEMERAL_LOGS_PATH, "-%DATE%-info.log"),
+  filename: path.resolve(process.env.EPHEMERAL_LOGS_PATH, "ROTATION-%DATE%-info.log"),
   datePattern: "YYYY-MM-DD-HH",
   zippedArchive: true,
   maxSize: "20m",
