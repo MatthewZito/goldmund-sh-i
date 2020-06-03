@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+    # Redis 
+    redis:
+        image: redis
+        command: redis-server --requirepass ${REDIS_PASSWORD} --bind redis
+        ports:
+            - "6379:6379"
+        networks:
+            - goldmundio
+    # Data Processing Service
+    goldmund-api:
+        container_name: goldmund-api
+        image: exbotanical/goldmundio:api-${TAG}
+        command: npm start #TODO replace w/manager
+        env_file: 
+            - .env
+        ports:
+            - "5000:5000"
+        networks:
+            - goldmundio
+        depends_on:
+            - redis
+    # SSR 'client' app
+    nextjs:
+        image: exbotanical/goldmundio:client-${TAG}
+        container_name: goldmund-client
+        command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
+        environment:
+            - API_BASE_DOCKER=https://goldmund-api:5000
+            - API_BASE_CLIENT=https://goldmund.io:5000
+        ports:
+            - "3000:3000"
+        networks:
+            - goldmundio
+        depends_on:
+            - goldmund-api
+            - redis
+networks:
+    goldmundio:
+        driver: bridge
