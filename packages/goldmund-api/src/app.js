@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require('cors');
 const morgan = require("morgan");
+const { winstonRotations } = require("./services/winston-rotation.js");
 
+/* Configurations */
 require("./db/mongoose.js");
-
 const entryRouter = require("./routes/entry-route.js");
 const userRouter = require("./routes/user-route.js");
 const emailRouter = require("./routes/email-route.js");
@@ -12,7 +13,8 @@ const app = express();
 const port = process.env.PORT || 5000
 
 /* Utils */
-app.use(morgan("combined"));
+app.use(morgan("short"));
+app.use(morgan("combined", { stream: winstonRotations.stream }));
 app.use(cors());
 app.use(express.json());
 
