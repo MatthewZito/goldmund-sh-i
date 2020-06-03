@@ -34,7 +34,8 @@ services:
         build:
             context: packages/goldmund-client
             dockerfile: Dockerfile
-        environment: 
+        command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
+        environment:
             - API_BASE_DOCKER=http://goldmund-api:5000
             - API_BASE_CLIENT=http://localhost:5000
         volumes:
