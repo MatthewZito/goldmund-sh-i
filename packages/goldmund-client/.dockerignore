@@ -1,5 +1,4 @@
+# for local testing w/compose 
 node_modules
 .next
-setupTests.js
-__tests__
-.babelrc
+.DS_Store

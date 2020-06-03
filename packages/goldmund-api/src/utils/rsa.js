@@ -1,15 +1,10 @@
-const fs = require("fs");
-const path = require("path");
 const jwt = require("jsonwebtoken");
 
 /* Constants */
 
-const privateKeyPath = path.join(__dirname, "../../config/keys/private.key");
-const publicKeyPath = path.join(__dirname, "../../config/keys/public.key");
-const privateKey = fs.readFileSync(privateKeyPath, "utf8");
-const publicKey = fs.readFileSync(publicKeyPath, "utf8");
+const privateKey = process.env.RSA_PRIV.replace(/\\n/g, '\n');
+const publicKey = process.env.RSA_PUB.replace(/\\n/g, '\n');
 const match = new RegExp("\@.*","i");
-
 
 /* Methods */
 

@@ -1,16 +1,16 @@
 {
   "name": "goldmund-api",
   "version": "1.0.0",
-  "description": "A remote data processing API and micro-service",
+  "description": "A remote data processing micro-service and API",
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"[Error: no test specified]\" && exit 0"
   },
   "keywords": [],
   "author": "Matthew T Zito (goldmund)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

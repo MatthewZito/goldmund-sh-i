@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require('cors');
 const morgan = require("morgan");
 
-require("dotenv").config();
 require("./db/mongoose.js");
 
 const entryRouter = require("./routes/entry-route.js");
