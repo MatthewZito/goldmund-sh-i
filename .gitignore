@@ -11,3 +11,4 @@
 *packages/goldmund-cli/tmp
 lerna-debug.log
 packages/goldmund-client/.babelrc
+docker-compose.ymld

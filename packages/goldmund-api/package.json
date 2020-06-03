@@ -12,7 +12,9 @@
   "author": "Matthew T Zito (goldmund)",
   "license": "MIT",
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "bcryptjs": "^2.4.3",
+    "clf-date": "^0.2.0",
     "cors": "^2.8.5",
     "dompurify": "^2.0.11",
     "dotenv": "^8.2.0",
@@ -26,7 +28,9 @@
     "multer": "^1.4.2",
     "redis": "^3.0.2",
     "slugify": "^1.4.0",
-    "validator": "^13.0.0"
+    "validator": "^13.0.0",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
