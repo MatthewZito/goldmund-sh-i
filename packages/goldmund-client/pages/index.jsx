@@ -117,8 +117,8 @@ class Vestibule extends React.Component {
                                     >
                                     <div className="grid" style={{ 
                                         display: "grid",
-                                        gridTemplateColumns: "repeat( auto-fill, minmax(250px, 1fr) )",
-                                        gridAutoRows: "1fr",
+                                        gridTemplateColumns: "repeat( auto-fill, minmax(200px, 1fr) )",
+                                        gridAutoRows: "15em",
                                         gridGap: "2em",
                                         
                                     }}> 
