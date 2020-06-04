@@ -18,9 +18,9 @@ Encoding: UTF-8
 The Admin CLI is a console-oriented service for local web administration and sessions-handling. It can be best understood as a light-weight, headless CMS.
 
 ### <a name="about"></a> About
-The CLI enables the controller to authenticate with the issuing authority (in this instance, the DPS API); the resulting auth token is persisted in a local session file. Destroying this session via `goldmund deauth` will simultaneously nullify the session on both the issuing authority database and local session file. While the local session is valid, it will be included in the headers of all subsequent `goldmund push` calls. However, if the session is null (either does not exist or is expired), the CLI will prompt the controller to authorize.
+The CLI enables the controller to authenticate with the issuing authority (in this instance, the `goldmund-api` service); the resulting auth token is persisted in a local session file. Destroying this session via `goldmund deauth` will simultaneously nullify the session on both the issuing authority database and local session file. While the local session is valid, it will be included in the headers of all subsequent `goldmund push` calls. However, if the session is null (it either does not exist or is expired), the CLI will prompt the controller to authorize.
 
-The CLI hosts a static entry template (`ephemera.json`) which is populated either via `goldmund pull --slug <slug>` or by way of controller inputs. The former scenario involves an entry ID - a string which identifies existing entries in the database. If this ID is present (it will be if the entry was pulled from the database), the CLI programatically determines the operation type is an update, ergo `goldmund push` will call a `PATCH` request and submit the entry to its corresponding ID-contingent endpoint. 
+The CLI hosts a static entry template (`ephemera.json`) which is populated either via `goldmund pull --slug <slug>` or by way of controller inputs. The former scenario involves an entry ID - a string which identifies existing entries in the database. If this ID is present (it will be if the entry was pulled from the database), the CLI programatically determines the operation type is an update, ergo `goldmund push` will call a `PATCH` request and submit the entry data to its corresponding ID-contingent endpoint. 
 
 In the latter scenario, the CLI determines the template signifies a new entry given the lack of an entry ID field. Thus, calling `goldmund push` will call a `POST` request with the new entry data. The newly-minted slug corresponding to the new entry will be returned to the CLI upon successful resource creation.
 
@@ -57,4 +57,7 @@ goldmund deauth
 
 
 #### <a name="notes"></a> Development Notes
+
+3 June 2020 - Tested the CLI with a production docker-compose configuration and it works splendidly. The CLI's Spartan architecture lends to speed and processing capabilities which render the administrative process *far* more user-friendly and intuitive. All methods are working.
+
 Soon, the CLI will be launched on a server and utilized as a wholly remote console-oriented service via web sockets.

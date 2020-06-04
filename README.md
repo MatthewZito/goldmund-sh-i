@@ -31,6 +31,7 @@ This repository hosts an application that is currently in development. As such, 
   - localized sessions management via custom CLI (console-oriented service for auth mgmt)
   - fully containerized environment (automated deployment of all micro-services and 'client')
   - monorepo architecture handles package testing at root level w/Lerna
+  - automated builds + deployments of all images on Dockerhub
 
 ### <a name="about"> About (temporary section for dev purposes)
 
@@ -76,20 +77,6 @@ lerna run test --stream
 Test at package level:
 ```
 npm run test
-```
-
-Running Docker (general):
-```
-docker build -t >=;
-
-docker run -it testcontainer
-
-docker run -it -d testcontainer // run detached
-
-docker exec -it <HASH> bash .. bring ps to fg
-
-# bind to port
-docker run -it -p 5000:5000 testcontainer
 ```
 
 Accessing Redis-CLI:

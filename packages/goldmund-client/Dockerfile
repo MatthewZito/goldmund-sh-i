@@ -7,4 +7,3 @@ RUN npm install
 COPY --chown=node:node . .
 RUN chmod +x wait-for-it.sh
 CMD ["/bin/bash"]
-
