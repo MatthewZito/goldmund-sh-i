@@ -82,9 +82,9 @@ npm run test
 Accessing Redis-CLI:
 ```
 # fetch internal IP
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name_or_id>
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <redis container_name_or_id>
 # connect
-docker exec -it <container_name_or_id> bash
+docker exec -it <redis container_name_or_id> bash
 # launch cli from internal docker namespace
 redis-cli -h <internal IP>
 ```
