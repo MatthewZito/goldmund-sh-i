@@ -14,7 +14,7 @@ const redisClient = redis.createClient({
     port: process.env.REDIS_PORT,
     password: process.env.REDIS_PASSWORD
 });
-
+// TODO add retrypolicy here
 // async/await bindings
 const getAsync = promisify(redisClient.get).bind(redisClient);
 const setAsync = promisify(redisClient.set).bind(redisClient);

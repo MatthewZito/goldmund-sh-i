@@ -30,7 +30,7 @@ services:
         depends_on:
             - redis
     # SSR 'client' app
-    nextjs:
+    goldmund-client:
         container_name: goldmund-client
         build:
             context: packages/goldmund-client
@@ -50,6 +50,17 @@ services:
         depends_on:
             - goldmund-api
             - redis
+    nginx: 
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        networks:
+            - goldmundio
+        depends_on:
+            - goldmund-client
+        
 networks:
     goldmundio:
         driver: bridge
