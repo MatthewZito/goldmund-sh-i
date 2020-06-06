@@ -40,6 +40,14 @@ This project is not a course project, nor does it use any bootstrapped content e
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
 to your needs, please consider this application to be an examplar of what I can design and build on my own. My hope here is that this delimits my actual capabilities from those apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). For instance, maybe I worked at a company that used Docker. How do you know if *I* understand Docker? You don't. Hopefully, this app dispels that veil.
 
+### <a name="demo"> Visualizations + Abstractions
+ Preliminary architectural layout:
+
+![demo](https://github.com/MatthewZito/goldmund.io/blob/master/documentation/preliminary-architecture.png)
+
+More information:
+- [Micro Batch-Processor](https://github.com/MatthewZito/goldmund.io/blob/master/documentation/batch-processing.md)
+ 
 ## <a name="notes"></a> Development Notes
 
 ### <a name="todo"></a> Todos + Upcoming Features
@@ -127,4 +135,4 @@ I'll get around to this one...
 
 #### How I Handled Isomorphic Hostname Resolution in a Serverless Environment
 
-I literally just implemented this and am therefore exhausted; I'll get around to this one...
+I'll get around to this one...
