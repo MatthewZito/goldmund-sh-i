@@ -7,7 +7,7 @@ Per the MongoDB docs:
 
 In short, MongoDB queries entail iterating over documents *in order to* skip them. Ergo, calling `cursor.skip` compounds and requires, when dealing with large datasets, such processing power that a cursory glance at said processing power's requirement asymptote - after such compounding has occurred - reveals we quickly approach θn^2 complexity. 
 
-Why, exactly, does using `skip` compound to such heights that we find ourselves with an asynmptotic notation of (at least when dealing with a theoretical dataset that is large*). Well, per the Mongo docs, `skip` does not utilize an index - hence why it gets exponentially slower in inverse proportion to dataset size.
+Why, exactly, does using `skip` compound to such heights that we find ourselves with an asynmptotic notation of (at least when dealing with a theoretical dataset that is large*) θn^2? Well, per the Mongo docs, `skip` does not utilize an index - hence why it gets exponentially slower in inverse proportion to dataset size.
 
 The implication here is that the processing speed of `skip` will not improve even if the data framework *is* indexed.
 
