@@ -2,9 +2,8 @@
 *implementing infinite scrolling without expensive database calls*
 
 Per the MongoDB docs:
-```
-The cursor.skip() method is often expensive because it requires the server to walk from the beginning of the collection or index to get the offset or skip position before beginning to return results. As the offset (e.g. pageNumber above) increases, cursor.skip() will become slower and more CPU intensive. With larger collections, cursor.skip() may become IO bound.
-```
+
+> The cursor.skip() method is often expensive because it requires the server to walk from the beginning of the collection or  index to get the offset or skip position before beginning to return results. As the offset (e.g. pageNumber above) increases, cursor.skip() will become slower and more CPU intensive. With larger collections, cursor.skip() may become IO bound.
 
 In short, MongoDB queries entail iterating over documents *in order to* skip them. Ergo, calling `cursor.skip` compounds and requires, when dealing with large datasets, such processing power that a cursory glance at said processing power's requirement asymptote - after such compounding has occurred - reveals we quickly approach θn^2 complexity. 
 
