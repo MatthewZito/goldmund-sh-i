@@ -20,18 +20,17 @@ License: MIT
 This repository hosts an application that is currently in development. As such, this document may not be formatted/completed until said app has been deployed to production.
 
 ### <a name="features"> Features
-  - Custom database wrapper utilizing [(quasi) Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
-  - custom REST microservice for data processing
-  - dynamic runtime configurations
-  - front-end proxy for resolving Docker hostnames
-  - hybrid static site generation (SSG) / server-side rendering (SSR) with NextJs
+  - Custom database wrapper modeled on [Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
+  - custom RESTful microservice for data processing
+  - reverse proxy routing to containerized environment
+  - hybrid static site generation (SSG) / server-side rendering (SSR) 
   - Reactjs components: code-splitting, lazy loading, and dynamic imports
   - infinite scrolling coordinated via batch processing on the backend (maintains consistent processing power requirements regardless of dataset size)
   - blazin' fast sessions caching with Redis
   - localized sessions management via custom CLI (console-oriented service for auth mgmt)
-  - fully containerized environment (automated deployment of all micro-services and 'client')
-  - monorepo architecture handles package testing at root level w/Lerna
-  - automated builds + deployments of all images on Dockerhub
+  - fully automated container-to-cloud CI/CD pipeline
+  - monorepo architecture handles package testing and dependencies hoisting at via Lerna
+  - automated builds + testing
 
 ### <a name="about"> About (temporary section for dev purposes)
 

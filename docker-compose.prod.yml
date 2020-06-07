@@ -23,20 +23,28 @@ services:
         depends_on:
             - redis
     # SSR 'client' app
-    nextjs:
+    goldmund-client:
         image: exbotanical/goldmundio:client-${TAG}
         container_name: goldmund-client
         command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
         environment:
             - API_BASE_DOCKER=https://goldmund-api:5000
             - API_BASE_CLIENT=https://goldmund.io:5000
-        ports:
-            - "3000:3000"
         networks:
             - goldmundio
         depends_on:
             - goldmund-api
             - redis
+    nginx: 
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        networks:
+            - goldmundio
+        depends_on:
+            - goldmund-client
 networks:
     goldmundio:
         driver: bridge
