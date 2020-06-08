@@ -23,8 +23,6 @@ services:
             - ./packages/goldmund-api:/home/node/app
             - api_node_modules:/home/node/app/node_modules
             - logs:/home/node/app/logs
-        ports:
-            - "5000:5000"
         networks:
             - goldmundio
         depends_on:
@@ -38,7 +36,7 @@ services:
         command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
         environment:
             - API_BASE_DOCKER=http://goldmund-api:5000
-            - API_BASE_CLIENT=http://localhost:5000
+            - API_BASE_CLIENT=/api/
         volumes:
             - ./packages/goldmund-client:/home/node/app
             - client_node_modules:/home/node/app/node_modules
@@ -49,6 +47,7 @@ services:
             - goldmund-api
             - redis
     nginx: 
+        restart: always
         build: 
             context: ./nginx
             dockerfile: Dockerfile
