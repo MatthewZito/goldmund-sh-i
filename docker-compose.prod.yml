@@ -16,8 +16,6 @@ services:
         command: npm start #TODO replace w/manager
         env_file: 
             - .env
-        ports:
-            - "5000:5000"
         networks:
             - goldmundio
         depends_on:
@@ -36,6 +34,7 @@ services:
             - goldmund-api
             - redis
     nginx: 
+        restart: always
         build: 
             context: ./nginx
             dockerfile: Dockerfile
