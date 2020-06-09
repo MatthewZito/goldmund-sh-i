@@ -6,6 +6,12 @@
             "image": "exbotanical/goldmundio:client-${TAG}",
             "hostname": "goldmund-client",
             "essential": false,
+            "dependsOn": [
+                {
+                  "containerName": "goldmund-api",
+                  "condition": "START"
+                }
+              ],
             "memory": 128
         },
         {

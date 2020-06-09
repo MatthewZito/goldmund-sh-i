@@ -11,7 +11,7 @@
     3. Inbound Rule [new] -> Protocol: TCP; Port Range: 6379; Source: self 
     4. Add new group to ECS, EBS environ
 
-4. Configure process vars with SSM and applicable IAM restrictions (because AWS is embarrassingly slow at properly implementing this feature...but SSM is a start, I suppose)
+4. Configure process vars with SSM and applicable IAM restrictions (because AWS is embarrassingly slow at properly implementing this feature...but SSM is a start, I suppose). Try [here](https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html)
 
 5. IAM time.
     1. IAM [new] -> Type: programmatic; Attachments: primary 
