@@ -3,18 +3,18 @@
 1. Navigate to Elastic Beanstalk and create new app
 2. Create a web-server environment, multi-container docker, sample app
 3. Create Redis ECS instance:
-  - 1. 'ElastiCache' -> Redis [new]: Node type: cache.t2.micro .5GiB; Replicas: None 
-  - 2. New Subnet Group -> VPC ID: default; subnets: enable all
+    1. 'ElastiCache' -> Redis [new]: Node type: cache.t2.micro .5GiB; Replicas: None 
+    2. New Subnet Group -> VPC ID: default; subnets: enable all
 3. Create VPC-contingent security group and assign to all instances:
-  - 1. Nav to VPC dash, ensure VPC is same as EBS instance
-  - 2. Security Groups [new] ->  tag/group: VPC; VPC: VPC
-  - 3. Inbound Rule [new] -> Protocol: TCP; Port Range: 6379; Source: self 
-  - 4. Add new group to ECS, EBS environ
+    1. Nav to VPC dash, ensure VPC is same as EBS instance
+    2. Security Groups [new] ->  tag/group: VPC; VPC: VPC
+    3. Inbound Rule [new] -> Protocol: TCP; Port Range: 6379; Source: self 
+    4. Add new group to ECS, EBS environ
 
 4. Configure process vars with SSM and applicable IAM restrictions (because AWS is embarrassingly slow at properly implementing this feature...but SSM is a start, I suppose)
 
 5. IAM time.
-  - 1. IAM [new] -> Type: programmatic; Attachments: primary 
+    1. IAM [new] -> Type: programmatic; Attachments: primary 
 
 6. Configure Travis CI for automated deployments. I can just add this to my `.travis.yml`:
 
