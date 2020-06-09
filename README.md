@@ -34,10 +34,12 @@ This repository hosts an application that is currently in development. As such, 
 
 ### <a name="about"> About (temporary section for dev purposes)
 
-This project is not a course project, nor does it use any bootstrapped content e.g. Boostrap, Material UI CDN, templates, et al. All pages and components have been written from scratch. This is a full-stack application designed for production.
+This is a personal web application intended as an auto-didactic tool for perfecting CI/CD and production-grade development in a fully containerized cloud environment. Building this app has been quite interesting; it has necessitated extensive research and unending trials. As a developer who aspires to make an impact as a software architect one day, I'm rather pleased with the result. I hope you enjoy as well.
+
+Note to visitors:
 
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
-to your needs, please consider this application to be an examplar of what I can design and build on my own. My hope here is that this delimits my actual capabilities from those apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). For instance, maybe I worked at a company that used Docker. How do you know if *I* understand Docker? You don't. Hopefully, this app dispels that veil.
+to your needs, please consider this application to be an examplar of what I can design and build on my own, unassisted. My hope here is that this delimits my actual capabilities from those pertinent to apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). That is, here, you can see that I indeed can effectively employ tools such as Docker, Kubernetes, et al. 
 
 ### <a name="demo"> Visualizations + Abstractions
  Preliminary architectural layout:
@@ -57,9 +59,10 @@ More information:
  - tracking pixel campaign(s)
  - analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
  - ~~implement cookies via Redis store, utilize in-memory caching for client~~
- - cloudflare for ddos protection + auto https
+ - ingess controller
+ - https and automated cert [re-]auth
  - add rate limiter
- - add CORS policy/whitelist
+ - ~~add CORS policy/whitelist~~
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
  - ~~Front-end proxy for DNS resolution of internal Docker hostnames~~
@@ -128,10 +131,21 @@ Nextjs v9's Routes API is incredible, however it is very nascent. I have elected
  
  Finally, as someone who admires a great deal the ethos of the giants upon whose shoulders we stand (ie our UNIX forefathers), I'd prefer each service *do one thing, and do it well*. I have not enumarated this in my afore-cited reasons for using a decoupled API as it is ultimately a matter of personal preference and not of performance. Next's internal API feature is blazing fast, but it simply is not extensible enough for my needs right now.
 
-#### Why There is a 'wait-for-it' Shell Script Running in My Docker Config
+#### Activating the Data Layer at Run-time
 
-I'll get around to this one...
+A curious consequence of my architecture is the sensitive run-time configurations required to activate the data layers. As one can readily see, `goldmund-client` is somewhat a misnomer given it refers to a hybridized server-side-render/static-site-gen frontend. In order for the frontend service to operate at proper context, `goldmund-api` must be *actively serving data* at build-time. This is a quandary given my environment is fully automated; I must find a way to enforce a chronological context at run-time.
 
-#### How I Handled Isomorphic Hostname Resolution in a Serverless Environment
+As it stands, this has been accomplished by utilizing a shell script (`wait-for-it.sh`) which polls for the `goldmund-api` service. The `goldmund-client` build will not occur until this script has successfully exited, ergo the data layer acquires insurance. Simply specifying the Nginx routing service's contingency on `goldmund-client` delays Docker Engine's execution of its run-time command; thus:
+ 1. `goldmund-api` build init
+ 2. `goldmund-client` build init
+ 3. `wait-for-it.sh` execute, `goldmund-client` build freeze
+ 4. `goldmund-api` run
+ 5. `goldmund-api` ack, `wait-for-it.sh` exit, `goldmund-client` build commence
+ 6. `goldmund-client` run (build SSG content + export)
+ 7. `goldmund-server` build, run --> serve SSG content from step 6
+
+We'll see how this configuration changes relative to Kubernetes deployment, an imminent step in development at this moment.
+
+#### Handling Isomorphic Requests in a Containerized Environment
 
 I'll get around to this one...

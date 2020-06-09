@@ -1,0 +1,33 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "goldmund-client",
+            "image": "exbotanical/goldmundio:client-${TAG}",
+            "hostname": "goldmund-client",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "goldmund-api",
+            "image": "exbotanical/goldmundio:api-${TAG}",
+            "hostname": "goldmund-api",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "goldmund-server",
+            "image": "exbotanical/goldmundio:server-${TAG}",
+            "hostname": "goldmund-server",
+            "essential": true,
+            "portMappings": [
+                {
+                "hostPort": 80,
+                "containerPort": 80
+                }
+            ],
+            "links": ["goldmund-client", "goldmund-api"],
+            "memory": 128
+        }
+    ]
+}

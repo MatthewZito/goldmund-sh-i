@@ -33,11 +33,10 @@ services:
         depends_on:
             - goldmund-api
             - redis
-    nginx: 
+    goldmund-server: 
+        image: exbotanical/goldmundio:server-${TAG}
+        container_name: goldmund-server
         restart: always
-        build: 
-            context: ./nginx
-            dockerfile: Dockerfile
         ports:
             - "80:80"
         networks:
