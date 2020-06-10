@@ -18,7 +18,7 @@ spec:
                   imagePullPolicy: Never
                   env:
                     - name: API_BASE_DOCKER
-                      value: goldmund-api-service
+                      value: /api
                     - name: API_BASE_CLIENT
                       value: /api
                   ports:
