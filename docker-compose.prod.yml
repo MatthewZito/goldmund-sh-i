@@ -26,8 +26,8 @@ services:
         container_name: goldmund-client
         command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
         environment:
-            - API_BASE_DOCKER=https://goldmund-api:5000
-            - API_BASE_CLIENT=https://goldmund.io:5000
+            - API_BASE_DOCKER=http://goldmund-api:5000
+            - API_BASE_CLIENT=/api/
         networks:
             - goldmundio
         depends_on:

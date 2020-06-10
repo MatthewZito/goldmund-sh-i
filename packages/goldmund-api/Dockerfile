@@ -1,8 +1,7 @@
-FROM node:13.6.0
-RUN mkdir -p /home/node/app/node_modules && mkdir -p /home/node/app/logs && chown -R node:node /home/node/app
-WORKDIR /home/node/app
+FROM node:13-apline
+RUN mkdir -p /usr/src/app/logs
+WORKDIR /usr/src/app
 COPY package*.json ./
-USER node
-RUN npm install
-COPY --chown=node:node . .
-CMD ["/bin/bash"]
+RUN npm install --production
+COPY . .
+CMD ["npm","run","start"]
