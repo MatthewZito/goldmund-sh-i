@@ -14,7 +14,8 @@ spec:
         spec:
             containers:
                 - name: goldmund-api
-                  image: exbotanical/goldmundio:api
+                  image: goldmund-api-test
+                  imagePullPolicy: Never
                   ports:
                     - containerPort: 5000
                   env:
@@ -29,40 +30,40 @@ spec:
                     - name: MONGO_ATLAS_URI
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: MONGO_ATLAS_URI
                     - name: REDIS_PASSWORD
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: REDIS_PASSWORD
                     - name: JWT_SECRET
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: JWT_SECRET
                     - name: JWT_AUTHORITY
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: JWT_AUTHORITY
                     - name: JWT_ALGORITHM
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: JWT_ALGORITHM
                     - name: JWT_EMAIL
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: JWT_EMAIL
                     - name: RSA_PRIV
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: RSA_PRIV
                     - name: RSA_PUB
                       valueFrom:
                         secretKeyRef:
-                            name: goldmund_ledger
+                            name: goldmund-ledger
                             key: RSA_PUB

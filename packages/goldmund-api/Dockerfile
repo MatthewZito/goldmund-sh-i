@@ -1,4 +1,4 @@
-FROM node:13-apline
+FROM node:13-alpine
 RUN mkdir -p /usr/src/app/logs
 WORKDIR /usr/src/app
 COPY package*.json ./

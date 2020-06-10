@@ -14,11 +14,12 @@ spec:
         spec:
             containers: 
                 - name: goldmund-client
-                  image: exbotanical/goldmundio:client
+                  image: goldmund-client-test
+                  imagePullPolicy: Never
                   env:
                     - name: API_BASE_DOCKER
                       value: goldmund-api-service
                     - name: API_BASE_CLIENT
-                      value: /api/
+                      value: /api
                   ports:
                     - containerPort: 3000

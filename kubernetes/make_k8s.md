@@ -1,6 +1,11 @@
 Imperatively:
 ```
-kubectl create secret generic goldmund_ledger --from-literal <k8s env name>=<env val [et al ...]>
+kubectl create secret generic goldmund-ledger --from-literal <k8s env name>=<env val> [et al ...]
+```
+
+Cleaner, but more complicated for myriad reasons:
+```
+kubectl create secret generic goldmund-ledger --from-env-file="path"
 ```
 
 Or declaratively:
