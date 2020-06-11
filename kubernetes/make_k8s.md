@@ -46,3 +46,16 @@ Run Proxy Dashboard:
 1. apply dash service
 2. run `kubectl proxy`
 3. launch at http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/error?namespace=default
+
+Run Proxy Metrics Server:
+1. `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml`
+2. `kubectl -n kube-system edit deploy metrics-server`
+3. Add following to args: 
+```
+- args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --v=2
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP
+```

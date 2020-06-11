@@ -43,6 +43,8 @@ Note to visitors:
 If you are a hiring manager, recruiter, or otherwise an individual considering my competencies as they might apply
 to your needs, please consider this application to be an examplar of what I can design and build on my own, unassisted. My hope here is that this delimits my actual capabilities from those pertinent to apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). That is, here, you can see that I indeed can effectively employ tools such as Docker, Kubernetes, et al. 
 
+If you'd like to work together, you are invited to email me at matthewtzito (gmail).
+
 ### <a name="demo"> Visualizations + Abstractions
  Preliminary architectural layout:
 
