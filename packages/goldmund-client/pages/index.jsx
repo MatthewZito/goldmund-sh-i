@@ -108,7 +108,7 @@ class Vestibule extends React.Component {
                                     <i className="fa fa-search" aria-hidden="true" />
                                 </form>
                             </div>
-                        <div className="hero-full-wrapper">
+                        <div className="hero-full-wrapper" style={{ maxWidth: "1150px"}} >
                                 <InfiniteScroll
                                     dataLength={entries.length}
                                     next={this.fetchNextBatch}

@@ -27,7 +27,7 @@ export default function Entry(props) {
                 <div>
                     <SidebarNavigator name="$ cat "/>
                     <main className="" id="main-collapse">
-                        <div className="row">
+                        <div className="row" style={{ maxWidth: "1150px"}} >
                             <div className="col-xs-12 col-md-12">
                                 <div className="section-container-spacer">
                                     <h2>{data.title}</h2>
