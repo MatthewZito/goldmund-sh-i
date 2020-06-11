@@ -1,4 +1,4 @@
-# Goldmund.io 
+# Goldmund.sh - Automated Cluster
 ```
 Author: Matthew T Zito (goldmund)
 License: MIT
@@ -48,10 +48,10 @@ If you'd like to work together, you are invited to email me at matthewtzito (gma
 ### <a name="demo"> Visualizations + Abstractions
  Preliminary architectural layout:
 
-![demo](https://github.com/MatthewZito/goldmund.io/blob/master/documentation/preliminary-architecture.png)
+![demo](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/preliminary-architecture.png)
 
 More information:
-- [Micro Batch-Processor](https://github.com/MatthewZito/goldmund.io/blob/master/documentation/batch-processing.md)
+- [Micro Batch-Processor](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/batch-processing.md)
  
 ## <a name="notes"></a> Development Notes
 
@@ -109,4 +109,6 @@ docker run --rm -it \
 dive build -t <some-tag> .
 ```
 
-[More documentation](https://github.com/MatthewZito/goldmund.io/tree/master/documentation)
+Somewhat amusing, the ingress service object is ultimately just a wrapper around the "deprecated" load balancer service object...
+
+[More documentation](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation)

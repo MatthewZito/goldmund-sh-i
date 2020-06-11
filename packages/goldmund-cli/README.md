@@ -1,4 +1,4 @@
-# Goldmund.io Admin CLI
+# Goldmund.sh Admin CLI
 ```
 Author: Matthew T Zito (goldmund)
 License: MIT

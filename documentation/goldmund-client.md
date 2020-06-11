@@ -11,7 +11,7 @@ Nextjs v9's Routes API is incredible, however it is very nascent. I have elected
    * I cannot set sessions without inelegant logic (I'll nigh make mention of auth issues)
  - Building my API into the Next server will effectively marry this project to Nextjs; development would be contingent on Zeit's priorities
  - My services still maintain same-origin given they will be containerized (no need for explicit service coupling)
- - Authentication and authorization are both difficult to properly implement when dealing with Nextjs; auth will be handled by the API - ~~the rendered browser can simply store the token after authenticating with the API itself (as opposed to auth with next routed api, which can detriment security efforts)~~ (see the Goldmund.io Admin CLI)
+ - Authentication and authorization are both difficult to properly implement when dealing with Nextjs; auth will be handled by the API - ~~the rendered browser can simply store the token after authenticating with the API itself (as opposed to auth with next routed api, which can detriment security efforts)~~ (see the Goldmund.sh Admin CLI)
  
  Finally, as someone who admires a great deal the ethos of the giants upon whose shoulders we stand (ie our UNIX forefathers), I'd prefer each service *do one thing, and do it well*. I have not enumarated this in my afore-cited reasons for using a decoupled API as it is ultimately a matter of personal preference and not of performance. Next's internal API feature is blazing fast, but it simply is not extensible enough for my needs right now.
 

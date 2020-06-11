@@ -14,8 +14,7 @@ spec:
         spec:
             containers: 
                 - name: goldmund-client
-                  image: goldmund-client-test
-                  imagePullPolicy: Never
+                  image: exbotanical/goldmund-client
                   env:
                     - name: API_BASE_DOCKER
                       value: http://goldmund-api-service:5000

@@ -8,41 +8,41 @@ services:
         ports:
             - "6379:6379"
         networks:
-            - goldmundio
+            - goldmund-network
     # Data Processing Service
     goldmund-api:
         container_name: goldmund-api
-        image: exbotanical/goldmundio:api-${TAG}
+        image: exbotanical/goldmund-api
         command: npm start #TODO replace w/manager
         env_file: 
             - .env
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - redis
     # SSR 'client' app
     goldmund-client:
-        image: exbotanical/goldmundio:client-${TAG}
+        image: exbotanical/goldmund-client
         container_name: goldmund-client
         command: /bin/bash -c "./wait-for-it.sh goldmund-api:5000 --timeout=60 -- npm run build && npm run start"
         environment:
             - API_BASE_DOCKER=http://goldmund-api:5000
             - API_BASE_CLIENT=/api/
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - goldmund-api
             - redis
     goldmund-server: 
-        image: exbotanical/goldmundio:server-${TAG}
+        image: exbotanical/goldmund-server
         container_name: goldmund-server
         restart: always
         ports:
             - "80:80"
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - goldmund-client
 networks:
-    goldmundio:
+    goldmund-network:
         driver: bridge
