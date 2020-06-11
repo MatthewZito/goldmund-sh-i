@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: goldmund-client-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: web
+    template:
+        metadata:
+            labels:
+                component: web
+        spec:
+            containers: 
+                - name: goldmund-client
+                  image: goldmund-client-test
+                  imagePullPolicy: Never
+                  env:
+                    - name: API_BASE_DOCKER
+                      value: http://goldmund-api-service:5000
+                    - name: API_BASE_CLIENT
+                      value: /api
+                  ports:
+                    - containerPort: 3000

@@ -1,7 +1,9 @@
 {
   "name": "goldmund-client",
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   },
   "version": "0.1.0",
   "description": "Frontend for goldmundio webapp",
@@ -10,7 +12,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "init": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "Matthew T Zito (goldmund)",

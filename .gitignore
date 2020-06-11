@@ -12,3 +12,4 @@
 lerna-debug.log
 packages/goldmund-client/.babelrc
 docker-compose.ymld
+k8s.env
