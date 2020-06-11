@@ -41,3 +41,8 @@ spec:
         requests:
             storage: 2Gi
 ```
+
+Run Proxy Dashboard:
+1. apply dash service
+2. run `kubectl proxy`
+3. launch at http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/error?namespace=default
