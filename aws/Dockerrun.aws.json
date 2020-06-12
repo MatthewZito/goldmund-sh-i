@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "goldmund-client",
-            "image": "exbotanical/goldmundio:client-${TAG}",
+            "image": "exbotanical/goldmund-client",
             "hostname": "goldmund-client",
             "essential": false,
             "dependsOn": [
@@ -16,14 +16,14 @@
         },
         {
             "name": "goldmund-api",
-            "image": "exbotanical/goldmundio:api-${TAG}",
+            "image": "exbotanical/goldmund-api",
             "hostname": "goldmund-api",
             "essential": false,
             "memory": 128
         },
         {
             "name": "goldmund-server",
-            "image": "exbotanical/goldmundio:server-${TAG}",
+            "image": "exbotanical/goldmund-server",
             "hostname": "goldmund-server",
             "essential": true,
             "portMappings": [

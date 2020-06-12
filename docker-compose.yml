@@ -8,7 +8,7 @@ services:
         ports:
             - "6379:6379"
         networks:
-            - goldmundio
+            - goldmund-network
     # Data Processing Service
     goldmund-api:
         container_name: goldmund-api
@@ -24,7 +24,7 @@ services:
             - api_node_modules:/home/node/app/node_modules
             - logs:/home/node/app/logs
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - redis
     # SSR 'client' app
@@ -42,7 +42,7 @@ services:
             - client_node_modules:/home/node/app/node_modules
             - client_dist:/home/node/app/.next
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - goldmund-api
             - redis
@@ -54,12 +54,12 @@ services:
         ports:
             - "80:80"
         networks:
-            - goldmundio
+            - goldmund-network
         depends_on:
             - goldmund-client
         
 networks:
-    goldmundio:
+    goldmund-network:
         driver: bridge
 
 volumes:

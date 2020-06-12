@@ -5,11 +5,12 @@ require("winston-daily-rotate-file");
 
 const infofile = new winston.transports.DailyRotateFile({
   level: "info",
-  filename: path.resolve(process.env.EPHEMERAL_LOGS_PATH, "ROTATION-%DATE%-info.log"),
-  datePattern: "YYYY-MM-DD-HH",
+  filename: path.resolve(process.env.EPHEMERAL_LOGS_PATH, "GOLDMUND-API-ROTATION-%DATE%-info.log"),
+  datePattern: "YYYY-MM-DD",
+  frequency: "1d",
   zippedArchive: true,
   maxSize: "20m",
-  maxFiles: "1d" 
+  maxFiles: "6d" 
 });
 
 // infofile.on("rotate", function(oldFilename, newFilename) {
