@@ -22,6 +22,9 @@ Packages:
  - `goldmund-cli` - CLI and headless CMS for managing sessions and content
  - `goldmund-server` - a mock ingress for proxying Docker Engine namespace
 
+ To deploy:
+ Merge into Master with commit message "automate-deployment"
+
 ### <a name="features"> Features
   - Custom database wrapper modeled on [Lambda architecture](https://en.wikipedia.org/wiki/Lambda_architecture)
   - custom RESTful microservice for data processing
@@ -115,7 +118,6 @@ docker exec -it <container-name> sh
 container-shell# ( set -o posix ; set ) | less
 ```
 This can also be done via `kubectl`.
-
 
 Somewhat amusing, the ingress service object is ultimately just a wrapper around the "deprecated" load balancer service object...
 

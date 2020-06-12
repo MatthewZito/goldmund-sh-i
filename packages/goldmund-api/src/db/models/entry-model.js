@@ -71,7 +71,7 @@ EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
  * @description Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
-    const numReturnedDocs = 10
+    const numReturnedDocs = 20
     // first page
     if (!lastProcessedID) {
         let entries = await this.find().sort({ createdAt: "desc"}).limit(numReturnedDocs);

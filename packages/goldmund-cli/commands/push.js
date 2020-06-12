@@ -19,13 +19,22 @@ const processEntry = async () => {
             let id = ephemeralEntry["_id"] // pull id
             delete ephemeralEntry["_id"] // rm id from req object
             let response = await pushEntry(id, ephemeralEntry, token);
-            console.log(chalk.green(`[+] Entry ${id} successfully updated.\n`));
+            if (response.status === 201) {
+                console.log(chalk.green(`[+] Entry ${id} successfully updated.\n`));
+            }
+            else {
+                throw new Error("[-] PATCH Failure.");
+            }
         }
         else {
             let response = await pushEntry(false, ephemeralEntry, token);
-            console.log(chalk.green(`[+] New entry ${response} created.\n`));
+            if (response.status === 201) {
+                console.log(chalk.green(`[+] New entry ${response.data} created.\n`));
+            }
+            else {
+                throw new Error("[-] POST Failure.");
+            }
         }
-        
     } catch(err) {
         console.log(chalk.red(err));
     }
