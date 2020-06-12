@@ -10,6 +10,5 @@
 *packages/goldmund-api/config/
 *packages/goldmund-cli/tmp
 lerna-debug.log
-packages/goldmund-client/.babelrc
 docker-compose.ymld
 k8s.env

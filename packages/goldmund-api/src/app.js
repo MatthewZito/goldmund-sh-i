@@ -11,12 +11,19 @@ const userRouter = require("./routes/user-route.js");
 const emailRouter = require("./routes/email-route.js");
 
 const app = express();
-app.use(helmet());
-app.use(helmet.frameguard({action: 'deny'}));
-DISABLE HSTS DEV
 const port = process.env.PORT || 5000
 
 /* Utils */
+const randomHeaders = ["PHP/5.4.45","PHP/5.5.9-1ubuntu4.7", "PleskLin", "PHP/5.3.29", "ASP.NET", "PHP/5.4.39-0+deb7u2", "ZendServer 8.5.0,ASP.NET"]
+app.use(helmet.frameguard({action: 'deny'}));
+app.use(helmet.hidePoweredBy({ setTo: randomHeaders[Math.floor(Math.random() * randomHeaders.length)] }));
+// TODO Implement Fisher-Yates Algorithm fun
+// const sixtyDaysInSeconds = 5184000
+// app.use(helmet.hsts({
+//     maxAge: sixtyDaysInSeconds,
+//     includeSubDomains: false
+//   }));
+
 app.use(morgan("short"));
 app.use(morgan("combined", { stream: winstonRotations.stream }));
 app.use(cors());

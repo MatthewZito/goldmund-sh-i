@@ -114,11 +114,12 @@ class Vestibule extends React.Component {
                                     next={this.fetchNextBatch}
                                     loader={<p>Loading...</p>}
                                     hasMore={lastProcessedID}
+                                    style={{ overflow: "unset" }}
                                     >
                                     <div className="grid" style={{ 
                                         display: "grid",
                                         gridTemplateColumns: "repeat( auto-fill, minmax(200px, 1fr) )",
-                                        gridAutoRows: "15em",
+                                        gridAutoRows: "15fr",
                                         gridGap: "2em",
                                         
                                     }}> 
