@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 docker build -t exbotanical/goldmund-api:latest -t exbotanical/goldmund-api:$COMMIT_SHA -f ./packages/goldmund-api/Dockerfile ./packages/goldmund-api
 docker build -t exbotanical/goldmund-client:latest -t exbotanical/goldmund-client:$COMMIT_SHA -f ./packages/goldmund-client/Dockerfile ./packages/goldmund-client
 docker push exbotanical/goldmund-api:latest
