@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in scripts/service-account.json.enc -out service-account.json -d
 curl https://sdk.cloud.google.com | bash > /dev/null;
 source $HOME/google-cloud-sdk/path.bash.inc

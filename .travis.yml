@@ -6,12 +6,12 @@ env:
         - COMMIT_SHA=$(git rev-parse HEAD) # Manually set current commit SHA - unfortunately Travis' default has issues with merges
         - CLOUDSDK_CORE_DISABLE_PROMPTS=1 
 before_install:
-    script: bash scripts/automate-install.sh
+    script: scripts/automate-install.sh
     on: 
         branch: master
         condition: $TRAVIS_COMMIT_MESSAGE =~ ^(automate deployment)
     provider: script
-    script: bash scripts/automate-deployment.sh
+    script: scripts/automate-deployment.sh
     on: 
         branch: master
         condition: $TRAVIS_COMMIT_MESSAGE =~ ^(automate deployment)
