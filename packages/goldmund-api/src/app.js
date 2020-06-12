@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require('helmet')
 const cors = require('cors');
 const morgan = require("morgan");
 const { winstonRotations } = require("./services/winston-rotation.js");
@@ -10,6 +11,9 @@ const userRouter = require("./routes/user-route.js");
 const emailRouter = require("./routes/email-route.js");
 
 const app = express();
+app.use(helmet());
+app.use(helmet.frameguard({action: 'deny'}));
+DISABLE HSTS DEV
 const port = process.env.PORT || 5000
 
 /* Utils */
