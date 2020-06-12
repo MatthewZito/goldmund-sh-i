@@ -18,6 +18,7 @@ before_install:
 
 deploy:
     provider: script
-    script: if [[ $TRAVIS_COMMIT_MESSAGE == *"automate deployment"* ]]; then bash scripts/automate-deployment.sh ; fi ;
+    script: bash scripts/automate-deployment.sh
     on: 
         branch: master
+        condition: commit_message =~ /(automate deployment)/
