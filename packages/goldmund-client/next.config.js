@@ -11,5 +11,6 @@ serverRuntimeConfig: {
 publicRuntimeConfig: {
     // Will be available on both server and client
     URI: process.env.API_BASE_CLIENT
-}
+},
+poweredByHeader: false
 }));

@@ -20,5 +20,7 @@ spec:
                       value: http://goldmund-api-service:5000
                     - name: API_BASE_CLIENT
                       value: /api
+                    - name: NEXT_TELEMETRY_DISABLED
+                      value: "1"
                   ports:
                     - containerPort: 3000

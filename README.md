@@ -109,6 +109,14 @@ docker run --rm -it \
 dive build -t <some-tag> .
 ```
 
+To enumerate all environment variables in a given container runtime:
+```
+docker exec -it <container-name> sh
+container-shell# ( set -o posix ; set ) | less
+```
+This can also be done via `kubectl`.
+
+
 Somewhat amusing, the ingress service object is ultimately just a wrapper around the "deprecated" load balancer service object...
 
 [More documentation](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation)
