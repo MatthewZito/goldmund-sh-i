@@ -9,10 +9,9 @@ before_install:
     script: bash scripts/automate-install.sh
     on: 
         branch: master
-        condition: commit_message =~ /(automate deployment)/
-deploy:
+        condition: $TRAVIS_COMMIT_MESSAGE =~ ^(automate deployment)
     provider: script
     script: bash scripts/automate-deployment.sh
     on: 
         branch: master
-        condition: commit_message =~ /(automate deployment)/
+        condition: $TRAVIS_COMMIT_MESSAGE =~ ^(automate deployment)
