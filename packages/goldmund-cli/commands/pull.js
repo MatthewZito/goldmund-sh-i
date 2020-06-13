@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { persist } = require("../utils/fs.js");
+const { persist, spawnDisparateShell } = require("../utils/fs.js");
 const { fetchEntry } = require("../utils/requests.js");
 
 /**
@@ -21,9 +21,10 @@ const populateEntry = async (slug) => {
             legalFields.forEach(legalField => 
                 ephemeralEntry[legalField] = entry[legalField]
                 );
-            // populate local tempfile
+            // populate local entry template
             persist(ephemeralEntry);
             console.log(chalk.green("[+] Ephemeral document populated...\n"));
+            spawnDisparateShell();
         }
     } catch(err) {
         console.log(chalk.red(err));
@@ -31,7 +32,7 @@ const populateEntry = async (slug) => {
 }
 
 exports.command = "pull"
-exports.desc = "Populate local tempfile"
+exports.desc = "Populate local entry template"
 exports.builder = {
     slug: {
         describe: "Specify entry URI",

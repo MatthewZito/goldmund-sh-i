@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const yargs = require("yargs");
-
+const yargs = require("yargs")
 /**
- * @description This pa
+ * @description This package is a command-line CMS and sessions manager for goldmund.sh.
  */
-yargs
+
+const argv = yargs
   .commandDir("commands")
   .demandCommand(1, "[-] You must specify a command.")
-  .help()
-  .argv
+  .help().argv
+  
