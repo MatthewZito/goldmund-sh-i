@@ -14,8 +14,8 @@ const Information = () => {
                             <img className="img-responsive" alt="John Tromp's Cuckoo Cycle logo" src="https://hackernoon.com/hn-images/1*y9-rz5yuvrYeQMhyFChocg.png" />
                         </div>
                         <div className="col-xs-12 col-md-6">
-                            <h1>Lexicon v2.0</h1>
-                            <p>content here</p>
+                            <h1>Goldmund.sh | Automated Cluster v1</h1>
+                            <p>This site's content is currently being developed.</p>
                             <Link href="/communications">
                                 <button className="btn btn-primary">Communicate</button>
                             </Link>

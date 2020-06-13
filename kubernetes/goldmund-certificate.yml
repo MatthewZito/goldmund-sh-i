@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+    name: goldmund-sh-tls
+spec:
+    secretName: goldmund-sh
+    issuerRef: 
+        name: letsencrypt-prod
+        kind: ClusterIssuer
+    commonName: goldmund.sh
+    dnsNames:
+        - goldmund.sh
+        - www.goldmund.sh
+    acme:
+        config:
+            - http01:
+                ingressClass: nginx
+              domains:
+                - goldmund.sh
+                - www.goldmund.sh
