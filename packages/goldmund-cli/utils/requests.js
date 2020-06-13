@@ -78,7 +78,7 @@ const fetchEntry = async (slug) => {
  * @param {Object} data Entry data currently holding residence in local entry template.
  * @param {String} token RSA encrypted token object.
  * @description Pushes the current local entry template to server. If entry ID exists, the entry is of 
- * type update and is therefore sent to the PATCH endpoint. Else, the entry is new and is sent to the new entry endpoint.
+ *     type update and is therefore sent to the PATCH endpoint. Else, the entry is new and is sent to the new entry endpoint.
  * @returns {String} The API response - either null or the newly created resource's slug URI. 
  */
 const pushEntry = async (id, data, token) => {
