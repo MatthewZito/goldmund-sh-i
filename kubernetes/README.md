@@ -14,7 +14,6 @@ google-cloud-console# ./get_helm.sh
 google-cloud-console# helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 google-cloud-console# helm install my-nginx stable/nginx-ingress --set rbac.create=true 
 ```
-2. Skip Helm Setup, Kubernetes Security with RBAC, Assigning Tiller a Service Account and Ingress-Nginx with Helm.
 
 ### Generating Encrypted Objects
 Imperatively:
@@ -38,6 +37,14 @@ data:
   A_VALUE: $(head -c 24 /dev/random | base64)
 stringData:
   ANOTHER_VALUE: string_value
+```
+
+Via `gcloud` we can just echo the values into a text file (which is deleted, of course), then read them in:
+```
+echo 'USER=superuser' > ./stuff.txt
+echo 'PASS=adfkjvnekrjfv' >> ./stuff.txt
+...
+kubectl create secret generic stuff --from-env-file="./stuff.txt"
 ```
 
 ### APIs and Ancillary Services

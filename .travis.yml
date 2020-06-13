@@ -12,13 +12,12 @@ before_install:
     - source $HOME/google-cloud-sdk/path.bash.inc
     - gcloud components update kubectl
     - gcloud auth activate-service-account --key-file service-account.json
-    - gcloud config set project <PROJECT_ID>
-    - gcloud config set compute/zone <ZONE_STRING>
-    - gcloud container clusters get-credentials <CLUSTER_NAME>
+    - gcloud config set project copper-stacker-280005
+    - gcloud config set compute/zone us-central1-c
+    - gcloud container clusters get-credentials goldmund-cluster
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
 deploy:
     provider: script
-    script: if [[ $TRAVIS_COMMIT_MESSAGE == *"automate deployment"* ]]; then bash scripts/automate-deployment.sh ; fi ;
+    script: bash scripts/automate-deployment.sh
     on: 
         branch: master

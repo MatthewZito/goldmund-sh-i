@@ -7,4 +7,4 @@ docker push exbotanical/goldmund-api:$COMMIT_SHA
 docker push exbotanical/goldmund-client:$COMMIT_SHA 
 kubectl apply $(ls ./kubernetes/*.yml | awk ' { print " -f " $1 } ')
 kubectl set image deployments/goldmund-api-deployment goldmund-api=exbotanical/goldmund-api:$COMMIT_SHA 
-kubectl set image deployments/goldmund-client-deployment goldmund-client=exbotanical/goldmund-client:$COMMIT_SHA 
+kubectl set image deployments/goldmund-client-deployment goldmund-client=exbotanical/goldmund-client:$COMMIT_SHA
