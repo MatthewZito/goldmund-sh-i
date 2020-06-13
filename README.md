@@ -9,9 +9,8 @@ License: MIT
  - [Introduction](#intro) 
     * [Features](#features)
     * [About](#about)
-    * [Demos](#demo)
- - [Development Notes](#notes)
-    * [Testing](#test)
+ - [Documentation](#docs)
+    * [Visualizations](#demo)
     * [Todos](#todo)
 
 ## <a name="intro"></a> Introduction
@@ -49,15 +48,20 @@ to your needs, please consider this application to be an examplar of what I can 
 
 If you'd like to work together, you are invited to email me at matthewtzito (gmail).
 
+## <a name="docs"></a> Documentation
+
 ### <a name="demo"> Visualizations + Abstractions
  Preliminary architectural layout:
 
 ![demo](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/preliminary-architecture.png)
 
 More information:
-- [Micro Batch-Processor](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/batch-processing.md)
- 
-## <a name="notes"></a> Development Notes
+  - See [Testing and Auditing](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/testing.md)
+  - [Micro Batch-Processor](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/batch-processing.md)
+  - [Isomorphic Kubernetes](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/goldmund-client.md)
+  - [Goldmund CLI](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/packages/goldmund-cli/README.md)
+  - [Goldmund Server](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/goldmund-server.md)
+  -[More documentation](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation)
 
 ### <a name="todo"></a> Todos + Upcoming Features
 
@@ -65,61 +69,5 @@ More information:
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
  - slowly convert CSS stylesheet to styled components with Emotionjs
 
-### <a name="test"></a> Testing
 
-Testing is automated locally. To manually test:
 
-*Run all packages' respective tests (quiet)*
-```
-lerna run test 
-```
-
-*Run all packages' respective tests (verbose)*
-```
-lerna run test --stream
-```
-
-Test at package level:
-```
-npm run test
-```
-
-Accessing Redis-CLI:
-```
-# fetch internal IP
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <redis container_name_or_id>
-# connect
-docker exec -it <redis container_name_or_id> bash
-# launch cli from internal docker namespace
-redis-cli -h <internal IP>
-```
-
-Using 'Dive' to Audit Cached Container Layers (*This is a mandatory security audit which will be included in the CI/CD pipeline*):
-
-*on osx*:
-```
-# in given package root dir
-docker run --rm -it \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v  "$(pwd)":"$(pwd)" \
-      -w "$(pwd)" \
-      -v "$HOME/.dive.yaml":"$HOME/.dive.yaml" \
-      wagoodman/dive:latest build -t <some-tag> .
-```
-
-*on pixel-linux*
-```
-# in given package root dir
-dive build -t <some-tag> .
-```
-
-To enumerate all environment variables in a given container runtime:
-```
-docker exec -it <container-name> sh
-container-shell# ( set -o posix ; set ) | less
-```
-This can also be done via `kubectl`.
-
-Somewhat amusing, the ingress service object is ultimately just a wrapper around the "deprecated" load balancer service object...
-
-[More documentation](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation)

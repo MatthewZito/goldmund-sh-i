@@ -28,7 +28,7 @@ const SidebarNavigator = (props) => {
                     <img className="img-responsive site-logo" alt="site logo" src={svglogo} />
                     <Link href="/"><a className="site-brand">{props.name}</a></Link>
                         {(router.pathname === "/") && (
-                        <p>A collation of documented visual media.</p>
+                        <p>A collection of essays and writings.</p>
                         )}
                     </div>
                     <ul className="nav">

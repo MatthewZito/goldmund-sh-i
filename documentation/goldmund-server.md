@@ -1,4 +1,6 @@
-#### Configuring Nginx as a Reverse Proxy for a SSG Frontend
+## Goldmund-Server Development Notes
+
+### Configuring Nginx as a Reverse Proxy for a SSG Frontend
 *exploring esoteric caching mechanisms to handle hybrid websites effectively*
 
 Nginx is far more proficient at serving static assets than Node (which is what Nextjs is utilizing).

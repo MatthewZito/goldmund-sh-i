@@ -1,8 +1,8 @@
-## Goldmund Client
+## Goldmund-Client Development Notes
 
 Follows are notes regarding the `goldmund-client` package.
 
-#### Why I Elected to Use an External API
+### Why I Elected to Use an External API
 As you may know, Nextjs version 9 saw the introduction of several new features which deprecated custom servers and introduced myriad utilities for integrating API routes into a Nextjs project.
 
 Nextjs v9's Routes API is incredible, however it is very nascent. I have elected to maintain my API as a standard RESTful CRUD endpoint. I have done this for a few reasons:
@@ -15,7 +15,7 @@ Nextjs v9's Routes API is incredible, however it is very nascent. I have elected
  
  Finally, as someone who admires a great deal the ethos of the giants upon whose shoulders we stand (ie our UNIX forefathers), I'd prefer each service *do one thing, and do it well*. I have not enumarated this in my afore-cited reasons for using a decoupled API as it is ultimately a matter of personal preference and not of performance. Next's internal API feature is blazing fast, but it simply is not extensible enough for my needs right now.
 
-#### Activating the Data Layer at Run-time
+### Activating the Data Layer at Run-time
 
 A curious consequence of my architecture is the sensitive run-time configurations required to activate the data layers. As one can readily see, `goldmund-client` is somewhat a misnomer given it refers to a hybridized server-side-render/static-site-gen frontend. In order for the frontend service to operate at proper context, `goldmund-api` must be *actively serving data* at `goldmund-client`'s build-time. This is a quandary given my environment is fully automated; I must find a way to enforce a chronology at run-time.
 
@@ -30,6 +30,6 @@ As it stands, this has been accomplished by utilizing a shell script (`wait-for-
 
 We'll see how this configuration changes relative to Kubernetes deployment, an imminent step in development at this moment.
 
-#### Handling Isomorphic Requests in a Containerized Environment
+### Handling Isomorphic Requests in a Containerized Environment
 
 I'll get around to this one...
