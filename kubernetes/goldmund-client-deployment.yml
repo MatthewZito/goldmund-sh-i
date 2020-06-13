@@ -17,7 +17,7 @@ spec:
                   image: exbotanical/goldmund-client
                   env:
                     - name: API_BASE_DOCKER
-                      value: http://goldmund-api-service:5000
+                      value: https://goldmund-api-service:5000
                     - name: API_BASE_CLIENT
                       value: /api
                     - name: NEXT_TELEMETRY_DISABLED

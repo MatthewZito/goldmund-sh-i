@@ -5,11 +5,30 @@ metadata:
     annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/rewrite-target: /$1
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
         nginx.ingress.kubernetes.io/server-snippet: |
             server_tokens off;
 spec:
+    tls:
+        - hosts:
+            - goldmund.sh
+            - www.goldmund.sh
+          secretName: goldmund-sh
     rules:
-        - http:
+        - host: goldmund.sh
+          http:
+            paths:
+                - path: /?(.*)
+                  backend:
+                    serviceName: goldmund-client-service
+                    servicePort: 3000
+                - path: /api/?(.*)
+                  backend:
+                    serviceName: goldmund-api-service
+                    servicePort: 5000
+        - host: www.goldmund.sh
+          http:
             paths:
                 - path: /?(.*)
                   backend:
