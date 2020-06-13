@@ -15,16 +15,20 @@ Encoding: UTF-8
  - [Development Notes](#notes)
 
 ## <a name="intro"></a> Introduction
-The Admin CLI is a console-oriented service for local web administration and sessions-handling. It can be best understood as a light-weight, headless CMS.
+The `goldmund-cli` package is a CLI for local web administration and sessions-handling. It can be best understood as a light-weight, headless CMS.
 
 ### <a name="about"></a> About
 The CLI enables the controller to authenticate with the issuing authority (in this instance, the `goldmund-api` service); the resulting auth token is persisted in a local session file. Destroying this session via `goldmund deauth` will simultaneously nullify the session on both the issuing authority database and local session file. While the local session is valid, it will be included in the headers of all subsequent `goldmund push` calls. However, if the session is null (it either does not exist or is expired), the CLI will prompt the controller to authorize.
 
-The CLI hosts a static entry template (`ephemera.json`) which is populated either via `goldmund pull --slug <slug>` or by way of controller inputs. The former scenario involves an entry ID - a string which identifies existing entries in the database. If this ID is present (it will be if the entry was pulled from the database), the CLI programatically determines the operation type is an update, ergo `goldmund push` will call a `PATCH` request and submit the entry data to its corresponding ID-contingent endpoint. 
+The CLI hosts a static local entry template (`ephemera.json`) which is populated either via `goldmund pull --slug <slug>` or by way of controller inputs. The former scenario involves an entry ID - a string which identifies existing entries in the database. If this ID is present (it will be if the entry was pulled from the database), the CLI programatically determines the operation type is an update, ergo `goldmund push` will call a `PATCH` request and submit the entry data to its corresponding ID-contingent endpoint. 
 
 In the latter scenario, the CLI determines the template signifies a new entry given the lack of an entry ID field. Thus, calling `goldmund push` will call a `POST` request with the new entry data. The newly-minted slug corresponding to the new entry will be returned to the CLI upon successful resource creation.
 
-It should also be noted that calling `goldmund deauth` will reset the entry template, wiping *all* values, as well as the ID key/value pair (if extant).
+It should also be noted that calling `goldmund deauth` will reset the local entry template, wiping *all* values, as well as the ID key/value pair (if extant).
+
+To arbitrarily reset the local entry template, one need only execute the command `goldmund flush`, and the file will be restored to default settings.
+
+For creating new entries, the `goldmund touch` command is particularly useful; it will spawn a child process in a new tab running the user's preferred text editor. The default editor has been set to vi; the editor mounts a tabula rasa template.
 
 ## <a name="install"></a> Installation
 First, establish `.env` variables as needed. Then,
@@ -40,14 +44,24 @@ Authorize a new session:
 goldmund auth
 ```
 
-Populate local tempfile with a given entry qua slug
+Populate local entry template with a given entry qua slug
 ```
 goldmund pull --slug <String: slug>
 ```
 
-Push local tempfile to API
+Spawn new entry template in separate editor window:
+```
+goldmund touch
+```
+
+Push local entry template to API
 ```
 goldmund push
+```
+
+Reset local entry template:
+```
+goldmund flush
 ```
 
 Destroy session/clean-up:
@@ -55,9 +69,10 @@ Destroy session/clean-up:
 goldmund deauth
 ```
 
-
 #### <a name="notes"></a> Development Notes
 
 3 June 2020 - Tested the CLI with a production docker-compose configuration and it works splendidly. The CLI's Spartan architecture lends to speed and processing capabilities which render the administrative process *far* more user-friendly and intuitive. All methods are working.
+
+13 June 2020 - Now that [link](goldmund.sh) is live, the CLI has been tested and found to be operating sufficiently.
 
 Soon, the CLI will be launched on a server and utilized as a wholly remote console-oriented service via web sockets.

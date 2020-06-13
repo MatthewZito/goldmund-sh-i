@@ -5,7 +5,7 @@ const { logout } = require("../utils/requests.js");
 
 /**
  * @description Command handler. Nullifies session on issuing authority and destroys local artifact thereof.
- *   Resets the entry template to defaults.
+ *   Resets the local entry template to defaults.
  */
 const destroyAuth = async () => {
     try {
@@ -20,7 +20,7 @@ const destroyAuth = async () => {
         }
         else {
             depopulate();
-            console.log(chalk.green("[+] Successfully cleared entry template.\n"));
+            console.log(chalk.green("[+] Successfully cleared local entry template.\n"));
             // destroy local token
             authorize({ token: "" });
             console.log(chalk.green("[+] Successfully destroyed current session.\n"));

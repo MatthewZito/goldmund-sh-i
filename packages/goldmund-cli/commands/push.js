@@ -4,7 +4,7 @@ const { mountEphemeralDoc, readToken } = require("../utils/fs.js");
 const { pushEntry } = require("../utils/requests.js");
 
 /**
- * @description Command handler. Pushes the current entry template to server. If entry ID exists, the entry is of 
+ * @description Command handler. Pushes the current local entry template to server. If entry ID exists, the entry is of 
  * type update and is therefore sent to the PATCH endpoint. Else, the entry is new and is sent to the new entry endpoint.
  */
 const processEntry = async () => {
@@ -42,7 +42,7 @@ const processEntry = async () => {
 }
 
 exports.command = "push"
-exports.desc = "Push local tempfile to database"
+exports.desc = "Push local entry template to database"
 exports.handler = () => {
     processEntry();
 }
