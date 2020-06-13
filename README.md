@@ -1,4 +1,5 @@
 # Goldmund.sh - Automated Cluster
+[![Build Status](https://travis-ci.org/MatthewZito/goldmund-automated-cluster.svg?branch=master)](https://travis-ci.org/MatthewZito/goldmund-automated-cluster)
 ```
 Author: Matthew T Zito (goldmund)
 License: MIT
