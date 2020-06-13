@@ -18,7 +18,7 @@ const SidebarNavigator = (props) => {
               <span className="icon-bar"></span>
             </button>
             <Link href="/">
-                <a className="navbar-brand">Lexicon II</a>
+                <a className="navbar-brand">./goldmund.sh</a>
             </Link>
         </div>
         <div>
