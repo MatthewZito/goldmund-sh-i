@@ -1,4 +1,4 @@
-#### Batch Processing Unit (DPS) 
+## Mocking a Batch Processor to Optimize MongoDB Performance
 *implementing infinite scrolling without expensive database calls*
 
 Per the MongoDB docs:
