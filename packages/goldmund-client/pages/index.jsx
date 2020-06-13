@@ -112,7 +112,6 @@ class Vestibule extends React.Component {
                                 <InfiniteScroll
                                     dataLength={entries.length}
                                     next={this.fetchNextBatch}
-                                    loader={<p>Loading...</p>}
                                     hasMore={lastProcessedID}
                                     style={{ overflow: "unset" }}
                                     >
@@ -120,8 +119,7 @@ class Vestibule extends React.Component {
                                         display: "grid",
                                         gridTemplateColumns: "repeat( auto-fill, minmax(200px, 1fr) )",
                                         gridAutoRows: "15fr",
-                                        gridGap: "2em",
-                                        
+                                        gridGap: "2em"
                                     }}> 
                                         {entries && entries.map(({_id, ...data}) => (
                                             <EntryThumbnail key={_id} {...data} />

@@ -45,7 +45,7 @@ class Communications extends React.Component {
                 Router.push("/"); // TODO change to form success
               }
         } catch(err) {
-            alert("[-] Form submission failed. Please report this issue to the administrator at exbotanical at gmail dot com.");
+            alert("[-] Form submission failed. Please report this issue to the administrator at goldmund.regler (gmail).");
             Router.push("/"); // TODO change to err
         }
     }
