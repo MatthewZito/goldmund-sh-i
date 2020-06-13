@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A console-oriented service for localized web administration",
   "bin": {
-    "goldmund": "./app.js"
+    "goldmund": "app.js"
   },
   "preferGlobal": true,
   "main": "app.js",

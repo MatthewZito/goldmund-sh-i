@@ -27,7 +27,7 @@ In the latter scenario, the CLI determines the template signifies a new entry gi
 It should also be noted that calling `goldmund deauth` will reset the entry template, wiping *all* values, as well as the ID key/value pair (if extant).
 
 ## <a name="install"></a> Installation
-First, establish `.env` variables as needed.
+First, establish `.env` variables as needed. Then,
 ```
 npm install
 npm link
