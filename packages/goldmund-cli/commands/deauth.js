@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { authorize, readToken, persist } = require("../utils/fs.js");
+const { authorize, readToken, depopulate } = require("../utils/fs.js");
 const { logout } = require("../utils/requests.js");
 
 /**
  * @description Command handler. Nullifies session on issuing authority and destroys local artifact thereof.
+ *   Resets the entry template to defaults.
  */
 const destroyAuth = async () => {
     try {
@@ -18,13 +19,7 @@ const destroyAuth = async () => {
             throw new Error("[-] Unable to destroy local session.\n");
         }
         else {
-            let ephemeralEntryTemplate = {}
-            const fields = [ "deleted", "tags", "title", "subtitle", "imgsrc", "content"]
-            fields.forEach(field => 
-                field === "tags" ? ephemeralEntryTemplate[field] = [] : ephemeralEntryTemplate[field] = ""
-                );
-            // depopulate local tempfile
-            persist(ephemeralEntryTemplate);
+            depopulate();
             console.log(chalk.green("[+] Successfully cleared entry template.\n"));
             // destroy local token
             authorize({ token: "" });

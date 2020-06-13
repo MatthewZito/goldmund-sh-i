@@ -12,3 +12,4 @@
 lerna-debug.log
 docker-compose.ymld
 k8s.env
+test.js

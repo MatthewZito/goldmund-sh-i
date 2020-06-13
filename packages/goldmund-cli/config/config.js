@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-require("dotenv").config();
+require("dotenv").config({ path: `${__dirname}/../.env` });
 module.exports = {
-    localStore: "tmp/ephemera.json",
-    sessionStore: "tmp/session.json",
+    localStore: `${__dirname}/../tmp/ephemera.json`,
+    sessionStore: `${__dirname}/../tmp/session.json`,
     basePath: process.env.DPS_BASE_URL,
     email: process.env.CLI_EMAIL,
     password: process.env.CLI_PASSWORD

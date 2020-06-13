@@ -54,10 +54,22 @@ const mountEphemeralDoc = () => {
         console.log(chalk.red(`[-] A critical error occurred during mounting. See: ${err}\n`));
     }
 }
+/**
+ * @description Depopulate local tempfile.
+ */
+const depopulate = () => {
+    let ephemeralEntryTemplate = {}
+    const fields = [ "deleted", "tags", "title", "subtitle", "imgsrc", "content"]
+    fields.forEach(field => 
+        field === "tags" ? ephemeralEntryTemplate[field] = [] : ephemeralEntryTemplate[field] = ""
+        );
+    persist(ephemeralEntryTemplate);
+}
 
 module.exports = {
     authorize,
     persist,
     readToken,
-    mountEphemeralDoc
+    mountEphemeralDoc,
+    depopulate
 }
