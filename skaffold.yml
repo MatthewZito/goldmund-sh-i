@@ -1,0 +1,33 @@
+apiVersion: skaffold/v2alpha1
+kind: Config
+build:
+    local:
+        push: false
+    artifacts:
+        - image: exbotanical/goldmund-api
+          context: packages/goldmund-api
+          docker:
+            dockerfile: Dockerfile.dev
+          sync:
+            infer:
+                - '**/*.js'
+        - image: exbotanical/goldmund-client
+          context: packages/goldmund-client
+          docker:
+            dockerfile: Dockerfile.dev
+          sync:
+            infer:
+                - '**/*.js'
+                - '**/*.jsx'
+                - '**/*.css'
+                - '**/*.html'
+deploy:
+    kubectl:
+        manifests:
+            - dev-ingress-service.yml
+            - kubernetes/redis-deployment.yml
+            - kubernetes/redis-service.yml
+            - kubernetes/goldmund-api-deployment.yml
+            - kubernetes/goldmund-api-service.yml
+            - kubernetes/goldmund-client-deployment.yml
+            - kubernetes/goldmund-client-service.yml

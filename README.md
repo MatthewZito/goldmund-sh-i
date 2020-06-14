@@ -44,6 +44,10 @@ Packages:
 
 ![demo](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/preliminary-architecture.png)
 
+Local development is greatly aided by Skaffold. In order to run local dev instance,
+1. Register ledger secret object 
+2. `skaffold dev`
+
 More information:
   - [Testing and Auditing](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/testing.md)
   - [Micro Batch-Processor](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/batch-processing.md)
