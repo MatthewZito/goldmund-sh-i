@@ -2,7 +2,7 @@
   "name": "goldmund-api",
   "version": "1.0.0",
   "description": "A remote data processing micro-service and API",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
