@@ -6,6 +6,10 @@ const yargs = require("yargs")
 
 const argv = yargs
   .commandDir("commands")
+  .completion()
   .demandCommand(1, "[-] You must specify a command.")
-  .help().argv
+  .usage("\n☯ Goldmund CLI ☯\n\nUsage: $0 <command> [options]")
+  .help().alias("help", "h")
+  .version("version", "0.1.0").alias("version", "V")
+  .epilog("☯ Created by M Zito ☯").argv
   

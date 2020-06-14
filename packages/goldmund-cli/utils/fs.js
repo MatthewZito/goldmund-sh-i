@@ -56,6 +56,7 @@ const mountEphemeralDoc = () => {
         console.log(chalk.red(`[-] A critical error occurred during mounting. See: ${err}\n`));
     }
 }
+
 /**
  * @description Depopulate local entry template and reset to defaults.
  * 
@@ -74,11 +75,16 @@ const depopulate = () => {
  *     Currently supports: osx; this operation is blocking.
  *     Command defaults to launch local entry template in given editor.
  * @param {String} cmd Command to be executed in detached shell's child process.
+ * Note: other env incl Apple_Terminal
  */
 const spawnDisparateShell = (cmd=`${editor} ${localStore}`) => {
     if (os.platform() !== "darwin") {
-        return console.log(chalk.red("[-] Your operating system does not support this Feature.\n"));
+        return console.log(chalk.red("[-] Your operating system does not support this feature.\n"));
     }
+    if (process.env.TERM_PROGRAM === "vscode") {
+        return console.log(chalk.red("[-] Your current environment does not support this feature.\n"));
+    }
+    console.log(chalk.green("[+] Launching editor...\n"));
     const command = [
         `osascript -e 'tell application "Terminal" to activate'`, 
         `-e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down'`, 
@@ -98,11 +104,30 @@ const spawnDisparateShell = (cmd=`${editor} ${localStore}`) => {
     })
 }
 
+/**
+ * @description Stream contents of given file into local template file content field.
+ * @param {String} file File from which to read contents.
+ * Note: Temporarily configured to utilize hardcoded default. 
+ */
+const streamInputFileToEphemeralDoc = (file=`${__dirname}/../tmp/markdown_template.md`) => {
+    try {
+        console.log(chalk.green(`[+] Streaming contents of markdown template into local template file...`));
+        const entry = mountEphemeralDoc();
+        const buffer = fs.readFileSync(file,"utf8");
+        entry.content = buffer
+        persist(entry);
+    }
+    catch (err) {
+        console.log(chalk.red(`[-] A critical error occurred during streaming. See: ${err}\n`));
+    }
+}
+
 module.exports = {
     authorize,
     persist,
     readToken,
     mountEphemeralDoc,
     depopulate,
-    spawnDisparateShell
+    spawnDisparateShell,
+    streamInputFileToEphemeralDoc
 }

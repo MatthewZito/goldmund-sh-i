@@ -10,6 +10,9 @@ const { pushEntry } = require("../utils/requests.js");
 const processEntry = async () => {
     try {
         const ephemeralEntry = mountEphemeralDoc();
+        if (Object.values(ephemeralEntry).filter(item => item === "").length > 0) {
+            throw new Error("[-] Insufficient data; all default fields must be normalized prior to entry processing.\n");
+        }
         const { token } = readToken();
         if (!token) {
             throw new Error("[-] You must first authenticate.\n");

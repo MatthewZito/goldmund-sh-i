@@ -12,7 +12,6 @@ Encoding: UTF-8
     * [Demos](#demo)
  - [Installation](#install) 
  - [Usage](#usage) 
- - [Development Notes](#notes)
 
 ## <a name="intro"></a> Introduction
 The `goldmund-cli` package is a CLI for local web administration and sessions-handling. It can be best understood as a light-weight, headless CMS.
@@ -37,6 +36,12 @@ npm install
 npm link
 ```
 
+To enable auto-completion, generate a bash completion script with `goldmund completion` and redirect stdout into your bash profile, a la:
+```
+goldmund completion >> ~/.bashrc # linux
+goldmund completion >> ~/.bash_profile #osx
+```
+
 ## <a name="usage"></a> Usage
 
 Authorize a new session:
@@ -53,6 +58,10 @@ Spawn new entry template in separate editor window:
 ```
 goldmund touch
 ```
+Stream markdown template into new entry template, spawn in separate editor window:
+```
+goldmund touch --stream
+```
 
 Push local entry template to API
 ```
@@ -68,11 +77,3 @@ Destroy session/clean-up:
 ```
 goldmund deauth
 ```
-
-#### <a name="notes"></a> Development Notes
-
-3 June 2020 - Tested the CLI with a production docker-compose configuration and it works splendidly. The CLI's Spartan architecture lends to speed and processing capabilities which render the administrative process *far* more user-friendly and intuitive. All methods are working.
-
-13 June 2020 - Now that [link](goldmund.sh) is live, the CLI has been tested and found to be operating sufficiently.
-
-Soon, the CLI will be launched on a server and utilized as a wholly remote console-oriented service via web sockets.
