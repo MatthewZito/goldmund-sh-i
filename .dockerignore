@@ -1,9 +1,0 @@
-.gitignore
-.env
-packages/*/node_modules
-node_modules
-**/.DS_Store
-.git
-.DS_Store
-
-
