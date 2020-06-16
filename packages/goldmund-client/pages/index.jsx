@@ -18,7 +18,7 @@ class Vestibule extends React.Component {
         this.state = { search: "", entries: this.props.entries, lastProcessedID: this.props.lastProcessedID, error: this.props.error };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.fetchNextBatch = this.fetchNextBatch.bind(this);
+        // this.fetchNextBatch = this.fetchNextBatch.bind(this);
     }
 
     handleChange(event) {
@@ -37,26 +37,27 @@ class Vestibule extends React.Component {
         Router.push("/error", `/?search=${search}`);
     }
 
-    async fetchNextBatch(query=this.state.search) {
-        try {
-            let response = await axios({
-                method: "get",
-                url: `${DPS_URI}/entries/`,
-                params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
-            });
-            if (response.status !== 200) {
-                this.setState({ error: true })
-            }
-            else {
-                const { entries, lastProcessedID } = response.data
-                this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
-            }
-        } catch (err) {
-            return {
-                error: true
-            }
-        }
-    }
+
+    // async fetchNextBatch(query=this.state.search) {
+    //     try {
+    //         let response = await axios({
+    //             method: "get",
+    //             url: `${DPS_URI}/entries/`,
+    //             params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
+    //         });
+    //         if (response.status !== 200) {
+    //             this.setState({ error: true })
+    //         }
+    //         else {
+    //             const { entries, lastProcessedID } = response.data
+    //             this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
+    //         }
+    //     } catch (err) {
+    //         return {
+    //             error: true
+    //         }
+    //     }
+    // }
 
     static async getInitialProps({ query }) {
         try {
@@ -85,6 +86,13 @@ class Vestibule extends React.Component {
             }
         }
     }
+    componentDidMount() {
+        const script = document.createElement("script");
+        script.src = "/static/masonry.js";
+        script.async = true;
+        script.onload = () => document.addEventListener("DOMContentLoaded", initializeMasonryConstruct());
+        document.body.appendChild(script);
+    }
 
     render() {
         const { error, entries, lastProcessedID } = this.state
@@ -104,29 +112,18 @@ class Vestibule extends React.Component {
                         <main id="main-collapse">
                             <div className="search-outer" >
                                 <form onSubmit={this.handleSubmit} className="search-form">
-                                    <input type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange}  />
-                                    <i className="fa fa-search" aria-hidden="true" />
+                                    <input type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange} autoComplete="off" />
                                 </form>
                             </div>
-                        <div className="hero-full-wrapper" style={{ maxWidth: "1150px"}} >
-                                <InfiniteScroll
-                                    dataLength={entries.length}
-                                    next={this.fetchNextBatch}
-                                    hasMore={lastProcessedID}
-                                    style={{ overflow: "unset" }}
-                                    >
-                                    <div className="grid" style={{ 
-                                        display: "grid",
-                                        gridTemplateColumns: "repeat( auto-fill, minmax(200px, 1fr) )",
-                                        gridAutoRows: "15fr",
-                                        gridGap: "2em"
-                                    }}> 
-                                        {entries && entries.map(({_id, ...data}) => (
-                                            <EntryThumbnail key={_id} {...data} />
-                                        ))
-                                        }
-                                    </div>
-                                </InfiniteScroll>
+                            <div className="hero-full-wrapper">
+                                <div className="grid" >
+                                <div className="gutter-sizer"></div>
+                                <div className="grid-sizer"></div> 
+                                    {entries && entries.map(({_id, ...data}) => (
+                                        <EntryThumbnail key={_id} {...data} />
+                                    ))
+                                    }
+                                </div>
                             </div>
                         </main>
                     </div>

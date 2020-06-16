@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const EntryThumbnail = (props) => {
     return (
-        <div key={props._id} className="grid-item" style={{display:"flex"}}>
+        <div key={props._id} className="grid-item" >
             <img className="img-responsive" alt="blog entry thumbnail" src={props.imgsrc} />
             <Link href="/entries/[slug]" as={`/entries/${props.slug}`}>
                 <a className="project-description">

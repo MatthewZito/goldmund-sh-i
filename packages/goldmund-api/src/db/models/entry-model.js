@@ -69,9 +69,10 @@ EntrySchema.query.findByTag = async function(tag, lastProcessedID) {
  * @returns All matched entries (even if no res).
  * @summary Light-weight batch processor.
  * @description Batch process documents by numReturnedDocs per page, as delimited by `lastProcessedID`. 
+ * NOTE: Conceptually deprecated for now; functionally applied, but default to return all documents (eg 100).
  */
 EntrySchema.query.processBatch = async function(lastProcessedID=undefined) {
-    const numReturnedDocs = 20
+    const numReturnedDocs = 100
     // first page
     if (!lastProcessedID) {
         let entries = await this.find().sort({ createdAt: "desc"}).limit(numReturnedDocs);
