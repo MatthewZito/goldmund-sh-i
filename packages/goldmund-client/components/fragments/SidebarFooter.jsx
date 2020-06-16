@@ -7,7 +7,7 @@ const SidebarFooter = () => {
                 <a className="fa-icon" target="_blank" href="https://www.instagram.com/magister_zito" title="">
                     <i className="fab fa-instagram" aria-hidden="true"></i>
                 </a>
-                <a className="fa-icon" target="_blank" href="https://www.youtube.com/channel/UCg3SBNPF1QyMeL-GtrKkvRQ/about?view_as=public" title="">
+                <a className="fa-icon" target="_blank" href="https://www.youtube.com/user/fasolplanetarium/videos" title="">
                     <i className="fab fa-youtube" aria-hidden="true"></i>
                 </a>
                 <a className="fa-icon" target="_blank" href="https://github.com/MatthewZito" title="">
