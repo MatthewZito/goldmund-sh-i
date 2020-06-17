@@ -3,8 +3,8 @@ const helmet = require('helmet')
 const cors = require('cors');
 const morgan = require("morgan");
 const { winstonRotations } = require("./services/winston-rotation.js");
-const { setXClacksHeader } = require("./middleware/x-clacks-overhead.js");
-const { setXPoweredByHeader } = require("./middleware/x-powered-by.js");
+const setXClacksHeader = require("./middleware/x-clacks-overhead.js");
+const setXPoweredByHeader = require("./middleware/x-powered-by.js");
 
 /* Configurations */
 require("./db/mongoose.js");
