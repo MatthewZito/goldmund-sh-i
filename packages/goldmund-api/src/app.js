@@ -3,6 +3,8 @@ const helmet = require('helmet')
 const cors = require('cors');
 const morgan = require("morgan");
 const { winstonRotations } = require("./services/winston-rotation.js");
+const { setXClacksHeader } = require("./middleware/x-clacks-overhead.js");
+const { setXPoweredByHeader } = require("./middleware/x-powered-by.js");
 
 /* Configurations */
 require("./db/mongoose.js");
@@ -14,9 +16,10 @@ const app = express();
 const port = process.env.PORT || 5000
 
 /* Utils */
-const randomHeaders = ["PHP/5.4.45","PHP/5.5.9-1ubuntu4.7", "PleskLin", "PHP/5.3.29", "ASP.NET", "PHP/5.4.39-0+deb7u2", "ZendServer 8.5.0,ASP.NET"]
+
 app.use(helmet.frameguard({action: 'deny'}));
-app.use(helmet.hidePoweredBy({ setTo: randomHeaders[Math.floor(Math.random() * randomHeaders.length)] }));
+app.use(setXClacksHeader);
+app.use(setXPoweredByHeader);
 // TODO Implement Fisher-Yates Algorithm fun
 // const sixtyDaysInSeconds = 5184000
 // app.use(helmet.hsts({

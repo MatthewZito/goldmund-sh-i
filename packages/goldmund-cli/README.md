@@ -97,3 +97,8 @@ Destroy session/clean-up:
 ```
 goldmund deauth
 ```
+
+Initialize worker for automated CDN resource creation:
+```
+goldmund cdn
+```
