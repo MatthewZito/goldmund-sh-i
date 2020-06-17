@@ -24,8 +24,7 @@
     "next": "^9.4.0",
     "next-images": "^1.4.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-infinite-scroll-component": "^5.0.4"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",

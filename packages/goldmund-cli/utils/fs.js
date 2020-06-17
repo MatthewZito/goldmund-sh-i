@@ -59,7 +59,6 @@ const mountEphemeralDoc = () => {
 
 /**
  * @description Depopulate local entry template and reset to defaults.
- * 
  */
 const depopulate = () => {
     let ephemeralEntryTemplate = {}
@@ -74,21 +73,22 @@ const depopulate = () => {
  * @description Spawn a new shell instance and execute given command.
  *     Currently supports: osx; this operation is blocking.
  *     Command defaults to launch local entry template in given editor.
- * @param {String} cmd Command to be executed in detached shell's child process.
+ * @param {String} processCommand Command to be executed in detached shell's child process.
  * Note: other env incl Apple_Terminal
  */
-const spawnDisparateShell = (cmd=`${editor} ${localStore}`) => {
+const spawnDisparateShell = (executable=editor, rawCommand=localStore) => {
+    let processCommand = `${executable} ${rawCommand}`
     if (os.platform() !== "darwin") {
         return console.log(chalk.red("[-] Your operating system does not support this feature.\n"));
     }
     if (process.env.TERM_PROGRAM === "vscode") {
         return console.log(chalk.red("[-] Your current environment does not support this feature.\n"));
     }
-    console.log(chalk.green("[+] Launching editor...\n"));
+    console.log(chalk.green(`[+] ${executable === "node" ? "Initializing server" : "Launching editor"}...\n`));
     const command = [
         `osascript -e 'tell application "Terminal" to activate'`, 
         `-e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down'`, 
-        `-e 'tell application "Terminal" to do script "${cmd}" in selected tab of the front window'`
+        `-e 'tell application "Terminal" to do script "${processCommand}" in selected tab of the front window'`
     ].join(" ");
     
     const childProcess = exec(command, (err, stdout, stderr) => {

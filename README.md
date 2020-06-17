@@ -19,7 +19,7 @@ This is a personal web application intended as an auto-didactic tool for perfect
 Packages:
  - [`goldmund-api`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-api) - persistent data processing service and REST API
  - [`goldmund-client`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-client) - isomorphic server - hybrid SSG + server-side rendering at runtime
- - [`goldmund-cli`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-cli) - CLI and headless CMS for managing sessions and content
+ - [`goldmund-cli`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-cli) - command-line utility for managing sessions, `goldmund-api` database content, and CDN uploads/eager transformations
  - [`goldmund-server`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-server) - a mock ingress for proxying Docker Engine namespace
 
  To deploy:
@@ -32,7 +32,7 @@ Packages:
   - Reactjs components: code-splitting, lazy loading, and dynamic imports
   - infinite scrolling coordinated via batch processing on the backend (maintains consistent processing power requirements regardless of dataset size)
   - blazin' fast sessions caching with Redis
-  - localized sessions management and headless CMS via `goldmund-cli`
+  - localized sessions, database, and CDN management via `goldmund-cli` command-line utility
   - fully automated container-to-cloud CI/CD pipeline
   - local development automated w/Docker Compose
   - automated production deployments w/ Helm + Kubernetes

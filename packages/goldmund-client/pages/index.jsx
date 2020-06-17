@@ -2,7 +2,6 @@ import React from "react";
 import Router from "next/router";
 import getConfig from 'next/config';
 import axios from "axios";
-import InfiniteScroll from 'react-infinite-scroll-component';
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import EntryThumbnail from "../components/fragments/EntryThumbnail.jsx";
 import ErrorBoundary from "../components/fragments/ErrorBoundary.jsx";
