@@ -35,7 +35,7 @@ export default function Entry(props) {
                                     <hr />
                                     <div dangerouslySetInnerHTML={{__html: data.sanitizedHTML}}></div>
                                     <hr />
-                                    <p><em>{dateFooter}</em></p>
+                                    <p className="img-caption">{dateFooter}</p>
                                 </div>
                             </div>
                         </div>

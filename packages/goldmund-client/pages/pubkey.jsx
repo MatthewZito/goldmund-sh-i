@@ -1,14 +1,28 @@
 import SidebarNavigator from "../components/navigation/SidebarNavigator.jsx";
 import Meta from "../components/wrappers/Meta.jsx";
+import Tooltip from "../components/fragments/Tooltip.jsx";
 
 const PublicKey = () => {
+
+    function copyToClipboard(e) {
+        let valueToPersist = document.getElementById("pub-key").innerText
+        let ephemeralInputElement = document.createElement("input");
+        document.body.appendChild(ephemeralInputElement);
+        ephemeralInputElement.value = valueToPersist;
+        ephemeralInputElement.select();
+        document.execCommand("copy", false);
+        ephemeralInputElement.remove();
+        alert("[+] The public key has been copied to your clipboard.");
+    };
+
     return (
         <>
             <Meta />
             <div>
                 <SidebarNavigator name="$ gpg --import"/>
                 <main id="main-collapse">
-                    <pre style={{width: "min-content", whiteSpace: "normal", wordBreak: "normal"}}>
+                <Tooltip message="Click anywhere on the public key to copy to clipboard" position={"left"}>
+                    <pre onClick={copyToClipboard} id="pub-key" style={{width: "min-content", whiteSpace: "normal", wordBreak: "normal"}}>
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQINBF5oVmMBEADLwX2+YXgEp6srdrYc26yiEmUmD/NJJnwC4oBRMVgXNZ8zjXj9
@@ -62,6 +76,9 @@ JEfIEYA9BrzI/jp1
 =5FGM
 -----END PGP PUBLIC KEY BLOCK-----
                 </pre>
+                </Tooltip>
+                <div>
+        </div>
             </main>
         </div>
     </>
