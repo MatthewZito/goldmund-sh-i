@@ -60,6 +60,7 @@ More information:
 
  - analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
  - optimize for mobile, where needed ([see: why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
+ - styled components
  
 #### <a name="about"> Note to visitors
 
