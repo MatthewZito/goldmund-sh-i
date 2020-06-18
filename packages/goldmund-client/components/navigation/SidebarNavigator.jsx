@@ -2,7 +2,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import SidebarFooter from "../fragments/SidebarFooter.jsx";
-import svglogo from "../../static/assets/main-logo.svg";
 
 // wrap new entry route in admin
 const SidebarNavigator = (props) => {
@@ -25,7 +24,7 @@ const SidebarNavigator = (props) => {
             <nav className={`sidebar ${toggled ? "open" : ""}`}>
                 <div className="navbar-collapse" id="navbar-collapse">
                     <div className="site-header hidden-xs">
-                    <img className="img-responsive site-logo" alt="site logo" src={svglogo} />
+                    <img className="img-responsive site-logo" alt="site logo" src="/assets/main-logo.svg" />
                     <Link href="/"><a className="site-brand">{props.name}</a></Link>
                         {(router.pathname === "/") && (
                         <p>A collection of essays and writings.</p>

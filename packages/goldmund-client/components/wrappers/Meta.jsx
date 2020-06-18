@@ -24,7 +24,7 @@ const Meta = (props) => {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="description" content={content} />
             <meta name="msapplication-tap-highlight" content="no" />
-            <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
+            <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
             <title>Goldmund.sh | {path} </title>
         </Head>
     )

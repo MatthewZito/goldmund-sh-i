@@ -7,7 +7,7 @@ const ErrorBoundary = (props) => {
         <>
             <SidebarNavigator name="$pwd" />
             <main id="main-collapse">
-                <img alt="error boundary image" src="/static/assets/sadmac.jpeg" />
+                <img alt="error boundary image" src="/assets/sadmac.jpeg" />
                 <div>{props.reason}</div>
                 <Link href="/communications"><span>Please <a style={{cursor: "pointer"}}>report this event</a> to the webmaster.</span></Link>
             </main>

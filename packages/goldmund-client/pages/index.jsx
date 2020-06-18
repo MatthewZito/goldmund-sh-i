@@ -14,11 +14,19 @@ const DPS_URI = serverRuntimeConfig.URI || publicRuntimeConfig.URI;
 class Vestibule extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { search: "", entries: this.props.entries, lastProcessedID: this.props.lastProcessedID, error: this.props.error };
+        this.state = { isPopoverOpen:false, search: "", entries: this.props.entries, lastProcessedID: this.props.lastProcessedID, error: this.props.error };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.focusTextInput = this.focusTextInput.bind(this);
         // this.fetchNextBatch = this.fetchNextBatch.bind(this);
+        this.textInput = React.createRef();
+        
+
     }
+
+    focusTextInput() {
+        this.textInput.current.focus();
+      }
 
     handleChange(event) {
         const target = event.target;
@@ -28,35 +36,17 @@ class Vestibule extends React.Component {
     }
 
     async handleSubmit(event) {
-        event.preventDefault();
         let { search } = this.state
-        // weird workaround, probably because router.push only works on client and not server
-        // unless it's a hot-reloading issue only present in dev
-        // we shall see. nevertheless, file this as a TODO: ensure works in prod
+        /* Unfortunate workaround for a known Nextjs bug
+         June 2020: Zeit still hasn't addressed this bug */
         Router.push("/error", `/?search=${search}`);
     }
 
-
-    // async fetchNextBatch(query=this.state.search) {
-    //     try {
-    //         let response = await axios({
-    //             method: "get",
-    //             url: `${DPS_URI}/entries/`,
-    //             params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
-    //         });
-    //         if (response.status !== 200) {
-    //             this.setState({ error: true })
-    //         }
-    //         else {
-    //             const { entries, lastProcessedID } = response.data
-    //             this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
-    //         }
-    //     } catch (err) {
-    //         return {
-    //             error: true
-    //         }
-    //     }
-    // }
+    onKeyPress = (event) => {
+        if(event.which === 13) {
+          this.handleSubmit();
+        }
+      }
 
     static async getInitialProps({ query }) {
         try {
@@ -87,12 +77,12 @@ class Vestibule extends React.Component {
     }
     componentDidMount() {
         const script = document.createElement("script");
-        script.src = "/static/masonry.js";
+        script.src = "/js/masonry.js";
         script.async = true;
         script.onload = () => document.addEventListener("DOMContentLoaded", initializeMasonryConstruct());
         document.body.appendChild(script);
     }
-
+    
     render() {
         const { error, entries, lastProcessedID } = this.state
         if (error) {
@@ -109,11 +99,13 @@ class Vestibule extends React.Component {
                     <div>
                         <SidebarNavigator name="$ pwd" />
                         <main id="main-collapse">
-                            <div className="search-outer" >
-                                <form onSubmit={this.handleSubmit} className="search-form">
-                                    <input type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange} autoComplete="off" />
-                                </form>
-                            </div>
+                                <div className="goldmundfb fab">
+                                    <input ref={this.textInput}  type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange} onKeyPress={this.onKeyPress} autoComplete="off" />
+                                        <button onClick={this.focusTextInput} type="push" className="goldmundfb-button button-search">
+                                            <i className="fa fa-search"></i>
+                                        </button>
+                                        <button type="reset" form="form" className="goldmundfb-button button-reset fa fa-times"></button>
+                                </div>
                             <div className="hero-full-wrapper">
                                 <div className="grid" >
                                 <div className="gutter-sizer"></div>
@@ -131,5 +123,25 @@ class Vestibule extends React.Component {
         }
     }
 }
-
 export default Vestibule;
+
+// async fetchNextBatch(query=this.state.search) {
+//     try {
+//         let response = await axios({
+//             method: "get",
+//             url: `${DPS_URI}/entries/`,
+//             params: { search: query ? query.search : undefined, lastProcessedID: this.state.lastProcessedID }
+//         });
+//         if (response.status !== 200) {
+//             this.setState({ error: true })
+//         }
+//         else {
+//             const { entries, lastProcessedID } = response.data
+//             this.setState({ entries: this.state.entries.concat(entries), lastProcessedID: lastProcessedID });
+//         }
+//     } catch (err) {
+//         return {
+//             error: true
+//         }
+//     }
+// }
