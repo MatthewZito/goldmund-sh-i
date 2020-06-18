@@ -24,10 +24,14 @@ const SidebarNavigator = (props) => {
             <nav className={`sidebar ${toggled ? "open" : ""}`}>
                 <div className="navbar-collapse" id="navbar-collapse">
                     <div className="site-header hidden-xs">
-                    <img className="img-responsive site-logo" alt="site logo" src="/assets/main-logo.svg" />
-                    <Link href="/"><a className="site-brand">{props.name}</a></Link>
+                        <Link href="/">
+                            <a className="site-brand">
+                                <img className="img-responsive site-logo" alt="site logo" src="/assets/main-logo.svg" />
+                                {props.name}
+                            </a>
+                        </Link>
                         {(router.pathname === "/") && (
-                        <p>A collection of essays and writings.</p>
+                            <p style={{color:"#555"}} >An archive of visual and literary media</p>
                         )}
                     </div>
                     <ul className="nav">

@@ -57,15 +57,19 @@ class Communications extends React.Component {
                 <div>
                     <SidebarNavigator name="$ ping"/>
                     <main id="main-collapse">
-                        <div style={{maxWidth: "750px"}}>
+                        <div className="row">
+                        <div class="col-xs-12">
                             <div className="section-container-spacer">
                                 <h1>Communications</h1>
-                                <p>Should you wish to communicate, this is the best means to do so. PGP correspondence is welcome and even encouraged.
-                                    To this end, find below my self-signed GPG public key and accompanying fingerprint for validation.
-                                </p>
+                               
                             </div>
                             <div className="section-container-spacer">
+                            
                                 <form onSubmit={this.handleSubmit} className="reveal-content">
+                                <div className="row">
+                                <div className="col-md-6">
+                                <p>Should you wish to communicate, this is the best means to do so. PGP correspondence is welcome and even encouraged.
+                                To this end, find below my self-signed GPG public key and accompanying fingerprint for validation.</p>
                                     <div className="form-group">
                                         <label htmlFor="email">Email</label>
                                         <input required type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" />
@@ -86,9 +90,8 @@ class Communications extends React.Component {
                                             placeholder="Enter your message">
                                         </textarea>
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Send</button>
-                                </form>
-                                <div className="row" style={{marginTop: "20px"}}>
+                                    <button type="submit" className="btn btn-primary btn-lg">Send</button>
+                                    </div>
                                     <div className="col-md-6" style={{marginLeft: "-15px"}}>
                                         <ul className="list-unstyled address-container">
                                             <li>
@@ -106,6 +109,9 @@ class Communications extends React.Component {
                                         </ul>
                                     </div>
                                 </div>
+                                </form>
+                                </div>
+                                
                             </div>
                         </div>
                     </main>
