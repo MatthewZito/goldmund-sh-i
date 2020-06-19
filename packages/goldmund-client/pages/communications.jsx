@@ -82,7 +82,8 @@ class Communications extends React.Component {
                                         <label htmlFor="content">Message</label>
                                         <textarea 
                                             required type="text" 
-                                            name="content" 
+                                            name="content"
+                                            id="content"
                                             value={this.state.content} 
                                             onChange={this.handleChange} 
                                             className="form-control" 
