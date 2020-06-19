@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { authorize, readToken, depopulate } = require("../utils/fs.js");
+const { persist, readTemplateData, depopulate } = require("../utils/fs.js");
 const { logout } = require("../utils/requests.js");
+const { sessionTemplate } = require("../config/config.js");
 
 /**
  * @description Command handler. Nullifies session on issuing authority and destroys local artifact thereof.
- *   Resets the local entry template to defaults.
+ *   Resets the entry template to defaults.
  */
 const destroyAuth = async () => {
     try {
-        const { token } = readToken();
+        const { token } = readTemplateData(sessionTemplate);
         if (!token || token === "") {
             throw new Error("[-] Unable to find local session.\n");
             
@@ -20,9 +21,9 @@ const destroyAuth = async () => {
         }
         else {
             depopulate();
-            console.log(chalk.green("[+] Successfully cleared local entry template.\n"));
+            console.log(chalk.green("[+] Successfully cleared entry template.\n"));
             // destroy local token
-            authorize({ token: "" });
+            persist({ token: "" }, sessionTemplate);
             console.log(chalk.green("[+] Successfully destroyed current session.\n"));
         }
     } catch(err) {

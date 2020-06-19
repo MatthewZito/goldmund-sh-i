@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { authorize } = require("../utils/fs.js");
+const { persist } = require("../utils/fs.js");
 const { login } = require("../utils/requests.js");
+const { sessionTemplate } = require("../config/config.js");
 
 /**
  * @description Command handler. Automate login process and persist resulting session token locally.
@@ -16,7 +17,7 @@ const establishAuth = async () => {
             throw new Error("[-] An error occurred during token generation.\n");
         }
         else {
-            authorize({ token: token.token });
+            persist({ token: token.token }, sessionTemplate);
             console.log(chalk.green("[+] Successfully authenticated; new session established.\n"));
         }
     } catch(err) {

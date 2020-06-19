@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
 const { depopulate, spawnDisparateShell, streamInputFileToEphemeralDoc } = require("../utils/fs.js");
+const { entryTemplate } = require("../config/config.js");
 
 /**
  * @description Command handler. Launch detached editor from which to update 
- *   depopulated local entry template.
+ *   depopulated entry template.
  */
-const touch = async (file) => {
+const touch = async (options) => {
     try {
         depopulate();
-        if (file) {
+        if (options) {
             streamInputFileToEphemeralDoc();
         }
-        spawnDisparateShell();
+        spawnDisparateShell(undefined, entryTemplate);
     } catch(err) {
         console.log(chalk.red(err));
     }
@@ -27,5 +28,5 @@ exports.builder = {
     },
 }
 exports.handler = (argv) => {
-    touch(argv.file);
+    touch(argv.stream);
 }
