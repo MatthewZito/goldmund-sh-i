@@ -44,6 +44,8 @@ Packages:
 
 ![demo](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/preliminary-architecture.png)
 
+[Usage demo of `goldmund-cli`, basic commands](https://streamable.com/n2jqqc)
+
 Local development is greatly aided by Skaffold. In order to run local dev instance,
 1. Register ledger secret object 
 2. `skaffold dev`
