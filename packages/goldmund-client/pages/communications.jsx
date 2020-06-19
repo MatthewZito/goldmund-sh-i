@@ -90,7 +90,7 @@ class Communications extends React.Component {
                                             placeholder="Enter your message">
                                         </textarea>
                                     </div>
-                                    <button type="submit" className="btn btn-primary btn-lg">Send</button>
+                                    <button aria-label="submit form" type="submit" className="btn btn-primary btn-lg">Send</button>
                                     </div>
                                     <div className="col-md-6" style={{marginLeft: "-15px"}}>
                                         <ul className="list-unstyled address-container">

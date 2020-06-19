@@ -69,7 +69,7 @@ const Information = () => {
                                         <li>The entire application has been open-sourced, utilizing polymorphic and otherwise self-modifying code to instantiate the semiotic environment <em>i.e. the specific data such as blog entries.</em> Kubectl applies constants via a Secret object; these values are interpolated into the base images' source-code. Hypothetically,
                                         I might replicate the actual cluster and therein respectively instantiate different semiotic scopes e.g. three versions of <em>Goldmund.sh</em> contingent on locale&mdash;one dedicated to programming, the second to dogs, the third to music theory</li>
                                     </ul>
-                                    <p>To learn more about the <em>Goldmund.sh</em> v1 development process, system architecture, and the myriad nuances + easter eggs therein, visit its documentation <a target="_blank" href="https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation" title="github repository link for Goldmund.sh">here.</a></p>
+                                    <p>To learn more about the <em>Goldmund.sh</em> v1 development process, system architecture, and the myriad nuances + easter eggs therein, visit its documentation <a aria-label="github" rel="noreferrer" target="_blank" href="https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation" title="github repository link for Goldmund.sh">here.</a></p>
 
                                     <h3>Collated Literary and Visual Media | 2009 &ndash; Present</h3>
                                     <hr />
@@ -84,7 +84,7 @@ const Information = () => {
                             <hr />
                             <div>
                                 <Link href="/communications">
-                                    <button className="btn btn-primary">Communicate</button>
+                                    <button aria-label="link" className="btn btn-primary">Communicate</button>
                                 </Link>
                                 <button onClick={() => setTooLongDidntRead(!tooLongDidntRead) } className="btn btn-primary" style={{ marginLeft: "1rem" }}>{ tooLongDidntRead ? "Show more..." : "Show less..."}</button>
                             </div>
