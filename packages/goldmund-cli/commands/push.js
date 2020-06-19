@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { mountEphemeralDoc, readToken } = require("../utils/fs.js");
+const { readTemplateData } = require("../utils/fs.js");
 const { pushEntry } = require("../utils/requests.js");
+const { sessionTemplate, entryTemplate } = require("../config/config.js");
 
 /**
- * @description Command handler. Pushes the current local entry template to server. If entry ID exists, the entry is of 
+ * @description Command handler. Pushes the current entry template to server. If entry ID exists, the entry is of 
  * type update and is therefore sent to the PATCH endpoint. Else, the entry is new and is sent to the new entry endpoint.
  */
 const processEntry = async () => {
     try {
-        const ephemeralEntry = mountEphemeralDoc();
+        const ephemeralEntry = readTemplateData(entryTemplate);
         if (Object.values(ephemeralEntry).filter(item => item === "").length > 0) {
             throw new Error("[-] Insufficient data; all default fields must be normalized prior to entry processing.\n");
         }
-        const { token } = readToken();
+        const { token } = readTemplateData(sessionTemplate);
         if (!token) {
             throw new Error("[-] You must first authenticate.\n");
         }
@@ -45,7 +46,7 @@ const processEntry = async () => {
 }
 
 exports.command = "push"
-exports.desc = "Push local entry template to database"
+exports.desc = "Push entry template to database"
 exports.handler = () => {
     processEntry();
 }

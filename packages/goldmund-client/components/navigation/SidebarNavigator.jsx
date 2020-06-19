@@ -10,7 +10,7 @@ const SidebarNavigator = (props) => {
     return (
         <>
         <div className="navbar navbar-default visible-xs">
-            <button type="button" onClick={() => setToggled(!toggled)} className="navbar-toggle collapsed">
+            <button aria-label="toggle menu" type="button" onClick={() => setToggled(!toggled)} className="navbar-toggle collapsed">
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>

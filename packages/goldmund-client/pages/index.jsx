@@ -100,11 +100,11 @@ class Vestibule extends React.Component {
                         <SidebarNavigator name="$ pwd" />
                         <main id="main-collapse">
                                 <div className="goldmundfb fab">
-                                    <input ref={this.textInput}  type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange} onKeyPress={this.onKeyPress} autoComplete="off" />
-                                        <button onClick={this.focusTextInput} type="push" className="goldmundfb-button button-search">
+                                    <input aria-label="search input" ref={this.textInput}  type="search" name="search" placeholder="Search..." value={this.state.search} onChange={this.handleChange} onKeyPress={this.onKeyPress} autoComplete="off" />
+                                        <button aria-label="open search input" onClick={this.focusTextInput} type="push" className="goldmundfb-button button-search">
                                             <i className="fa fa-search"></i>
                                         </button>
-                                        <button type="reset" form="form" className="goldmundfb-button button-reset fa fa-times"></button>
+                                        <button aria-label="close search input" type="reset" form="form" className="goldmundfb-button button-reset fa fa-times"></button>
                                 </div>
                             <div className="hero-full-wrapper">
                                 <div className="grid" >

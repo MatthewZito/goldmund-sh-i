@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 require("dotenv").config({ path: `${__dirname}/../.env` });
 module.exports = {
-    localStore: `${__dirname}/../tmp/ephemera.json`,
-    sessionStore: `${__dirname}/../tmp/session.json`,
+    entryTemplate: `${__dirname}/../tmp/ephemera.json`,
+    sessionTemplate: `${__dirname}/../tmp/session.json`,
     basePath: process.env.GOLDMUND_API_BASE_URL,
     editor: process.env.EDITOR || "vi",
     email: process.env.CLI_EMAIL,

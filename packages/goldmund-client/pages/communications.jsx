@@ -58,7 +58,7 @@ class Communications extends React.Component {
                     <SidebarNavigator name="$ ping"/>
                     <main id="main-collapse">
                         <div className="row">
-                        <div class="col-xs-12">
+                        <div className="col-xs-12">
                             <div className="section-container-spacer">
                                 <h1>Communications</h1>
                                
@@ -82,7 +82,8 @@ class Communications extends React.Component {
                                         <label htmlFor="content">Message</label>
                                         <textarea 
                                             required type="text" 
-                                            name="content" 
+                                            name="content"
+                                            id="content"
                                             value={this.state.content} 
                                             onChange={this.handleChange} 
                                             className="form-control" 
@@ -90,7 +91,7 @@ class Communications extends React.Component {
                                             placeholder="Enter your message">
                                         </textarea>
                                     </div>
-                                    <button type="submit" className="btn btn-primary btn-lg">Send</button>
+                                    <button aria-label="submit form" type="submit" className="btn btn-primary btn-lg">Send</button>
                                     </div>
                                     <div className="col-md-6" style={{marginLeft: "-15px"}}>
                                         <ul className="list-unstyled address-container">

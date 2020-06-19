@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const express = require("express");
 const chokidar = require("chokidar");
 const chalk = require("chalk");
@@ -50,7 +51,6 @@ watcher
                 }
             }
         })
-        console.log(`[+] Results\n\nSecure URL:\n${result.secure_url}\n\nInsecure URL:\n${result.url}\n`)
 
     .on("addDir", (path) => {
         // console.log("Directory", path, "has been added"); 

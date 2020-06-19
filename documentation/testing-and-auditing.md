@@ -57,3 +57,12 @@ docker exec -it <redis container_name_or_id> bash
 # launch cli from internal docker namespace
 redis-cli -h <internal IP>
 ```
+
+### Clearing Docker Cache
+Due to the way the Goldmund.sh CI/CD pipeline is configured - in conjunction with a few nuanced issues introduced by Skaffold - I accumulate several versions of the same docker images. Removing these is quite simple with this chained command that I most certainly would forget if I don't document it here:
+```
+docker images | grep goldmund-api | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi exbotanical/goldmund-api:{}
+
+docker images | grep goldmund-client | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi exbotanical/goldmund-client:{}
+
+```

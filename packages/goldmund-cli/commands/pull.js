@@ -2,10 +2,11 @@
 const chalk = require("chalk");
 const { persist, spawnDisparateShell } = require("../utils/fs.js");
 const { fetchEntry } = require("../utils/requests.js");
+const { entryTemplate } = require("../config/config.js");
 
 /**
  * @param {String} slug The slug (URI identifier) of the given entry.
- * @description Command handler. Populates local entry template by pulling given entry and persisting matched fields.
+ * @description Command handler. Populates entry template by pulling given entry and persisting matched fields.
  */
 const populateEntry = async (slug) => {
     try {
@@ -21,10 +22,10 @@ const populateEntry = async (slug) => {
             legalFields.forEach(legalField => 
                 ephemeralEntry[legalField] = entry[legalField]
                 );
-            // populate local entry template
-            persist(ephemeralEntry);
+            // populate entry template
+            persist(ephemeralEntry, entryTemplate);
             console.log(chalk.green("[+] Ephemeral document populated...\n"));
-            spawnDisparateShell();
+            spawnDisparateShell(undefined, entryTemplate);
         }
     } catch(err) {
         console.log(chalk.red(err));
@@ -32,7 +33,7 @@ const populateEntry = async (slug) => {
 }
 
 exports.command = "pull"
-exports.desc = "Populate local entry template"
+exports.desc = "Populate entry template"
 exports.builder = {
     slug: {
         describe: "Specify entry URI",
