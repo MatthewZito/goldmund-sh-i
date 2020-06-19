@@ -58,7 +58,7 @@ class Communications extends React.Component {
                     <SidebarNavigator name="$ ping"/>
                     <main id="main-collapse">
                         <div className="row">
-                        <div class="col-xs-12">
+                        <div className="col-xs-12">
                             <div className="section-container-spacer">
                                 <h1>Communications</h1>
                                
