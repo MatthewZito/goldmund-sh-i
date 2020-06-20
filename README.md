@@ -46,9 +46,11 @@ Goldmund.sh is a distributed, multi-service web application designed as an exerc
  -->
 
 Goldmund.sh Architecture High-level Design:
+<br>
 ![demo](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/architecture-hld.jpg)
 
   [Watch the usage demo of `goldmund-cli`, basic commands](https://streamable.com/n2jqqc)
+  <br>
   [Watch the usage demo of `goldmund-cli`, advanced commands](https://streamable.com/atzsma)
 
 Local development is greatly aided by Skaffold. In order to run local dev instance:
