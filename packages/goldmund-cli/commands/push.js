@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
 const { readTemplateData } = require("../utils/fs.js");
-const { pushEntry } = require("../utils/requests.js");
+const { pushEntry } = require("../utils/web.js");
 const { sessionTemplate, entryTemplate } = require("../config/config.js");
 
 /**

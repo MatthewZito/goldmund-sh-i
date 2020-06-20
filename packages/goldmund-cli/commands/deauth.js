@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
 const { persist, readTemplateData, depopulate } = require("../utils/fs.js");
-const { logout } = require("../utils/requests.js");
+const { logout } = require("../utils/web.js");
 const { sessionTemplate } = require("../config/config.js");
 
 /**

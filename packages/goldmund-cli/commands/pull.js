@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { persist, spawnDisparateShell } = require("../utils/fs.js");
-const { fetchEntry } = require("../utils/requests.js");
+const { persist } = require("../utils/fs.js");
+const { fetchEntry } = require("../utils/web.js");
+const { spawnDisparateShell } = require("../utils/shell.js");
 const { entryTemplate } = require("../config/config.js");
 
 /**

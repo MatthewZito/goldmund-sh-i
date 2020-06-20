@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const { depopulate, spawnDisparateShell, streamInputFileToEphemeralDoc } = require("../utils/fs.js");
+const { depopulate, streamInputFileToEphemeralDoc } = require("../utils/fs.js");
+const { spawnDisparateShell } = require("../utils/shell.js");
 const { entryTemplate } = require("../config/config.js");
 
 /**

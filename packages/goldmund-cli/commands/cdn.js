@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const os = require("os");
 const chalk = require("chalk");
-const { spawnDisparateShell, executeChildProcess } = require("../utils/fs.js");
+const { spawnDisparateShell, executeChildProcess } = require("../utils/shell.js");
 const { cloudinaryDir } = require("../config/config.js");
 
 /**

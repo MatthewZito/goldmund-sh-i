@@ -17,6 +17,7 @@ Nextjs v9's Routes API is incredible, however it is very nascent. I have elected
 
 ### Activating the Data Layer at Run-time
 
+*essentially deprecated but I am maintaining this portion of the docs nonetheless - only applicable in development with Docker-Compose; the current Skaffold setup fixes this issue*<sup>*</sup>
 A curious consequence of my architecture is the sensitive run-time configurations required to activate the data layers. As one can readily see, `goldmund-client` is somewhat a misnomer given it refers to a hybridized server-side-render/static-site-gen frontend. In order for the frontend service to operate at proper context, `goldmund-api` must be *actively serving data* at `goldmund-client`'s build-time. This is a quandary given my environment is fully automated; I must find a way to enforce a chronology at run-time.
 
 As it stands, this has been accomplished by utilizing a shell script (`wait-for-it.sh`) which polls for the `goldmund-api` service. The `goldmund-client` build will not occur until this script has successfully exited, ergo the data layer acquires insurance. Simply specifying the Nginx routing service's contingency on `goldmund-client` delays Docker Engine's execution of its run-time command; thus:
@@ -28,7 +29,7 @@ As it stands, this has been accomplished by utilizing a shell script (`wait-for-
  6. `goldmund-client` run (build SSG content + export)
  7. `goldmund-server` build, run --> serve SSG content from step 6
 
-We'll see how this configuration changes relative to Kubernetes deployment, an imminent step in development at this moment.
+<sup>*</sup>~~We'll see how this configuration changes relative to Kubernetes deployment, an imminent step in development at this moment.~~
 
 ### Handling Isomorphic Requests in a Containerized Environment
 
