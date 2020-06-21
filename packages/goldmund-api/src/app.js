@@ -1,6 +1,6 @@
 const express = require("express");
-const helmet = require('helmet')
-const cors = require('cors');
+const helmet = require("helmet")
+const cors = require("cors");
 const morgan = require("morgan");
 const { winstonRotations } = require("./services/winston-rotation.js");
 const setXClacksHeader = require("./middleware/x-clacks-overhead.js");

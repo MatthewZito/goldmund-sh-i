@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require("mongoose");
+const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const redisClient = require("../redis.js");
 const { sign } = require("../../utils/rsa.js");
