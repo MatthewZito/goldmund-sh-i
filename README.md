@@ -18,6 +18,8 @@ License: MIT
 
 Goldmund.sh is a distributed, multi-service web application designed as an exercise in declarative automation. The entire system automates tests, builds, and production deployments via a single webhook. Conceptualizing, architecting, and building this app has necessitated extensive research and trials; coming up with this stuff has been immensely rewarding, heuristic, and fun. As a developer apiring to be a software architect, I'm rather pleased with the result. I hope you enjoy as well; please don't hesitate to [contact me](https://goldmund.sh/communications) if you did!
 
+Goldmund.sh [*carries the signal*](https://xclacksoverhead.org/home/about).
+
 ### <a name="packages"></a> Packages
 
  - [`goldmund-api`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-api) - Persistent data processing service and REST API
