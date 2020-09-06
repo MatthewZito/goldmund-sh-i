@@ -77,9 +77,4 @@ More information:
  
 #### <a name="random"> Note to visitors
 
-If you are a hiring manager, recruiter, or otherwise an interested party considering my competencies as they might apply to your needs, please consider this project to be an exemplar of what I can design and build unassisted. My hope here is that this delimits *my* capabilities from those pertinent to apps on which I have worked in a collaborative capacity (just about everything in any developer's professional portfolio). That is, here, you can see that I indeed can effectively employ tools such as Docker, Kubernetes, et al. 
-
-If you'd like to work together, you are invited to email me [here](https://goldmund.sh/communications).
-
-#### What's up with the name?
-Oh, 'Goldmund'? I'm a very big Hesse fan. You should read *Narziß und Goldmund* if you haven't already.
+This project has been closed (I don't enjoy paying for expensive k8s resources). Please see the documentation for media of this project.
