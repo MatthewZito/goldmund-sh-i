@@ -1,4 +1,4 @@
-## Goldmund.sh | A Declarative Approach to Cloud Automation
+## goldmund.sh i
  
 [![Build Status](https://travis-ci.org/MatthewZito/goldmund-automated-cluster.svg?branch=master)](https://travis-ci.org/MatthewZito/goldmund-automated-cluster)
 ```
@@ -12,20 +12,19 @@ License: MIT
  - [Documentation](#docs)
     * [Features](#features)
     * [Demos](#demo)
-    * [Todos](#todo)
 
 ## <a name="intro"></a> Introduction
 
-Goldmund.sh is a distributed, multi-service web application designed as an exercise in declarative automation. The entire system automates tests, builds, and production deployments via a single webhook.
+Goldmund.sh i is a small cohort of distributed microservices that drive a SEO and speed-optimized web application.
 
-Goldmund.sh [*carries the signal*](https://xclacksoverhead.org/home/about).
+This project has been closed (I don't enjoy paying for expensive k8s resources). Please see the documentation for media of this project.
 
 ### <a name="packages"></a> Packages
 
  - [`goldmund-api`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-api) - Persistent data processing service and REST API
  - [`goldmund-client`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-client) - Next.js isomorphic server for generating hybrid SSG/SSR React App at runtime
  - [`goldmund-cli`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-cli) - Command-line utility for managing sessions, `goldmund-api` database content, and CDN uploads/eager transformations
- - [`goldmund-server`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-server) - A mock ingress and load balancer (dev only)
+ - [`goldmund-server`](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/packages/goldmund-server) - Ingress and load balancer
 
 ## <a name="docs"></a> Documentation
 
@@ -69,12 +68,3 @@ More information:
   - [Goldmund CLI](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/packages/goldmund-cli/README.md)
   - [Goldmund Server](https://github.com/MatthewZito/goldmund-automated-cluster/blob/master/documentation/goldmund-server.md)
   - [More documentation](https://github.com/MatthewZito/goldmund-automated-cluster/tree/master/documentation)
-
-### <a name="todo"></a> Todos + Upcoming Features
-
- - Add analytics dashboard + campaigns (tracking per post analytics in a separate DB collection)
- - Enable Progressive Web App (PWA) support (As an aside, see: [why I will NOT be using AMP](https://medium.com/@danbuben/why-amp-is-bad-for-your-site-and-for-the-web-e4d060a4ff31))
- 
-#### <a name="random"> Note to visitors
-
-This project has been closed (I don't enjoy paying for expensive k8s resources). Please see the documentation for media of this project.
